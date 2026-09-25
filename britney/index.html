@@ -963,8 +963,9 @@
     .then(r => r.ok ? r.json() : null)
     .then(data => {
       if (!data) return;
-      Object.assign(state.sent, data.sent || {});
-      Object.keys(data.access || {}).forEach(k => { state.checks[k] = true; });
+      // Notion is the source of truth: deleting a row there resets it here too
+      state.sent = data.sent || {};
+      state.checks = Object.assign({}, data.access || {});
       save(); renderAll();
     }).catch(() => {});
 
