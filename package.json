@@ -1,0 +1,6 @@
+{
+  "name": "dfy-roadmaps",
+  "private": true,
+  "description": "Client funnel roadmaps for Whitney Bateson Digital Strategy",
+  "engines": { "node": ">=18" }
+}

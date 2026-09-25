@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Britney's Funnel Roadmap | Whitney Bateson Digital Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<style>
+  /* Brand tokens pulled from the DFY Funnel sales page */
+  :root {
+    --navy: #02525D;
+    --navy-dk: #013D46;
+    --coral: #FF7F50;
+    --coral-dk: #E6663B;
+    --lime: #E3F696;
+    --lime-lt: #F0FAC5;
+    --cream: #FAF8F4;
+    --white: #FFFFFF;
+    --text: #1A1A1A;
+    --muted: #5C5C5C;
+    --border: rgba(26,26,26,.09);
+    --hi: rgba(227,246,150,.30);
+    --hi-md: rgba(227,246,150,.62);
+    --peach: rgba(255,127,80,.16);
+    --sh-sm: 0 1px 3px rgba(2,82,93,.05);
+    --sh-md: 0 4px 22px rgba(2,82,93,.08);
+    --r: 6px;
+    --r-lg: 8px;
+    --head: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    --body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --hero: #DDEEEC;
+    --page: linear-gradient(180deg, var(--lime-lt) 0%, #F7FCE4 40%, var(--cream) 100%);
+    --paper: var(--white);
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --text: #EEF2F1; --muted: #AEBBBC; --paper: #16292C; --white: #16292C;
+      --border: rgba(255,255,255,.10); --hero: #0F3338; --cream: #0E1C1E;
+      --page: linear-gradient(180deg, #13261F 0%, #0E1C1E 100%);
+    }
+  }
+  :root[data-theme="dark"] {
+    --text: #EEF2F1; --muted: #AEBBBC; --paper: #16292C; --white: #16292C;
+    --border: rgba(255,255,255,.10); --hero: #0F3338; --cream: #0E1C1E;
+    --page: linear-gradient(180deg, #13261F 0%, #0E1C1E 100%);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0;
+    background: var(--cream);
+    background-image: var(--page);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: var(--head); font-weight: 600; line-height: 1.18; color: var(--navy); }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 56px; }
+  b, .num { font-variant-numeric: lining-nums tabular-nums; }
+
+  /* Buttons (sales page .btn) */
+  .btn, .cal a, .portal, .xbtn {
+    display: inline-block;
+    font-family: var(--body); font-weight: 700; font-size: 12px;
+    letter-spacing: .085em; text-transform: uppercase; text-decoration: none;
+    border-radius: 4px; padding: 11px 20px; line-height: 1.3;
+    transition: background .2s, transform .15s, box-shadow .2s, border-color .2s;
+    cursor: pointer;
+  }
+  .portal, .cal a.act, .xbtn { background: var(--coral); color: #FFFFFF; border: 1px solid var(--coral); }
+  .portal:hover, .cal a.act:hover, .xbtn:hover { background: var(--coral-dk); border-color: var(--coral-dk); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,127,80,.32); }
+  .cal a { background: var(--paper); color: var(--navy); border: 1px solid rgba(2,82,93,.3); }
+  .cal a:hover { border-color: var(--navy); transform: translateY(-1px); }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+
+  /* Hero */
+  .hero { position: relative; overflow: hidden; background: var(--hero); color: var(--navy); }
+  .hero-inner { position: relative; max-width: 720px; margin: 0 auto; padding: 40px 20px 104px; }
+  .hero-map { position: absolute; right: -40px; top: 10px; width: 460px; height: 340px; }
+  .brand { margin: 0 0 36px; font-weight: 800; font-size: 0.95rem; color: var(--navy); }
+  .eyebrow { margin: 0 0 12px; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--coral); }
+  .hero h1 { font-size: clamp(2.5rem, 7.5vw, 3.6rem); line-height: 1.05; margin: 0 0 20px; max-width: 13em; }
+  .lede { margin: 0 0 10px; color: var(--text); max-width: 54ch; font-size: 17px; }
+  .glance { display: flex; flex-wrap: wrap; gap: 14px 40px; margin: 28px 0 0; padding-top: 20px; border-top: 1px solid rgba(2,82,93,.18); }
+  .glance div { margin: 0; }
+  .glance dt { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); }
+  .glance dd { margin: 0; font-family: var(--head); font-size: 1.9rem; font-weight: 600; line-height: 1.1; color: var(--navy); font-variant-numeric: lining-nums; }
+
+  /* Next stop card with navy countdown (sales page bonus clock) */
+  .next {
+    position: relative; margin: -64px 0 32px;
+    display: grid; grid-template-columns: auto 1fr; gap: 26px; align-items: center;
+    background: var(--paper); border: 1px solid var(--border); border-radius: var(--r-lg);
+    padding: 26px; box-shadow: var(--sh-md);
+  }
+  .stamp-big {
+    width: 118px; height: 118px; border-radius: 50%;
+    background: var(--navy); color: #FFFFFF;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+    box-shadow: inset 0 0 0 5px var(--navy), inset 0 0 0 7px var(--lime);
+    transform: rotate(-6deg);
+  }
+  .stamp-big b { font-family: var(--head); font-size: 2.8rem; font-weight: 600; line-height: 1; color: var(--lime); font-variant-numeric: lining-nums; }
+  .stamp-big small { margin-top: 4px; font-size: 9.5px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: rgba(255,255,255,.75); }
+  .next h2 { margin: 0 0 4px; font-family: var(--body); font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--coral); }
+  .next h3 { margin: 0 0 4px; font-size: 1.75rem; line-height: 1.15; }
+  .next p { margin: 0 0 14px; color: var(--muted); }
+  .cal { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  /* Links row */
+  .links { margin: 0 0 36px; }
+  .links .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
+  .links p { margin: 0; color: var(--muted); font-size: 15px; }
+  .links a.mail { color: var(--coral-dk); font-weight: 700; text-decoration: underline; text-decoration-color: var(--coral); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+
+  /* Getting-started list (sales page .prob-card) */
+  .access {
+    background: var(--paper); border: 1px solid var(--border); border-radius: var(--r-lg);
+    padding: 32px 34px 18px; margin: 0 0 44px; box-shadow: var(--sh-md);
+  }
+  .access h2 {
+    display: block; width: fit-content; margin: 0 0 14px;
+    font-family: var(--body); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--navy); background: var(--lime); padding: 7px 14px; border-radius: 3px;
+  }
+  .access h2 mark { background: none; color: inherit; padding: 0; }
+  .access-intro { margin: 0 0 6px; color: var(--muted); }
+  #access-list { list-style: none; margin: 0; padding: 0; }
+  #access-list li { display: grid; grid-template-columns: 28px 1fr auto; gap: 14px; align-items: start; padding: 18px 0; }
+  #access-list li:not(:last-child) { border-bottom: 1px solid var(--border); }
+  .box {
+    width: 24px; height: 24px; margin-top: 3px; padding: 0;
+    border: 1.5px solid var(--coral); border-radius: 50%; background: transparent;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+  }
+  .box:disabled { cursor: default; }
+  .box svg { width: 13px; height: 13px; display: none; }
+  .got .box, .mine .box { background: var(--coral); }
+  .got .box svg, .mine .box svg { display: block; }
+  #access-list strong { display: block; font-weight: 700; color: var(--navy); }
+  .access .how { display: block; color: var(--text); font-size: 15.5px; }
+  .got strong, .mine strong { text-decoration: line-through; text-decoration-thickness: 2px; color: var(--muted); }
+  .got .how, .mine .how { color: var(--muted); }
+  .acc-link { display: inline-block; margin-top: 8px; font-weight: 700; font-size: 14.5px; color: var(--coral-dk); text-decoration: underline; text-decoration-color: var(--coral); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  .due { white-space: nowrap; font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 3px; background: var(--peach); color: var(--navy); }
+  .due.soon { background: var(--coral); color: #FFFFFF; }
+  .mine .due, .got .due { background: var(--hi-md); color: var(--navy); }
+  @media (max-width: 560px) {
+    .access { padding: 26px 22px 12px; }
+    #access-list li { grid-template-columns: 28px 1fr; }
+    .due { grid-column: 2; justify-self: start; }
+  }
+
+  /* Legend + route (sales page .flow: coral = you, navy = us) */
+  .legend { display: flex; flex-wrap: wrap; gap: 22px; margin: 0 0 22px; font-size: 14px; color: var(--muted); align-items: center; }
+  .legend .pin { position: relative; display: inline-block; width: 14px; height: 14px; margin-right: 8px; vertical-align: -1px; left: auto; top: auto; }
+  .route { list-style: none; margin: 0; padding: 0; position: relative; }
+  .route::before {
+    content: ""; position: absolute; left: 22px; top: 14px; bottom: 14px; width: 2px;
+    background: linear-gradient(180deg, var(--coral), var(--navy)); opacity: .3;
+  }
+  .stop { position: relative; padding: 0 0 26px 64px; }
+  .pin {
+    position: absolute; left: 12px; top: 4px; width: 22px; height: 22px;
+    background: var(--navy); border-radius: 50% 50% 50% 0; transform: rotate(-45deg); z-index: 1;
+  }
+  .pin::after { content: ""; position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: #FFFFFF; }
+  .yours .pin, .legend .pin.y { background: var(--coral); }
+  .done .pin { background: #B9C3C4; }
+  .card { position: relative; }
+  .date { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .stop h4 { margin: 2px 0 4px; font-size: 1.35rem; line-height: 1.25; }
+  .stop p { margin: 0; color: var(--text); max-width: 58ch; }
+  .yours .card {
+    background: var(--paper); border: 1px solid var(--border); border-left: 3px solid var(--coral);
+    border-radius: 0 var(--r) var(--r) 0; padding: 16px 20px 18px; box-shadow: var(--sh-sm);
+  }
+  .tag {
+    display: inline-block; margin-left: 10px; vertical-align: 1px;
+    background: var(--coral); color: #FFFFFF; font-size: 10px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; border-radius: 3px; padding: 3px 7px; line-height: 1.3;
+  }
+  .yours .cal { margin-top: 14px; }
+  a.inline { color: var(--coral-dk); font-weight: 700; text-decoration: underline; text-decoration-color: var(--coral); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .done h4, .done .date, .done p { color: #9AA5A6; }
+  .done .cal { display: none; }
+  .pstamp {
+    display: none; position: absolute; right: 10px; top: -4px; width: 76px; height: 76px;
+    border: 3px double var(--coral); border-radius: 50%; color: var(--coral);
+    font-size: 0.7rem; font-weight: 800; line-height: 1.1; text-align: center;
+    align-items: center; justify-content: center; flex-direction: column; transform: rotate(12deg); opacity: .85;
+  }
+  .pstamp b { font-family: var(--head); font-weight: 700; font-size: 1.15rem; }
+  .done .pstamp { display: flex; }
+  .done:not(.yours):not(.big) .card { padding-right: 90px; }
+  .yours.done .card, .big.done .card { padding-right: 100px; }
+
+  /* Handoff milestone: lime wash, like the sales page .cs-stat */
+  .big .card {
+    background: var(--hi-md); border-left: 3px solid var(--coral);
+    border-radius: 0 var(--r-lg) var(--r-lg) 0; padding: 20px 22px 22px;
+  }
+  .big .pin { width: 28px; height: 28px; left: 9px; top: 18px; background: var(--coral); }
+  .big h4 { font-size: 1.9rem; margin: 2px 0 6px; }
+  .big .after { margin-top: 10px; font-weight: 700; color: var(--navy); }
+  .big .after mark { background: var(--coral); color: #FFFFFF; padding: 2px 8px; border-radius: 3px; }
+
+  /* Forms */
+  .form-slot { margin-top: 14px; }
+  .access .form-slot { margin: 6px 0 16px; }
+  .fwrap { border: 1px solid rgba(2,82,93,.18); border-radius: var(--r); background: var(--cream); }
+  .fwrap summary {
+    list-style: none; cursor: pointer; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px;
+    padding: 12px 14px;
+  }
+  .fwrap summary::-webkit-details-marker { display: none; }
+  .f-sum {
+    display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .085em; text-transform: uppercase;
+    background: var(--navy); color: #FFFFFF; border-radius: 4px; padding: 9px 16px;
+  }
+  .f-sum::after { content: " ↓"; }
+  .fwrap[open] .f-sum::after { content: " ↑"; }
+  .f-sum-t { font-size: 14px; font-weight: 700; color: var(--navy); }
+  .fwrap summary:focus-visible { outline: 3px solid var(--coral); outline-offset: 2px; }
+  .fbody { padding: 6px 18px 20px; border-top: 1px solid rgba(2,82,93,.12); background: var(--paper); border-radius: 0 0 var(--r) var(--r); }
+  .f-title { font-family: var(--head); font-size: 1.45rem; margin: 14px 0 10px; }
+  .f-info { font-size: 15px; }
+  .f-info p { margin: 0 0 10px; }
+  .f-info h5 { font-family: var(--head); font-size: 1.15rem; font-weight: 700; color: var(--navy); margin: 16px 0 4px; }
+  .f-info ul { margin: 0 0 10px; padding-left: 20px; }
+  .f-info li { margin: 6px 0; }
+  .f-note { margin: 4px 0 14px; padding: 10px 14px; background: var(--hi-md); border-left: 3px solid var(--coral); border-radius: 0 4px 4px 0; font-size: 14px; }
+  .f-field { display: block; margin: 16px 0 0; padding: 0; border: 0; min-width: 0; }
+  .f-field > label:not(.f-choice):not(.f-drop):not(.f-check), .f-field legend, .f-label { display: block; font-weight: 700; color: var(--navy); font-size: 15.5px; line-height: 1.4; padding: 0; }
+  .f-label em { font-style: normal; font-weight: 600; color: var(--muted); }
+  .f-help { display: block; font-size: 14px; color: var(--muted); margin: 2px 0 6px; line-height: 1.5; }
+  .req { color: var(--coral-dk); font-weight: 800; }
+  .fbody textarea {
+    display: block; width: 100%; margin-top: 6px; padding: 10px 12px;
+    font: inherit; font-size: 15px; line-height: 1.5; color: var(--text);
+    background: var(--paper); border: 1px solid rgba(2,82,93,.25); border-radius: 4px; resize: vertical;
+  }
+  .fbody textarea:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(2,82,93,.12); }
+  .f-choice { display: flex; gap: 10px; align-items: center; padding: 10px 12px; margin-top: 8px; border: 1px solid rgba(2,82,93,.18); border-radius: 4px; cursor: pointer; font-size: 15px; }
+  .f-choice:has(input:checked) { border-color: var(--coral); background: var(--peach); }
+  .f-choice input, .f-check input { accent-color: var(--coral); width: 18px; height: 18px; flex-shrink: 0; }
+  .f-check { display: flex !important; gap: 10px; align-items: flex-start; padding: 12px 14px; background: var(--hi); border-radius: 4px; font-weight: 700; color: var(--navy); cursor: pointer; }
+  .f-check input { margin-top: 3px; }
+  .f-checks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .f-checks .f-check { margin: 0; }
+  @media (max-width: 560px) { .f-checks { grid-template-columns: 1fr; } }
+  .f-drop {
+    display: flex; flex-direction: column; align-items: center; gap: 2px; margin-top: 6px; padding: 18px;
+    border: 1.5px dashed rgba(2,82,93,.35); border-radius: 4px; background: var(--cream); cursor: pointer; text-align: center;
+  }
+  .f-drop input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+  .f-drop-t { font-weight: 700; color: var(--coral-dk); text-decoration: underline; text-underline-offset: 3px; }
+  .f-drop-s { font-size: 13px; color: var(--muted); }
+  .f-drop:focus-within { outline: 3px solid var(--coral); outline-offset: 2px; }
+  .f-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 20px; }
+  .f-submit {
+    font-family: var(--body); font-weight: 700; font-size: 12px; letter-spacing: .085em; text-transform: uppercase;
+    background: var(--coral); color: #FFFFFF; border: 0; border-radius: 4px; padding: 13px 24px; cursor: pointer;
+  }
+  .f-submit:hover { background: var(--coral-dk); }
+  .f-req-note { font-size: 13px; color: var(--muted); }
+  .f-status { margin: 12px 0 0; font-weight: 700; color: var(--navy); }
+  .f-status:empty { display: none; }
+  .done .fwrap { display: none; }
+  .done .zap-row { opacity: .85; }
+
+  /* Step 1 progress + complete state */
+  .s1-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; margin-bottom: 14px; }
+  .s1-head h2 { margin: 0 !important; }
+  .s1-progress { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; color: var(--navy); }
+  .s1-bar { width: 120px; height: 8px; border-radius: 999px; background: var(--peach); overflow: hidden; }
+  .s1-bar i { display: block; height: 100%; width: 0; background: var(--coral); border-radius: 999px; transition: width .3s ease; }
+  .access.complete .s1-bar i { background: var(--navy); }
+  .s1-complete[hidden] { display: none; }
+  .s1-complete { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 18px; padding: 12px 16px; background: var(--hi-md); border-radius: var(--r); margin-bottom: 14px; }
+  .s1-complete p { margin: 0; color: var(--navy); }
+  .s1-toggle { font: inherit; font-size: 13px; font-weight: 700; color: var(--navy); background: transparent; border: 1px solid rgba(2,82,93,.3); border-radius: 4px; padding: 6px 12px; cursor: pointer; }
+  .access.complete:not(.expanded) .s1-body { display: none; }
+  .access.complete { padding-bottom: 20px; }
+  .s1-later { margin: 6px 0 12px; font-size: 14px; color: var(--muted); }
+  .acc-more { margin-top: 4px; font-size: 14px; }
+  .acc-more summary { cursor: pointer; color: var(--navy); font-weight: 700; width: fit-content; }
+  .acc-more p { margin: 4px 0 0; color: var(--muted); }
+  #access-list .box[data-locked] { cursor: pointer; }
+
+  /* Zapier row on Oct 16 */
+  .zap-row { display: grid; grid-template-columns: 28px 1fr; gap: 12px; margin-top: 14px; padding: 12px 14px; background: var(--cream); border: 1px solid rgba(2,82,93,.14); border-radius: var(--r); }
+  .zap-row strong { display: block; color: var(--navy); }
+  .zap-row .how { display: block; font-size: 15px; }
+  .zap-row.on .box { background: var(--coral); }
+  .zap-row.on .box svg { display: block; }
+  .zap-row.on strong { text-decoration: line-through; color: var(--muted); }
+
+  /* Sent confirmation */
+  .f-sent { display: flex; gap: 12px; align-items: flex-start; margin-top: 14px; padding: 14px 16px; background: var(--hi-md); border-radius: var(--r); }
+  .f-sent-ic { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .f-sent-ic svg { width: 13px; height: 13px; }
+  .f-sent p { margin: 0; color: var(--navy); font-size: 15px; }
+  .done .f-sent { display: flex; }
+  .late-tag { background: var(--navy) !important; }
+
+
+  /* Phase headers */
+  .phase-head { margin: 0 0 22px; }
+  .phase-num {
+    display: inline-block; margin-bottom: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--navy); background: var(--lime); padding: 5px 12px; border-radius: 3px;
+  }
+  .phase-head h2 { margin: 0 0 6px; font-size: clamp(1.9rem, 4.5vw, 2.4rem); }
+  .phase-head p { margin: 0; color: var(--muted); max-width: 58ch; }
+
+  /* Finish line at the end of Phase 1 */
+  .finish .card { border-top: 2px dashed rgba(2,82,93,.35); padding-top: 14px; }
+  .finish h4 { font-size: 1.6rem; }
+  .finish .pin { background: var(--navy); }
+
+  /* Ads Made Simple head start */
+  .headstart {
+    margin: 36px 0 0; padding: 28px 30px;
+    background: var(--hi-md); border-left: 3px solid var(--coral); border-radius: 0 var(--r-lg) var(--r-lg) 0;
+  }
+  .headstart h2 { margin: 0 0 10px; font-size: clamp(1.6rem, 4vw, 2rem); }
+  .headstart p { margin: 0 0 10px; }
+  .hs-row { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 16px; }
+  .hs-login { font-size: 14px; font-weight: 700; color: var(--navy); }
+  .yours-p2 .p2-dot { border-color: var(--coral); }
+  .yours-p2 .p2-dot::after { background: var(--coral); }
+  .p2-date .tag { margin-left: 6px; }
+
+  /* Phase 2: horizontal, hands-off */
+  .phase2 {
+    margin: 36px 0 0; padding: 32px 30px 28px;
+    background: var(--paper); border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--sh-md);
+  }
+  .p2-track { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; position: relative; }
+  .p2-help {
+    display: flex; flex-wrap: wrap; gap: 14px 20px; align-items: center; justify-content: space-between;
+    margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--border);
+  }
+  .p2-help p { margin: 0; flex: 1 1 280px; font-size: 15px; }
+  .p2-help a.inline { overflow-wrap: anywhere; }
+  .ghost-btn { background: var(--paper); color: var(--navy); border: 1px solid rgba(2,82,93,.3); }
+  .ghost-btn:hover { background: var(--paper); color: var(--navy); border-color: var(--navy); box-shadow: none; }
+  .p2-track::before { content: ""; position: absolute; left: 10px; right: 10px; top: 10px; height: 2px; background: linear-gradient(90deg, var(--navy), var(--coral)); opacity: .3; }
+  .p2-stop { position: relative; padding-top: 32px; }
+  .p2-dot { position: absolute; top: 0; left: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--paper); border: 3px solid var(--navy); display: flex; align-items: center; justify-content: center; }
+  .p2-dot::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--navy); }
+  .p2-stop.bonus .p2-dot { border-color: var(--coral); }
+  .p2-stop.bonus .p2-dot::after { background: var(--coral); }
+  .p2-stop.reached .p2-dot { background: var(--navy); }
+  .p2-stop.reached .p2-dot::after { background: var(--lime); }
+  .p2-date { display: block; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .p2-stop h3 { margin: 2px 0 6px; font-size: 1.3rem; }
+  .p2-stop p { margin: 0; font-size: 15px; }
+  .p2-bar { display: grid; grid-template-columns: 1fr 1fr; margin-top: 22px; border-radius: 4px; overflow: hidden; font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; text-align: center; }
+  .p2-bar .w1 { background: var(--cream); color: var(--navy); padding: 7px; border: 1px solid rgba(2,82,93,.15); border-right: 0; }
+  .p2-bar .w2 { background: var(--lime); color: var(--navy); padding: 7px; border-left: 1.5px dashed var(--navy); }
+  @media (max-width: 760px) {
+    .phase2 { padding: 26px 22px 22px; }
+    .p2-track { grid-template-columns: 1fr; gap: 20px; }
+    .p2-track::before { left: 10px; right: auto; top: 10px; bottom: 10px; width: 2px; height: auto; background: linear-gradient(180deg, var(--navy), var(--coral)); }
+    .p2-stop { padding: 0 0 0 36px; }
+  }
+
+  /* Bonuses (sales page .bonus-head / .bonus-item) */
+  .extras { margin: 48px 0 0; padding-top: 40px; border-top: 1px solid var(--border); text-align: center; }
+  .extras .kicker {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--coral); color: #FFFFFF; font-size: 11.5px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
+    border-radius: 999px; padding: 8px 18px; margin-bottom: 16px;
+  }
+  .extras h2 { margin: 0 0 24px; font-size: clamp(1.9rem, 4.5vw, 2.4rem); }
+  .extras h2 mark { background: none; color: inherit; padding: 0; }
+  .extra-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; text-align: left; }
+  .extra {
+    display: flex; flex-direction: column;
+    background: var(--paper); border: 1px solid var(--hi-md); border-top: 3px solid var(--coral);
+    border-radius: var(--r); padding: 24px 24px 24px; box-shadow: 0 4px 18px rgba(2,82,93,.08);
+  }
+  .extra h3 { margin: 0 0 8px; font-size: 1.4rem; line-height: 1.2; }
+  .extra p { margin: 0 0 16px; font-size: 15.5px; flex: 1; }
+  .xbtn { align-self: flex-start; }
+  .xbtn[aria-disabled="true"] { background: transparent; color: var(--muted); border: 1.5px dashed rgba(2,82,93,.4); cursor: default; box-shadow: none; transform: none; }
+  .xbtn span { font-weight: 700; }
+  .xbtn:not([aria-disabled="true"]) span { display: none; }
+  .extra.wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: center; }
+  .extra.wide p { margin: 0; }
+  .weeks { display: grid; grid-template-columns: 1fr 1fr; border-radius: var(--r); overflow: hidden; border: 1px solid rgba(2,82,93,.2); }
+  .wk { padding: 12px 14px; display: flex; flex-direction: column; gap: 1px; background: var(--cream); color: var(--navy); }
+  .wk b { font-family: var(--head); font-size: 1.25rem; font-weight: 700; }
+  .wk span { font-size: 14px; color: var(--text); }
+  .wk em { font-style: normal; font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+  .wk.bonus { background: var(--lime); border-left: 1.5px dashed var(--navy); }
+  .wk.bonus em { color: var(--coral-dk); }
+  @media (max-width: 640px) { .extra-grid, .extra.wide { grid-template-columns: 1fr; } }
+
+  /* Something come up: quiet italic line (sales page .section-cta-line) */
+  .reply { margin: 40px auto 0; max-width: 52ch; text-align: center; }
+  .reply p { margin: 0; font-family: var(--head); font-style: italic; font-weight: 600; font-size: 1.3rem; line-height: 1.45; color: var(--navy); }
+  .reply strong { font-weight: 700; }
+
+  /* Finale: navy close + dark footer, like the sales page */
+  .finale { background: var(--navy); color: #FFFFFF; }
+  .finale-inner { max-width: 720px; margin: 0 auto; padding: 72px 20px 60px; text-align: center; }
+  .flag { width: 60px; height: 60px; margin: 0 auto 16px; color: #FFFFFF; }
+  .finale h2 { color: #FFFFFF; font-size: clamp(2rem, 5vw, 2.6rem); line-height: 1.12; margin: 0 auto 16px; max-width: 16em; }
+  .finale p { color: rgba(255,255,255,.85); max-width: 54ch; margin: 0 auto; font-size: 17px; }
+  .finale .more { margin-top: 16px; color: var(--lime); font-weight: 700; }
+  .finale-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 28px; }
+  .site-foot {
+    background: var(--navy-dk); padding: 0; min-height: 56px;
+    display: flex; flex-direction: column; gap: 8px; align-items: center; text-align: center;
+    font-size: 14px; color: rgba(255,255,255,.7);
+  }
+  .foot-links { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  .foot-links a { white-space: nowrap; }
+  .foot-links span, .site-foot p span { margin: 0 6px; opacity: .5; }
+  .site-foot a { text-decoration: none; }
+  .site-foot a:hover { color: #FFFFFF; text-decoration: underline; }
+  .site-foot p { margin: 0; }
+  .foot-brand { font-weight: 700; color: #FFFFFF; }
+  .site-foot a { color: rgba(255,255,255,.85); }
+
+  @media (max-width: 560px) {
+    .hero-inner { padding-top: 28px; }
+    .hero-map { width: 300px; right: -90px; top: 0; opacity: .45; }
+    .brand { margin-bottom: 24px; }
+    .next { grid-template-columns: 1fr; justify-items: start; padding: 22px; }
+    .stamp-big { width: 100px; height: 100px; }
+    .stamp-big b { font-size: 2.3rem; }
+    .pstamp { width: 62px; height: 62px; font-size: .62rem; }
+    .done:not(.yours):not(.big) .card, .yours.done .card, .big.done .card { padding-right: 74px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .stamp-big { animation: thunk 600ms cubic-bezier(.2,.9,.3,1.25) both; }
+    @keyframes thunk { from { transform: rotate(-20deg) scale(1.3); opacity: 0; } to { transform: rotate(-6deg) scale(1); opacity: 1; } }
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <svg class="hero-map" viewBox="0 0 420 320" aria-hidden="true" preserveAspectRatio="xMaxYMid meet">
+    <path d="M330 300 C 400 260, 300 210, 350 160 S 420 110, 370 70 S 380 20, 405 20" fill="none" stroke="#02525D" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 12" opacity=".45"/>
+    <g transform="translate(330 300)"><path d="M0-22a11 11 0 0 1 11 11c0 8-11 18-11 18s-11-10-11-18a11 11 0 0 1 11-11z" fill="#02525D"/><circle cy="-11" r="4" fill="#FFFFFF"/></g>
+    <g transform="translate(350 160)"><path d="M0-22a11 11 0 0 1 11 11c0 8-11 18-11 18s-11-10-11-18a11 11 0 0 1 11-11z" fill="#FF7F50"/><circle cy="-11" r="4" fill="#FFFFFF"/></g>
+    <g transform="translate(405 20)"><path d="M0-22a11 11 0 0 1 11 11c0 8-11 18-11 18s-11-10-11-18a11 11 0 0 1 11-11z" fill="#02525D"/><circle cy="-11" r="4" fill="#DDEEEC"/></g>
+  </svg>
+  <div class="hero-inner">
+    <!-- LOGO: swap this text for <img src="data:image/png;base64,..." alt="Whitney Bateson Digital Strategy"> once the PNG is available -->
+    <p class="brand">Whitney Bateson Digital Strategy</p>
+    <p class="eyebrow">Hi, Britney!</p>
+    <h1>Here's your funnel <span style="white-space:nowrap">roadmap 🗺️</span></h1>
+    <p class="lede">We are SO excited to get building for you. This is every stop between today and your ads going live.</p>
+    <p class="lede">The coral pins are your stops, the few times we need something from you. Everything else is on us, and each stop gets a stamp once it's done.</p>
+    <dl class="glance">
+      <div><dt>Funnel handoff</dt><dd>Oct 26</dd></div>
+      <div><dt>Ads go live</dt><dd>Nov 3</dd></div>
+    </dl>
+  </div>
+</header>
+<div class="wrap">
+
+  <section class="next" id="next" aria-live="polite"></section>
+
+  <div class="links">
+    <p>Bookmark this page. Everything you need for your funnel build lives right here. Questions? Email us at <a class="mail" href="mailto:admin@whitneybateson.com">admin@whitneybateson.com</a></p>
+  </div>
+
+  <section class="access" id="access" aria-labelledby="access-h">
+    <div class="s1-head">
+      <h2 id="access-h">Step 1: Give us access 🔑</h2>
+      <div class="s1-progress" aria-live="polite"><span class="s1-count"></span><span class="s1-bar"><i></i></span></div>
+    </div>
+    <div class="s1-complete" hidden>
+      <p><strong>Step 1 is done. Thank you! 🙌</strong> We'll double-check everything on our end and let you know if we need anything else.</p>
+      <button type="button" class="s1-toggle" aria-expanded="false">Show details</button>
+    </div>
+    <div class="s1-body">
+      <p class="access-intro">Before we can start building, we need access to a few things. Tick each one off as you finish it.</p>
+      <ul id="access-list"></ul>
+      <div id="ack-form" class="form-slot" data-form="ack"></div>
+      <p class="s1-later"><strong>Coming up later:</strong> Zapier access isn't needed until Fri, Oct 16. You'll find it on that stop below.</p>
+    </div>
+  </section>
+
+  <div class="phase-head">
+    <span class="phase-num">Phase 1</span>
+    <h2>Building your funnel</h2>
+    <p>Sep 28 to Nov 2. This is where we need you, just four quick stops.</p>
+  </div>
+
+  <div class="legend" aria-hidden="true">
+    <span><i class="pin y"></i>Your stop</span>
+    <span><i class="pin"></i>We deliver to you</span>
+  </div>
+
+  <ol class="route" id="route"></ol>
+
+  <section class="headstart" aria-labelledby="hs-h">
+    <span class="phase-num">Anytime now</span>
+    <h2 id="hs-h">Get a head start with Ads Made Simple 🎓</h2>
+    <p>You don't have to wait for your ads to go live. Your course is ready now, and we recommend starting with the modules on reading your results and making simple edits (you can skip setup, since we handle that part).</p>
+    <p>By the time ad support starts, you'll know your way around your ad account and can bring us specific questions about anything in the course or your ads.</p>
+    <div class="hs-row">
+      <!-- TODO: replace # with the Ads Made Simple login link -->
+      <a class="xbtn" href="#" target="_blank" rel="noopener">Start the course</a>
+      <span class="hs-login">Username: your email address<br>Password: your last name</span>
+    </div>
+  </section>
+
+  <section class="phase2" aria-labelledby="p2-h">
+    <div class="phase-head">
+      <span class="phase-num">Phase 2</span>
+      <h2 id="p2-h">Your ads go live</h2>
+      <p>Nov 3 to Nov 17. One quick step from you, then we take it from here, watching your ads and your whole funnel to make sure your automations are running, emails are sending and new subscribers are flowing in.</p>
+    </div>
+    <ol class="p2-track">
+      <li class="p2-stop yours-p2" data-date="2026-11-03">
+        <span class="p2-dot" aria-hidden="true"></span>
+        <span class="p2-date">Tue, Nov 3 <span class="tag">Your stop</span></span>
+        <h3>Turn on your ads 🚀</h3>
+        <p>Watch the video in your Funnel Command Center, turn your ads on, then let us know so we can check everything's running.</p>
+      </li>
+      <li class="p2-stop bonus" data-date="2026-11-10">
+        <span class="p2-dot" aria-hidden="true"></span>
+        <span class="p2-date">Tue, Nov 10</span>
+        <h3>Bonus week kicks in 🎁</h3>
+        <p>You signed up within 24 hours, so you get a second week of us keeping watch and answering questions.</p>
+      </li>
+      <li class="p2-stop" data-date="2026-11-17">
+        <span class="p2-dot" aria-hidden="true"></span>
+        <span class="p2-date">Tue, Nov 17</span>
+        <h3>Your recap 📊</h3>
+        <p>How your ads are performing, what your email data is showing, and our recommendations for what's next.</p>
+      </li>
+    </ol>
+    <div class="p2-bar" aria-hidden="true">
+      <span class="w1">Week 1 (included)</span>
+      <span class="w2">Week 2 (bonus)</span>
+    </div>
+    <div class="p2-help">
+      <p><strong>Ads on, or have a question during ad support?</strong> Email us at <a class="inline" href="mailto:admin@whitneybateson.com">admin@whitneybateson.com</a></p>
+    </div>
+  </section>
+
+  <section class="extras" aria-labelledby="extras-h">
+    <span class="kicker">Included with your funnel</span>
+    <h2 id="extras-h">Your extras 🎁</h2>
+    <div class="extra-grid">
+      <article class="extra">
+        <h3>Funnel Command Center</h3>
+        <p>Your Notion hub with every file we built and a video walkthrough of each piece, including how to turn on your ads.</p>
+        <!-- TODO: replace data-href="#" with Britney's Funnel Command Center link -->
+        <a class="xbtn handoff-btn" data-href="#" data-open="2026-10-26" aria-disabled="true">Open Command Center <span>(Oct 26)</span></a>
+      </article>
+      <article class="extra">
+        <h3>Ads Made Simple course</h3>
+        <p>Our step-by-step ads course is yours to keep. Your username is your email address, and your password is your last name.</p>
+        <!-- TODO: replace # with the Ads Made Simple login link -->
+        <a class="xbtn" href="#" target="_blank" rel="noopener">Go to Ads Made Simple</a>
+      </article>
+    </div>
+  </section>
+
+  <div class="reply">
+    <p><strong>Something come up?</strong> Life happens. Hit reply to any of our emails and we'll adjust the route with you.</p>
+  </div>
+
+</div>
+
+<section class="finale">
+  <div class="finale-inner">
+    <div class="flag" aria-hidden="true">
+      <svg viewBox="0 0 64 64"><path d="M16 58V8" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M18 10h30l-7 10 7 10H18z" fill="#E3F696" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>
+    </div>
+    <h2>Final destination: your funnel and ads are live 🎉</h2>
+    <p>Once everything's live, you'll have a strategic lead magnet that points people to the next step of working with you, a welcome sequence that does the nurturing for you, and ads that keep bringing new subscribers in.</p>
+    <p class="more">After their funnel is live, clients often come back to us for ongoing ad support, another lead magnet funnel, SEO or private coaching.</p>
+    <div class="finale-actions">
+      <a class="portal" href="mailto:admin@whitneybateson.com?subject=Looking%20for%20more%20support">Need more support down the road? Send us an email</a>
+    </div>
+  </div>
+  <footer class="site-foot" aria-hidden="true"></footer>
+</section>
+
+<script>
+  // Connection to the Vercel API (see README)
+  const CLIENT = "britney";
+  const TOKEN = "ahrmplkxZsbsenRiiXIOcx65";
+  const API = "/api";
+
+  const EMAIL = "admin@whitneybateson.com";
+  const APPROVE_URL = "#";
+  const DIGITALSERO_URL = "#"; // TODO: Britney's DigitalSero link
+  const ZAPIER_NOTE = "Don't have a paid plan yet? Hold off on buying one until closer to Oct 16, so you're not paying for time you won't use. On GoHighLevel? Skip this one.";
+
+  // Set got: true as access comes in (your confirmation), then republish.
+  const access = [
+    { id: "email", item: "Email software access", short: "Add " + EMAIL + " as a user on your email platform.", more: "If your plan doesn't allow extra users, share your login through LastPass (or another secure password tool) with " + EMAIL + " instead.", due: "2026-09-28", got: false },
+    { id: "web", item: "Website access", short: "Add " + EMAIL + " as a user on your website. Already a WBDS website client? Skip this one, we already have access.", due: "2026-09-28", got: false },
+    { id: "fb", item: "Facebook access", short: "Click your DigitalSero link. It only works once, so open it when you're ready to finish.", due: "2026-09-28", got: false, link: DIGITALSERO_URL, linkText: "Open my DigitalSero link" },
+    { id: "ack", item: "Acknowledge your schedule", short: "Read how reviews and ad support work, then submit the short form below.", due: "2026-09-28", got: false, form: "ack", link: "#ack-form", linkText: "Read it below", internal: true }
+  ];
+  const zapier = { id: "zap", item: "Zapier access", short: "Share your Zapier login through LastPass (or another secure password tool) with " + EMAIL + ".", more: ZAPIER_NOTE, got: false };
+
+  const sign = "\n\nQuestions? Email us at " + EMAIL + " – we're happy to help!\n\nWhitney & Priscilla\nWhitney Bateson Digital Strategy";
+
+  const stops = [
+    { date: "2026-09-28", yours: true, title: "Send us access and acknowledge your schedule",
+      step1: true,
+      note: "Everything in Step 1 above.",
+      action: { href: "#access", text: "Get started", internal: true },
+      calTitle: "Send Whitney's team access for your funnel (Whitney Bateson, " + EMAIL + ")",
+      calDetails: "Hi, Britney! Today's the day to get your funnel build rolling. 🎉\n\n→ Email software: add " + EMAIL + " as a user (or share your login through LastPass with " + EMAIL + ")\n→ Website: add " + EMAIL + " as a user (skip this if you're already a WBDS website client)\n→ Facebook: click the DigitalSero link we sent you (it only works once)\n→ Read and acknowledge your schedule on your roadmap\n\nOnce these are in, we can start building." + sign },
+    { date: "2026-09-30", yours: false, title: "Your lead magnet direction arrives",
+      note: "The direction we recommend for your freebie: what it is, who it's for, and why your people will want it." },
+    { date: "2026-10-02", yours: true, form: "direction", title: "Approve your direction",
+      note: "Give it the thumbs up, or tell us what to tweak, through the feedback form below.",
+      calTitle: "Approve your lead magnet direction (Whitney Bateson, " + EMAIL + ")",
+      calDetails: "Hi, Britney! Your lead magnet direction landed on Wednesday, and today's the day we need your feedback.\n\nOpen the feedback form on your roadmap and either:\n→ Give the direction a thumbs up, or\n→ Tell us what you'd like tweaked\n\nOnce it's approved, we start building your lead magnet and welcome emails." + sign },
+    { date: "2026-10-13", yours: false, title: "Lead magnet and email sequence arrive",
+      note: "Your finished freebie and the welcome emails that follow it." },
+    { date: "2026-10-16", yours: true, form: "lmemail", extra: "zap", title: "Send your revisions",
+      note: "Send one consolidated list of changes for the lead magnet and emails through the feedback form below.",
+      calTitle: "Send your lead magnet + email revisions (Whitney Bateson, " + EMAIL + ")",
+      calDetails: "Hi, Britney! Today's the day to send your revisions for your lead magnet and welcome emails.\n\n→ Put all your changes in one list (it helps us move faster!)\n→ Send it through the feedback form on your roadmap\n→ Also due today: your Zapier login, shared through LastPass or another secure password tool (skip this if you're on GoHighLevel)\n\nNext up, we build your pages, ads and automations." + sign },
+    { date: "2026-10-26", yours: false, big: true, title: "🎉 Your funnel is handed off!",
+      note: "Your Funnel Command Center opens, with your opt-in and thank you pages, ads, automations and a video walkthrough of each piece, all ready for you to look through.",
+      after: "Next up for you → a quick look and any edits by <mark>Thu, Oct 29</mark>" },
+    { date: "2026-10-29", yours: true, form: "edits", title: "Send your funnel edits",
+      note: "Take a quick, high-level look at your opt-in page, thank you page and ads, then send anything that looks off through the feedback form below.",
+      calTitle: "Send your funnel edits (Whitney Bateson, " + EMAIL + ")",
+      calDetails: "Hi, Britney! Today's the day for a quick, high-level look at your opt-in page, thank you page and ads.\n\n→ Look for anything that's wrong or doesn't sound like you (no need to comb through every word)\n→ Send it in one list through the feedback form on your roadmap\n\nHeads up: our team has limited availability Oct 28 to Nov 2, so replies might be a little slower this week." + sign },
+    { date: "2026-11-02", yours: false, finish: true, title: "🏁 Your funnel is complete",
+      note: "Final edits are in, and your funnel is ready to go. Your opt-in page is ready to share anywhere: your website, newsletter, social bio, even your email signature." }
+  ];
+
+  const ADS_ON_MAIL = "mailto:" + EMAIL + "?subject=" + encodeURIComponent("My ads are on! 🎉") + "&body=" + encodeURIComponent("Hi, Whitney & Priscilla! I just turned on my ads. Can you take a look and make sure everything's running?\n\nBritney");
+  const phase2Yours = [
+    { date: "2026-11-03", yours: true, adsOn: true, title: "Turn on your ads",
+      note: "Watch the video in your Funnel Command Center, turn your ads on, then email us at " + EMAIL + " so we can check everything's running.",
+      calTitle: "Turn on your ads (Whitney Bateson, " + EMAIL + ")",
+      calDetails: "Hi, Britney! Today's the day your ads go live. 🚀\n\n→ Open your Funnel Command Center and watch the video on turning on your ads\n→ Turn your ads on\n→ Email us at " + EMAIL + " to let us know, so we can check everything's running\n\nYour ad support starts today and runs through Nov 17." + sign }
+  ];
+
+  const parse = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y, m-1, d); };
+  const fmt = d => d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+  const short = d => d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  const ymd = d => d.getFullYear() + String(d.getMonth()+1).padStart(2,"0") + String(d.getDate()).padStart(2,"0");
+  const iso = d => d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
+  const addDay = d => { const n = new Date(d); n.setDate(n.getDate()+1); return n; };
+  const today = new Date(); today.setHours(0,0,0,0);
+  const tick = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  // ---- Saved progress (this device only until the forms are connected) ----
+  const KEY = "roadmap-" + CLIENT;
+  let state = { checks: {}, sent: {} };
+  try {
+    const old = JSON.parse(localStorage.getItem("britney-roadmap-checks") || "{}");
+    state = Object.assign(state, JSON.parse(localStorage.getItem(KEY) || "{}"));
+    state.checks = Object.assign({}, old, state.checks || {});
+    state.sent = state.sent || {};
+  } catch (e) {}
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+
+  const itemDone = a => a.got || (a.form ? !!state.sent[a.form] : !!state.checks[a.id]);
+  const step1Done = () => access.every(itemDone);
+  const stopDone = s => {
+    if (s.step1) return step1Done();
+    if (s.form) return !!state.sent[s.form];
+    if (s.adsOn) return !!state.sent.adson || parse(s.date) < today;
+    return parse(s.date) < today;
+  };
+
+  const FORMS = {
+    ack: {
+      title: "Your DFY Funnel Build: Project Schedule & Review Process",
+      button: "Read and acknowledge",
+      fields: [
+        { type: "info", html: "<p>Here's your funnel schedule and how revisions will go, so you know exactly what's coming and when. Sticking to the schedule and getting us what we need on time means we launch your funnel ASAP (so you can start building your list ASAP, too!).</p><p>This follows the template project schedule you already agreed to in our terms when you purchased your funnel. This just puts real dates to everything. Four of the dates on this roadmap are for you, and the rest are ours. Hit your four and your funnel goes live on schedule! Your total time on all of this is about an hour, spread across six weeks.</p>" },
+        { type: "info", html: "<h5>How reviews work</h5><p>You get one round of revisions on your lead magnet and email sequence. Send all of your changes at once, using the form on this page, so we can work through them in one pass. After the funnel handoff, you have until Thu, Oct 29 to request edits to your pages, ad copy and ad creative, also in one form.</p>" },
+        { type: "info", html: "<h5>Ad support</h5><p>Ad support runs by email and covers your ad campaign: performance, delivery and spend, audience and budget adjustments, Meta review or disapproval issues, and making sure leads are landing in your email platform. Priscilla replies within one business day. These dates are fixed, so please turn your ads on as soon as Meta approves them and you'll have live data to ask about.</p>" },
+        { type: "info", html: "<h5>Three things to know before we start</h5><ul><li><strong>Zapier:</strong> you'll need a paid Zapier plan (unless you're on GoHighLevel) for your funnel to deliver leads to your email platform. It's about $20/month, separate from your build, and we recommend a monthly plan so you can pause it in months you're not running ads.</li><li><strong>Ad spend</strong> is paid directly to Meta. We recommend starting around $5/day. Your build fee doesn't include it.</li><li><strong>Your ads don't run</strong> until Meta approves them and you turn them on. We submit them for review as our final build step.</li></ul>" },
+        { type: "textarea", label: "Any dates that won't work?", help: "Let us know within two business days and we'll see what we can do. Once we're underway, the dates are locked, since your build slot is reserved. All good? Leave this blank.", rows: 3 },
+        { type: "check", label: "I've read my project schedule and review process, and I'm ready to get started.", required: true }
+      ],
+      submit: "Submit"
+    },
+    direction: {
+      title: "Lead Magnet Direction Form",
+      button: "Open the feedback form",
+      fields: [
+        { type: "info", html: "<p>Here's where you tell us if we're on the right track. You're approving the direction (the idea, the title and who it's for), not the finished wording. That comes next, and you'll get a full review round on it.</p>" },
+        { type: "radio", label: "How do you feel about this direction?", required: true, options: ["Love it, go ahead and build it", "Love it, with a few small tweaks", "I'd like to talk through a different direction"] },
+        { type: "textarea", label: "What would you like us to tweak?", required: true, help: "The title, the angle, who it's for or what's inside. Something like \"can the title speak to busy moms instead of new moms?\" is perfect. No tweaks? Just write none." },
+        { type: "check", label: "I approve this direction (with any tweaks above), and I'm ready for you to start building.", required: true }
+      ],
+      submit: "Send my feedback"
+    },
+    lmemail: {
+      title: "Lead Magnet & Email Feedback Form",
+      button: "Open the feedback form",
+      fields: [
+        { type: "note", html: "<strong>Heads up:</strong> this form doesn't save as you go. If you're collecting notes over a few days, write them in a separate document, then paste them here when you're ready." },
+        { type: "textarea", label: "Is there anything you would like us to change about your lead magnet?", required: true, help: "Tell us what and where. Something like \"page 3, second bullet, swap 'patients' for 'clients'\" is perfect. No changes? Just write none." },
+        { type: "textarea", label: "Is there anything you would like us to change about your emails?", required: true, help: "Give us the email number and where to look. Something like \"email 2, subject line, can we try something softer?\" No changes? Just write none." },
+        { type: "textarea", label: "Did we get anything wrong?", required: true, help: "Credentials, program names, pricing, clinical details. Anything that needs to be exactly right.", rows: 3 },
+        { type: "file", label: "Screenshots", help: "If you need to upload any screenshots to support your comments above, add them here." },
+        { type: "textarea", label: "What's your favorite part?", help: "We love hearing it, and it helps us know what's landing.", rows: 3 },
+        { type: "textarea", label: "Is there anything else you would like to share with us?", rows: 3 },
+        { type: "checks", items: ["I've reviewed my full lead magnet and all emails.", "This is my complete list of changes, and I'm ready for you to get to work."] }
+      ],
+      submit: "Send my changes"
+    },
+    edits: {
+      title: "Funnel Edits Form",
+      button: "Open the feedback form",
+      fields: [
+        { type: "info", html: "<p>Your opt-in page, thank you page and ads are built from the lead magnet and emails you already approved. We carried that same messaging and your brand voice forward into every piece, so this is a quick, high-level look, not a line-by-line review.</p>" },
+        { type: "note", html: "<strong>A note on your ads:</strong> every ad is written to meet Meta's rules for health and wellness ads, and the wording is chosen carefully so it gets approved. For your ads, we're only looking for big things, like a wrong name, credential or link." },
+        { type: "textarea", label: "Anything that looks off?", required: true, rows: 6, help: "Tell us which piece and what's wrong. Something like \"the thank you page links to my old website\" is perfect. All good? Just write none." },
+        { type: "file", label: "Screenshots", help: "If a screenshot makes it easier to show us, add it here." },
+        { type: "checks", items: ["I've looked over my opt-in page, thank you page and ads.", "This is my complete list of changes, and I'm ready for you to get to work."] }
+      ],
+      submit: "Send my edits"
+    }
+  };
+
+  function esc(t) { return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }
+  function renderForm(key) {
+    const f = FORMS[key]; let n = 0;
+    const req = '<span class="req" aria-hidden="true">*</span>';
+    const body = f.fields.map(fl => {
+      const id = key + "-" + (n++);
+      const help = fl.help ? `<span class="f-help" id="${id}-h">${esc(fl.help)}</span>` : "";
+      const desc = fl.help ? ` aria-describedby="${id}-h"` : "";
+      if (fl.type === "info") return `<div class="f-info">${fl.html}</div>`;
+      if (fl.type === "note") return `<p class="f-note">${fl.html}</p>`;
+      if (fl.type === "textarea") return `<div class="f-field"><label for="${id}">${esc(fl.label)} ${fl.required ? req : ""}</label>${help}<textarea id="${id}" data-q="${esc(fl.label)}" rows="${fl.rows || 5}"${fl.required ? " required" : ""}${desc}></textarea></div>`;
+      if (fl.type === "radio") return `<fieldset class="f-field"><legend>${esc(fl.label)} ${fl.required ? req : ""}</legend>${fl.options.map((o, k) => `<label class="f-choice"><input type="radio" data-q="${esc(fl.label)}" name="${id}" value="${esc(o)}"${fl.required && k === 0 ? " required" : ""}><span>${esc(o)}</span></label>`).join("")}</fieldset>`;
+      if (fl.type === "checks") return `<div class="f-field f-checks">${fl.items.map(t => `<label class="f-check"><input type="checkbox" data-q="${esc(t)}" required><span>${esc(t)} ${req}</span></label>`).join("")}</div>`;
+      if (fl.type === "check") return `<label class="f-field f-check"><input type="checkbox" data-q="${esc(fl.label)}"${fl.required ? " required" : ""}><span>${esc(fl.label)} ${fl.required ? req : ""}</span></label>`;
+      if (fl.type === "file") return `<p class="f-note"><strong>Have screenshots?</strong> Email them to <a class="inline" href="mailto:${EMAIL}">${EMAIL}</a> after you submit.</p>`;
+      if (fl.type === "file-upload") return `<div class="f-field"><span class="f-label">${esc(fl.label)} <em>(optional)</em></span>${help}<label class="f-drop" for="${id}"><input type="file" id="${id}" multiple accept="image/*"><span class="f-drop-t">Choose files to upload</span><span class="f-drop-s">or drag them here</span></label></div>`;
+      return "";
+    }).join("");
+    return `<details class="fwrap"><summary><span class="f-sum">${esc(f.button)}</span><span class="f-sum-t">${esc(f.title)}</span></summary>
+      <form class="fbody" novalidate data-key="${key}"><h4 class="f-title">${esc(f.title)}</h4>${body}
+        <div class="f-actions"><button type="submit" class="f-submit">${esc(f.submit)}</button><span class="f-req-note">${req} Required</span></div>
+        <p class="f-status" role="status"></p>
+      </form></details>`;
+  }
+
+  function sentCard(key) {
+    const when = fmt(parse(state.sent[key]));
+    if (key === "ack") return `<div class="f-sent"><span class="f-sent-ic">${tick}</span><p><strong>Acknowledged on ${when}.</strong> Thanks for reading it through!</p></div>`;
+    return `<div class="f-sent"><span class="f-sent-ic">${tick}</span><p><strong>Sent on ${when}. Thank you!</strong> We're on it. Forgot something? Email us at <a class="inline" href="mailto:${EMAIL}">${EMAIL}</a> before the due date and we'll add it to your list.</p></div>`;
+  }
+  function fillForms(root) {
+    (root || document).querySelectorAll(".form-slot").forEach(slot => {
+      const k = slot.dataset.form;
+      slot.innerHTML = state.sent[k] ? sentCard(k) : renderForm(k);
+    });
+  }
+
+  function calLinks(s) {
+    const d = parse(s.date), end = addDay(d);
+    const text = encodeURIComponent(s.calTitle || ("Funnel: " + s.title));
+    const details = encodeURIComponent(s.calDetails || (s.note + sign));
+    const g = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${ymd(d)}/${ymd(end)}&details=${details}`;
+    const o = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${text}&body=${details}&startdt=${iso(d)}&enddt=${iso(end)}&allday=true`;
+    const act = s.action ? `<a class="act"${s.adsOn ? ' data-adson="1"' : ""} href="${s.action.href}"${s.action.internal ? "" : ' target="_blank" rel="noopener"'}>${s.action.text}</a>` : "";
+    return `<div class="cal">${act}<a href="${g}" target="_blank" rel="noopener">Add to Google Calendar</a><a href="${o}" target="_blank" rel="noopener">Add to Outlook</a></div>`;
+  }
+
+  function zapRow() {
+    const on = zapier.got || !!state.checks.zap;
+    return `<div class="zap-row${on ? " on" : ""}">
+      <button class="box" type="button" data-id="zap" aria-pressed="${on}" aria-label="Mark Zapier access as done" ${zapier.got ? "disabled" : ""}>${tick}</button>
+      <div><strong>Also due Oct 16: ${zapier.item}</strong><span class="how">${zapier.short}</span>
+      <details class="acc-more"><summary>More info</summary><p>${zapier.more}</p></details></div>
+    </div>`;
+  }
+
+  function renderRoute() {
+    document.getElementById("route").innerHTML = stops.map(s => {
+      const d = parse(s.date);
+      const done = stopDone(s);
+      const late = s.yours && !done && d < today;
+      const cls = ["stop", s.yours ? "yours" : "", s.big ? "big" : "", s.finish ? "finish" : "", done ? "done" : "", late ? "late" : ""].join(" ").trim();
+      return `<li class="${cls}">
+        <span class="pin" aria-hidden="true"></span>
+        <div class="card">
+          <span class="pstamp" aria-label="Done"><b>Done</b>${short(d)}</span>
+          <div class="date">${fmt(d)}${s.yours ? '<span class="tag">Your stop</span>' : ""}${late ? '<span class="tag late-tag">Still open</span>' : ""}</div>
+          <h4>${s.title}</h4>
+          <p>${s.note}</p>
+          ${s.after ? `<p class="after">${s.after}</p>` : ""}
+          ${s.yours && !done ? calLinks(s) : ""}
+          ${s.extra === "zap" ? zapRow() : ""}
+          ${s.form ? `<div class="form-slot" data-form="${s.form}"></div>` : ""}
+        </div>
+      </li>`;
+    }).join("");
+    fillForms(document.getElementById("route"));
+  }
+
+  function renderAccess() {
+    document.getElementById("access-list").innerHTML = access.map(a => {
+      const d = parse(a.due);
+      const days = Math.round((d - today) / 86400000);
+      const done = itemDone(a);
+      const soon = !done && days <= 3;
+      const label = a.got ? "Got it, thanks!" : done ? "Done" : days < 0 ? "Still needed" : "Needed by " + fmt(d);
+      const link = a.link && !done ? `<a class="acc-link" href="${a.link}"${a.internal ? "" : ' target="_blank" rel="noopener"'}>${a.linkText} ${a.internal ? "↓" : "→"}</a>` : "";
+      const more = a.more ? `<details class="acc-more"><summary>More info</summary><p>${a.more}</p></details>` : "";
+      const locked = a.got || a.form;
+      return `<li class="${a.got ? "got" : done ? "mine" : ""}">
+        <button class="box" type="button" data-id="${a.id}" aria-pressed="${done}" aria-label="Mark ${a.item} as done" ${locked ? 'data-locked="1"' : ""}>${tick}</button>
+        <div><strong>${a.item}</strong><span class="how">${a.short}</span>${more}${link}</div>
+        <span class="due${soon ? " soon" : ""}">${label}</span>
+      </li>`;
+    }).join("");
+    const n = access.filter(itemDone).length, total = access.length;
+    document.querySelector(".s1-count").textContent = n + " of " + total + " done";
+    document.querySelector(".s1-bar i").style.width = (n / total * 100) + "%";
+    const sec = document.getElementById("access");
+    const complete = n === total;
+    sec.classList.toggle("complete", complete);
+    document.querySelector(".s1-complete").hidden = !complete;
+    if (!complete) sec.classList.remove("expanded");
+  }
+
+  function renderNext() {
+    const next = stops.concat(phase2Yours).find(s => s.yours && !stopDone(s));
+    const box = document.getElementById("next");
+    if (next) {
+      const days = Math.round((parse(next.date) - today) / 86400000);
+      const big = days < 0 ? "Now" : days === 0 ? "Today" : days;
+      const small = days < 0 ? "let's catch up" : days === 0 ? "" : days === 1 ? "day to go" : "days to go";
+      box.innerHTML = `
+        <div class="stamp-big" aria-hidden="true"><b>${big}</b><small>${small}</small></div>
+        <div>
+          <h2>Your next stop</h2>
+          <h3>${next.title}</h3>
+          <p>Due end of day ${fmt(parse(next.date))}.</p>
+          ${calLinks(next)}
+        </div>`;
+    } else {
+      box.innerHTML = `
+        <div class="stamp-big" aria-hidden="true"><b>🎉</b></div>
+        <div>
+          <h2>Your next stop</h2>
+          <h3>You're all done</h3>
+          <p>No more homework for you. We'll handle the rest and keep you posted.</p>
+        </div>`;
+    }
+  }
+
+  function renderAll() {
+    renderAccess();
+    fillForms(document.getElementById("access"));
+    renderRoute();
+    renderNext();
+  }
+  renderAll();
+
+  // Step 1 checkboxes
+  document.getElementById("access-list").addEventListener("click", e => {
+    const btn = e.target.closest("button.box"); if (!btn) return;
+    if (btn.dataset.locked) {
+      if (btn.dataset.id === "ack") document.getElementById("ack-form").scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    const id = btn.dataset.id;
+    state.checks[id] = !state.checks[id]; save();
+    logAccess(id, state.checks[id]);
+    renderAccess();
+    const s1 = document.querySelector("#route .stop"); // Sep 28 stop
+    renderNext();
+    if (s1) s1.classList.toggle("done", step1Done());
+  });
+  document.querySelector(".s1-toggle").addEventListener("click", e => {
+    const sec = document.getElementById("access");
+    const open = sec.classList.toggle("expanded");
+    e.currentTarget.setAttribute("aria-expanded", open);
+    e.currentTarget.textContent = open ? "Hide details" : "Show details";
+  });
+
+  // Zapier checkbox on the Oct 16 stop
+  document.getElementById("route").addEventListener("click", e => {
+    const btn = e.target.closest(".zap-row button.box"); if (!btn || btn.disabled) return;
+    state.checks.zap = !state.checks.zap; save();
+    logAccess("zap", state.checks.zap);
+    const row = btn.closest(".zap-row");
+    row.classList.toggle("on", !!state.checks.zap);
+    btn.setAttribute("aria-pressed", !!state.checks.zap);
+  });
+
+  // "My ads are on!" buttons
+  const adsBtn = document.getElementById("ads-on-btn"); if (adsBtn) { adsBtn.href = ADS_ON_MAIL; adsBtn.dataset.adson = "1"; }
+  document.addEventListener("click", e => {
+    const a = e.target.closest("[data-adson]"); if (!a) return;
+    state.sent.adson = iso(today); save();
+    setTimeout(renderNext, 300);
+  });
+
+  // Form submit: sends answers to Notion through the Vercel API
+  function collect(form) {
+    const out = [];
+    form.querySelectorAll("textarea[data-q]").forEach(t => out.push({ q: t.dataset.q, a: t.value.trim() }));
+    const radios = {};
+    form.querySelectorAll('input[type="radio"][data-q]').forEach(r => { if (r.checked) radios[r.dataset.q] = r.value; });
+    Object.keys(radios).forEach(q => out.push({ q, a: radios[q] }));
+    form.querySelectorAll('input[type="checkbox"][data-q]').forEach(c => out.push({ q: c.dataset.q, a: c.checked ? "Yes" : "No" }));
+    return out;
+  }
+  document.addEventListener("submit", async e => {
+    const form = e.target.closest("form.fbody"); if (!form) return;
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    const btn = form.querySelector(".f-submit"), st = form.querySelector(".f-status");
+    const label = btn.textContent;
+    btn.disabled = true; btn.textContent = "Sending..."; st.textContent = "";
+    try {
+      const res = await fetch(API + "/submit", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ client: CLIENT, token: TOKEN, form: form.dataset.key, answers: collect(form) })
+      });
+      if (!res.ok) throw new Error("status " + res.status);
+      state.sent[form.dataset.key] = iso(new Date()); save();
+      renderAll();
+      const slot = document.querySelector(`.form-slot[data-form="${form.dataset.key}"]`);
+      if (slot) slot.scrollIntoView({ behavior: "smooth", block: "center" });
+    } catch (err) {
+      btn.disabled = false; btn.textContent = label;
+      st.textContent = "Something went wrong sending this. Please try again, or email your answers to " + EMAIL + ".";
+    }
+  });
+
+  // Let us know when an access item is ticked (best effort, never blocks the page)
+  function logAccess(id, on) {
+    if (!on) return;
+    fetch(API + "/submit", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ client: CLIENT, token: TOKEN, form: "access", item: id }) }).catch(() => {});
+  }
+
+  // Pull what's already been submitted, so it shows on every device
+  fetch(API + "/status?client=" + encodeURIComponent(CLIENT) + "&token=" + encodeURIComponent(TOKEN))
+    .then(r => r.ok ? r.json() : null)
+    .then(data => {
+      if (!data) return;
+      Object.assign(state.sent, data.sent || {});
+      Object.keys(data.access || {}).forEach(k => { state.checks[k] = true; });
+      save(); renderAll();
+    }).catch(() => {});
+
+  document.addEventListener("change", e => {
+    const inp = e.target.closest(".f-drop input"); if (!inp) return;
+    const t = inp.parentElement.querySelector(".f-drop-t");
+    t.textContent = inp.files.length ? inp.files.length + (inp.files.length === 1 ? " file chosen" : " files chosen") : "Choose files to upload";
+  });
+
+  document.querySelectorAll(".p2-stop").forEach(li => { if (parse(li.dataset.date) <= today) li.classList.add("reached"); });
+  document.querySelectorAll(".handoff-btn").forEach(b => {
+    if (parse(b.dataset.open) <= today && b.dataset.href && b.dataset.href !== "#") {
+      b.href = b.dataset.href; b.target = "_blank"; b.rel = "noopener"; b.removeAttribute("aria-disabled");
+    }
+  });
+
+</script>
+</body>
+</html>
