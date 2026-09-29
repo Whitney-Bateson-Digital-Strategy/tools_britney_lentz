@@ -101,7 +101,7 @@
     </div>
   </section>
 
-  <section class="review" id="review" aria-labelledby="review-h">
+  <section class="review" id="review" aria-labelledby="review-h"${C.showReview === false ? " hidden" : ""}>
     <h2 id="review-h">Ready for your review 👀</h2>
     <p class="review-intro">Everything we send you to look over lands here. Open it, then send your feedback through the form on that stop.</p>
     <ul id="review-list"></ul>
