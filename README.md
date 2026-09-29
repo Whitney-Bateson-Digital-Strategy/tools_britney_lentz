@@ -8,7 +8,10 @@ checkmarks are saved as rows in a Notion database.
 
 | File | What it does |
 |---|---|
-| `britney/index.html` | Britney's roadmap page |
+| `assets/roadmap.css` | The shared design. Change it once and every client's page updates |
+| `assets/roadmap.js` | The shared page: layout, wording, forms. Dates and names come from each client's settings |
+| `britney/index.html` | Britney's settings: name, key, dates, links, what's been received |
+| `heidi/index.html` | Heidi's settings |
 | `api/submit.js` | Saves a form or checkmark to Notion |
 | `api/status.js` | Tells the page what's already been submitted, so it matches on every device |
 | `api/_notion.js` | Shared Notion helper |
@@ -58,10 +61,20 @@ Create a full-page database called **Client Feedback** with these properties
 3. Open the page on your phone. The form should already show as sent.
 
 ## Adding a new client
-1. Copy the `britney` folder and rename it (for example `jessica`).
-2. In the new `index.html`, update `CLIENT`, `TOKEN`, the name, dates and links.
-3. Add the client to `clients.json` with a new random key (any long random string).
-4. Commit. Vercel redeploys on its own.
+1. Copy the `heidi` folder and rename it to the client's first name (for example `jessica`).
+   That name is the end of her link: `roadmap.whitneybateson.com/jessica`.
+2. In the new `index.html`, update the settings at the top:
+   - `client`: the folder name
+   - `token`: a new long random string (letters and numbers)
+   - `firstName`, `bonusWeek`, and her links once you have them
+   - `dates`: her nine dates. Everything else on the page (phase ranges, calendar
+     reminders, ad support weeks, the acknowledgement text) is worked out from these.
+3. Add her to `clients.json` with the same folder name, her full name, and the same token.
+   Without this, her forms won't save.
+4. Commit to `main`. Vercel redeploys on its own.
+
+As things come in, flip them to `true` under `received`. Once her four Step 1 items are all
+`true`, Step 1 hides itself and the "Ready for your review" card takes its place.
 
 ## Notes
 - Pages are hidden from search engines (`noindex`), but anyone with the link can open
