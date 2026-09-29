@@ -202,6 +202,36 @@
   .done:not(.yours):not(.big) .card { padding-right: 90px; }
   .yours.done .card, .big.done .card { padding-right: 100px; }
 
+  .access[hidden] { display: none; }
+
+  /* Ready for your review (same card as the old Step 1) */
+  .review {
+    background: var(--paper); border: 1px solid var(--border); border-radius: var(--r-lg);
+    padding: 32px 34px 18px; margin: 0 0 44px; box-shadow: var(--sh-md);
+  }
+  .review h2 {
+    display: block; width: fit-content; margin: 0 0 14px;
+    font-family: var(--body); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--navy); background: var(--lime); padding: 7px 14px; border-radius: 3px;
+  }
+  .review-intro { margin: 0 0 6px; color: var(--muted); }
+  #review-list { list-style: none; margin: 0; padding: 0; }
+  #review-list li { display: grid; grid-template-columns: 1fr auto; gap: 6px 14px; align-items: start; padding: 18px 0; }
+  #review-list li:not(:last-child) { border-bottom: 1px solid var(--border); }
+  #review-list strong { display: block; font-weight: 700; color: var(--navy); }
+  #review-list .how { display: block; color: var(--text); font-size: 15.5px; }
+  #review-list .rv-acts { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+  #review-list .rv-soon { display: inline-block; margin-top: 8px; font-size: 14.5px; font-weight: 700; color: var(--muted); }
+  #review-list li.later strong, #review-list li.later .how { color: var(--muted); }
+  #review-list li.sent strong { text-decoration: line-through; text-decoration-thickness: 2px; color: var(--muted); }
+  #review-list li.sent .how { color: var(--muted); }
+  #review-list li.later .due, #review-list li.sent .due { background: var(--hi-md); color: var(--navy); }
+  @media (max-width: 560px) {
+    .review { padding: 26px 22px 12px; }
+    #review-list li { grid-template-columns: 1fr; }
+    #review-list .due { grid-column: 1; grid-row: 1; justify-self: start; }
+  }
+
   /* Handoff milestone: lime wash, like the sales page .cs-stat */
   .big .card {
     background: var(--hi-md); border-left: 3px solid var(--coral);
@@ -479,7 +509,14 @@
     <p>Bookmark this page. Everything you need for your funnel build lives right here. Questions? Email us at <a class="mail" href="mailto:admin@whitneybateson.com">admin@whitneybateson.com</a></p>
   </div>
 
-  <section class="access" id="access" aria-labelledby="access-h">
+  <section class="review" id="review" aria-labelledby="review-h">
+    <h2 id="review-h">Ready for your review 👀</h2>
+    <p class="review-intro">Everything we send you to look over lands here. Open it, then send your feedback through the form on that stop.</p>
+    <ul id="review-list"></ul>
+  </section>
+
+  <!-- Step 1 (access + acknowledgement) is done, so it's hidden. Remove "hidden" to show it again. -->
+  <section class="access" id="access" aria-labelledby="access-h" hidden>
     <div class="s1-head">
       <h2 id="access-h">Step 1: Give us access 🔑</h2>
       <div class="s1-progress" aria-live="polite"><span class="s1-count"></span><span class="s1-bar"><i></i></span></div>
@@ -562,8 +599,8 @@
       <article class="extra">
         <h3>Funnel Command Center</h3>
         <p>Your Notion hub with every file we built and a video walkthrough of each piece, including how to turn on your ads.</p>
-        <!-- TODO: replace data-href="#" with Britney's Funnel Command Center link -->
-        <a class="xbtn handoff-btn" data-href="#" data-open="2026-10-29" aria-disabled="true">Open Command Center <span>(Oct 29)</span></a>
+        <!-- Link comes from COMMAND_CENTER_URL in the script below -->
+        <a class="xbtn handoff-btn" data-href="" data-open="2026-10-29" aria-disabled="true">Open Command Center <span>(Oct 29)</span></a>
       </article>
       <article class="extra">
         <h3>Ads Made Simple course</h3>
@@ -605,12 +642,23 @@
   const DIGITALSERO_URL = "https://whitneybateson.digitalsero.app/clients/onboarding/984d1c97-8e48-4786-ac1d-7fcf4657e7b5";
   const ZAPIER_NOTE = "Don't have a paid plan yet? Hold off on buying one until closer to Oct 20, so you're not paying for time you won't use. On GoHighLevel? Skip this one.";
 
-  // Set got: true as access comes in (your confirmation), then republish.
+  // Set got: true as access comes in (your confirmation), then republish. All four received.
   const access = [
-    { id: "email", item: "Email software access", short: "Add " + EMAIL + " as a user on your email platform.", more: "If your plan doesn't allow extra users, share your login through LastPass (or another secure password tool) with " + EMAIL + " instead.", due: "2026-09-28", got: false },
-    { id: "web", item: "Website access", short: "Add " + EMAIL + " as a user on your website. Already a WBDS website client? Skip this one, we already have access.", due: "2026-09-28", got: false },
-    { id: "fb", item: "Facebook access", short: "Click your DigitalSero link. It only works once, so open it when you're ready to finish.", due: "2026-09-28", got: false, link: DIGITALSERO_URL, linkText: "Open my DigitalSero link" },
-    { id: "ack", item: "Acknowledge your schedule", short: "Read how reviews and ad support work, then submit the short form below.", due: "2026-09-28", got: false, form: "ack", link: "#ack-form", linkText: "Read it below", internal: true }
+    { id: "email", item: "Email software access", short: "Add " + EMAIL + " as a user on your email platform.", more: "If your plan doesn't allow extra users, share your login through LastPass (or another secure password tool) with " + EMAIL + " instead.", due: "2026-09-28", got: true },
+    { id: "web", item: "Website access", short: "Add " + EMAIL + " as a user on your website. Already a WBDS website client? Skip this one, we already have access.", due: "2026-09-28", got: true },
+    { id: "fb", item: "Facebook access", short: "Click your DigitalSero link. It only works once, so open it when you're ready to finish.", due: "2026-09-28", got: true, link: DIGITALSERO_URL, linkText: "Open my DigitalSero link" },
+    { id: "ack", item: "Acknowledge your schedule", short: "Read how reviews and ad support work, then submit the short form below.", due: "2026-09-28", got: true, form: "ack", link: "#ack-form", linkText: "Read it below", internal: true }
+  ];
+  // Things for Britney to review. Paste each link in once it's ready; until then the page says "Link coming".
+  // COMMAND_CENTER_URL also unlocks the Command Center button on handoff day.
+  const COMMAND_CENTER_URL = "#";
+  const reviews = [
+    { form: "direction", item: "Your lead magnet direction", ready: "2026-09-30", due: "2026-10-05", url: "#", linkText: "Open your direction",
+      short: "What we recommend for your freebie: what it is, who it's for, and why your people will want it." },
+    { form: "lmemail", item: "Your lead magnet and email sequence", ready: "2026-10-13", due: "2026-10-20", url: "#", linkText: "Open your lead magnet and emails",
+      short: "Your finished freebie and the welcome emails that follow it. Send all your changes in one list." },
+    { form: "edits", item: "Your pages and ads", ready: "2026-10-29", due: "2026-11-03", url: COMMAND_CENTER_URL, linkText: "Open your Funnel Command Center",
+      short: "A quick, high-level look at your opt-in page, thank you page and ads. Flag anything that's wrong or doesn't sound like you." }
   ];
   const zapier = { id: "zap", item: "Zapier access", short: "Share your Zapier login through LastPass (or another secure password tool) with " + EMAIL + ".", more: ZAPIER_NOTE, got: false };
 
@@ -807,7 +855,7 @@
           ${s.after ? `<p class="after">${s.after}</p>` : ""}
           ${s.yours && !done ? calLinks(s) : ""}
           ${s.extra === "zap" ? zapRow() : ""}
-          ${s.form ? `<div class="form-slot" data-form="${s.form}"></div>` : ""}
+          ${s.form ? `<div class="form-slot" id="${s.form}-form" data-form="${s.form}"></div>` : ""}
         </div>
       </li>`;
     }).join("");
@@ -840,6 +888,25 @@
     if (!complete) sec.classList.remove("expanded");
   }
 
+  function renderReview() {
+    document.getElementById("review-list").innerHTML = reviews.map(r => {
+      const ready = parse(r.ready), due = parse(r.due);
+      const sent = !!state.sent[r.form];
+      const later = ready > today;
+      const days = Math.round((due - today) / 86400000);
+      const label = sent ? "Feedback sent" : later ? "Arrives " + fmt(ready) : days < 0 ? "Still open" : "Review by " + fmt(due);
+      const soon = !sent && !later && days <= 2;
+      const hasLink = r.url && r.url !== "#";
+      const acts = later ? "" : `<span class="rv-acts">${hasLink
+          ? `<a class="acc-link" href="${r.url}" target="_blank" rel="noopener">${r.linkText} →</a>`
+          : `<span class="rv-soon">Link coming soon</span>`}${sent ? "" : `<a class="acc-link" href="#${r.form}-form">Send feedback ↓</a>`}</span>`;
+      return `<li class="${sent ? "sent" : later ? "later" : ""}">
+        <div><strong>${r.item}</strong><span class="how">${r.short}</span>${acts}</div>
+        <span class="due${soon ? " soon" : ""}">${label}</span>
+      </li>`;
+    }).join("");
+  }
+
   function renderNext() {
     const next = stops.concat(phase2Yours).find(s => s.yours && !stopDone(s));
     const box = document.getElementById("next");
@@ -870,6 +937,7 @@
     renderAccess();
     fillForms(document.getElementById("access"));
     renderRoute();
+    renderReview();
     renderNext();
   }
   renderAll();
@@ -973,6 +1041,7 @@
 
   document.querySelectorAll(".p2-stop").forEach(li => { if (parse(li.dataset.date) <= today) li.classList.add("reached"); });
   document.querySelectorAll(".handoff-btn").forEach(b => {
+    b.dataset.href = COMMAND_CENTER_URL;
     if (parse(b.dataset.open) <= today && b.dataset.href && b.dataset.href !== "#") {
       b.href = b.dataset.href; b.target = "_blank"; b.rel = "noopener"; b.removeAttribute("aria-disabled");
     }
