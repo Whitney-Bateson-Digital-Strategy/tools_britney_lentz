@@ -295,7 +295,7 @@
   .acc-more p { margin: 4px 0 0; color: var(--muted); }
   #access-list .box[data-locked] { cursor: pointer; }
 
-  /* Zapier row on Oct 16 */
+  /* Zapier row on Oct 20 */
   .zap-row { display: grid; grid-template-columns: 28px 1fr; gap: 12px; margin-top: 14px; padding: 12px 14px; background: var(--cream); border: 1px solid rgba(2,82,93,.14); border-radius: var(--r); }
   .zap-row strong { display: block; color: var(--navy); }
   .zap-row .how { display: block; font-size: 15px; }
@@ -466,8 +466,8 @@
     <p class="lede">We are SO excited to get building for you. This is every stop between today and your ads going live.</p>
     <p class="lede">The coral pins are your stops, the few times we need something from you. Everything else is on us, and each stop gets a stamp once it's done.</p>
     <dl class="glance">
-      <div><dt>Funnel handoff</dt><dd>Oct 26</dd></div>
-      <div><dt>Ads go live</dt><dd>Nov 3</dd></div>
+      <div><dt>Funnel handoff</dt><dd>Oct 29</dd></div>
+      <div><dt>Ads go live</dt><dd>Nov 6</dd></div>
     </dl>
   </div>
 </header>
@@ -492,14 +492,14 @@
       <p class="access-intro">Before we can start building, we need access to a few things. Tick each one off as you finish it.</p>
       <ul id="access-list"></ul>
       <div id="ack-form" class="form-slot" data-form="ack"></div>
-      <p class="s1-later"><strong>Coming up later:</strong> Zapier access isn't needed until Fri, Oct 16. You'll find it on that stop below.</p>
+      <p class="s1-later"><strong>Coming up later:</strong> Zapier access isn't needed until Tue, Oct 20. You'll find it on that stop below.</p>
     </div>
   </section>
 
   <div class="phase-head">
     <span class="phase-num">Phase 1</span>
     <h2>Building your funnel</h2>
-    <p>Sep 28 to Nov 2. This is where we need you, just four quick stops.</p>
+    <p>Sep 28 to Nov 5. This is where we need you, just four quick stops.</p>
   </div>
 
   <div class="legend" aria-hidden="true">
@@ -524,24 +524,24 @@
     <div class="phase-head">
       <span class="phase-num">Phase 2</span>
       <h2 id="p2-h">Your ads go live</h2>
-      <p>Nov 3 to Nov 17. One quick step from you, then we take it from here, watching your ads and your whole funnel to make sure your automations are running, emails are sending and new subscribers are flowing in.</p>
+      <p>Nov 6 to Nov 20. One quick step from you, then we take it from here, watching your ads and your whole funnel to make sure your automations are running, emails are sending and new subscribers are flowing in.</p>
     </div>
     <ol class="p2-track">
-      <li class="p2-stop yours-p2" data-date="2026-11-03">
+      <li class="p2-stop yours-p2" data-date="2026-11-06">
         <span class="p2-dot" aria-hidden="true"></span>
-        <span class="p2-date">Tue, Nov 3 <span class="tag">Your stop</span></span>
+        <span class="p2-date">Fri, Nov 6 <span class="tag">Your stop</span></span>
         <h3>Turn on your ads 🚀</h3>
         <p>Watch the video in your Funnel Command Center, turn your ads on, then let us know so we can check everything's running.</p>
       </li>
-      <li class="p2-stop bonus" data-date="2026-11-10">
+      <li class="p2-stop bonus" data-date="2026-11-13">
         <span class="p2-dot" aria-hidden="true"></span>
-        <span class="p2-date">Tue, Nov 10</span>
+        <span class="p2-date">Fri, Nov 13</span>
         <h3>Bonus week kicks in 🎁</h3>
         <p>You signed up within 24 hours, so you get a second week of us keeping watch and answering questions.</p>
       </li>
-      <li class="p2-stop" data-date="2026-11-17">
+      <li class="p2-stop" data-date="2026-11-20">
         <span class="p2-dot" aria-hidden="true"></span>
-        <span class="p2-date">Tue, Nov 17</span>
+        <span class="p2-date">Fri, Nov 20</span>
         <h3>Your recap 📊</h3>
         <p>How your ads are performing, what your email data is showing, and our recommendations for what's next.</p>
       </li>
@@ -563,7 +563,7 @@
         <h3>Funnel Command Center</h3>
         <p>Your Notion hub with every file we built and a video walkthrough of each piece, including how to turn on your ads.</p>
         <!-- TODO: replace data-href="#" with Britney's Funnel Command Center link -->
-        <a class="xbtn handoff-btn" data-href="#" data-open="2026-10-26" aria-disabled="true">Open Command Center <span>(Oct 26)</span></a>
+        <a class="xbtn handoff-btn" data-href="#" data-open="2026-10-29" aria-disabled="true">Open Command Center <span>(Oct 29)</span></a>
       </article>
       <article class="extra">
         <h3>Ads Made Simple course</h3>
@@ -603,7 +603,7 @@
   const EMAIL = "admin@whitneybateson.com";
   const APPROVE_URL = "#";
   const DIGITALSERO_URL = "https://whitneybateson.digitalsero.app/clients/onboarding/984d1c97-8e48-4786-ac1d-7fcf4657e7b5";
-  const ZAPIER_NOTE = "Don't have a paid plan yet? Hold off on buying one until closer to Oct 16, so you're not paying for time you won't use. On GoHighLevel? Skip this one.";
+  const ZAPIER_NOTE = "Don't have a paid plan yet? Hold off on buying one until closer to Oct 20, so you're not paying for time you won't use. On GoHighLevel? Skip this one.";
 
   // Set got: true as access comes in (your confirmation), then republish.
   const access = [
@@ -625,33 +625,33 @@
       calDetails: "Hi, Britney! Today's the day to get your funnel build rolling. 🎉\n\n→ Email software: add " + EMAIL + " as a user (or share your login through LastPass with " + EMAIL + ")\n→ Website: add " + EMAIL + " as a user (skip this if you're already a WBDS website client)\n→ Facebook: click the DigitalSero link we sent you (it only works once)\n→ Read and acknowledge your schedule on your roadmap\n\nOnce these are in, we can start building." + sign },
     { date: "2026-09-30", yours: false, title: "Your lead magnet direction arrives",
       note: "The direction we recommend for your freebie: what it is, who it's for, and why your people will want it." },
-    { date: "2026-10-02", yours: true, form: "direction", title: "Approve your direction",
+    { date: "2026-10-05", yours: true, form: "direction", title: "Approve your direction",
       note: "Give it the thumbs up, or tell us what to tweak, through the feedback form below.",
       calTitle: "Approve your lead magnet direction (Whitney Bateson, " + EMAIL + ")",
       calDetails: "Hi, Britney! Your lead magnet direction landed on Wednesday, and today's the day we need your feedback.\n\nOpen the feedback form on your roadmap and either:\n→ Give the direction a thumbs up, or\n→ Tell us what you'd like tweaked\n\nOnce it's approved, we start building your lead magnet and welcome emails." + sign },
     { date: "2026-10-13", yours: false, title: "Lead magnet and email sequence arrive",
       note: "Your finished freebie and the welcome emails that follow it." },
-    { date: "2026-10-16", yours: true, form: "lmemail", extra: "zap", title: "Send your revisions",
+    { date: "2026-10-20", yours: true, form: "lmemail", extra: "zap", title: "Send your revisions",
       note: "Send one consolidated list of changes for the lead magnet and emails through the feedback form below.",
       calTitle: "Send your lead magnet + email revisions (Whitney Bateson, " + EMAIL + ")",
       calDetails: "Hi, Britney! Today's the day to send your revisions for your lead magnet and welcome emails.\n\n→ Put all your changes in one list (it helps us move faster!)\n→ Send it through the feedback form on your roadmap\n→ Also due today: your Zapier login, shared through LastPass or another secure password tool (skip this if you're on GoHighLevel)\n\nNext up, we build your pages, ads and automations." + sign },
-    { date: "2026-10-26", yours: false, big: true, title: "🎉 Your funnel is handed off!",
+    { date: "2026-10-29", yours: false, big: true, title: "🎉 Your funnel is handed off!",
       note: "Your Funnel Command Center opens, with your opt-in and thank you pages, ads, automations and a video walkthrough of each piece, all ready for you to look through.",
-      after: "Next up for you → a quick look and any edits by <mark>Thu, Oct 29</mark>" },
-    { date: "2026-10-29", yours: true, form: "edits", title: "Send your funnel edits",
+      after: "Next up for you → a quick look and any edits by <mark>Tue, Nov 3</mark>" },
+    { date: "2026-11-03", yours: true, form: "edits", title: "Send your funnel edits",
       note: "Take a quick, high-level look at your opt-in page, thank you page and ads, then send anything that looks off through the feedback form below.",
       calTitle: "Send your funnel edits (Whitney Bateson, " + EMAIL + ")",
-      calDetails: "Hi, Britney! Today's the day for a quick, high-level look at your opt-in page, thank you page and ads.\n\n→ Look for anything that's wrong or doesn't sound like you (no need to comb through every word)\n→ Send it in one list through the feedback form on your roadmap\n\nHeads up: our team has limited availability Oct 28 to Nov 2, so replies might be a little slower this week." + sign },
-    { date: "2026-11-02", yours: false, finish: true, title: "🏁 Your funnel is complete",
+      calDetails: "Hi, Britney! Today's the day for a quick, high-level look at your opt-in page, thank you page and ads.\n\n→ Look for anything that's wrong or doesn't sound like you (no need to comb through every word)\n→ Send it in one list through the feedback form on your roadmap" + sign },
+    { date: "2026-11-05", yours: false, finish: true, title: "🏁 Your funnel is complete",
       note: "Final edits are in, and your funnel is ready to go. Your opt-in page is ready to share anywhere: your website, newsletter, social bio, even your email signature." }
   ];
 
   const ADS_ON_MAIL = "mailto:" + EMAIL + "?subject=" + encodeURIComponent("My ads are on! 🎉") + "&body=" + encodeURIComponent("Hi, Whitney & Priscilla! I just turned on my ads. Can you take a look and make sure everything's running?\n\nBritney");
   const phase2Yours = [
-    { date: "2026-11-03", yours: true, adsOn: true, title: "Turn on your ads",
+    { date: "2026-11-06", yours: true, adsOn: true, title: "Turn on your ads",
       note: "Watch the video in your Funnel Command Center, turn your ads on, then email us at " + EMAIL + " so we can check everything's running.",
       calTitle: "Turn on your ads (Whitney Bateson, " + EMAIL + ")",
-      calDetails: "Hi, Britney! Today's the day your ads go live. 🚀\n\n→ Open your Funnel Command Center and watch the video on turning on your ads\n→ Turn your ads on\n→ Email us at " + EMAIL + " to let us know, so we can check everything's running\n\nYour ad support starts today and runs through Nov 17." + sign }
+      calDetails: "Hi, Britney! Today's the day your ads go live. 🚀\n\n→ Open your Funnel Command Center and watch the video on turning on your ads\n→ Turn your ads on\n→ Email us at " + EMAIL + " to let us know, so we can check everything's running\n\nYour ad support starts today and runs through Nov 20." + sign }
   ];
 
   const parse = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y, m-1, d); };
@@ -689,7 +689,7 @@
       button: "Read and acknowledge",
       fields: [
         { type: "info", html: "<p>Here's your funnel schedule and how revisions will go, so you know exactly what's coming and when. Sticking to the schedule and getting us what we need on time means we launch your funnel ASAP (so you can start building your list ASAP, too!).</p><p>This follows the template project schedule you already agreed to in our terms when you purchased your funnel. This just puts real dates to everything. Four of the dates on this roadmap are for you, and the rest are ours. Hit your four and your funnel goes live on schedule! Your total time on all of this is about an hour, spread across six weeks.</p>" },
-        { type: "info", html: "<h5>How reviews work</h5><p>You get one round of revisions on your lead magnet and email sequence. Send all of your changes at once, using the form on this page, so we can work through them in one pass. After the funnel handoff, you have until Thu, Oct 29 to request edits to your pages, ad copy and ad creative, also in one form.</p>" },
+        { type: "info", html: "<h5>How reviews work</h5><p>You get one round of revisions on your lead magnet and email sequence. Send all of your changes at once, using the form on this page, so we can work through them in one pass. After the funnel handoff, you have until Tue, Nov 3 to request edits to your pages, ad copy and ad creative, also in one form.</p>" },
         { type: "info", html: "<h5>Ad support</h5><p>Ad support runs by email and covers your ad campaign: performance, delivery and spend, audience and budget adjustments, Meta review or disapproval issues, and making sure leads are landing in your email platform. Priscilla replies within one business day. These dates are fixed, so please turn your ads on as soon as Meta approves them and you'll have live data to ask about.</p>" },
         { type: "info", html: "<h5>Three things to know before we start</h5><ul><li><strong>Zapier:</strong> you'll need a paid Zapier plan (unless you're on GoHighLevel) for your funnel to deliver leads to your email platform. It's about $20/month, separate from your build, and we recommend a monthly plan so you can pause it in months you're not running ads.</li><li><strong>Ad spend</strong> is paid directly to Meta. We recommend starting around $5/day. Your build fee doesn't include it.</li><li><strong>Your ads don't run</strong> until Meta approves them and you turn them on. We submit them for review as our final build step.</li></ul>" },
         { type: "textarea", label: "Any dates that won't work?", help: "Let us know within two business days and we'll see what we can do. Once we're underway, the dates are locked, since your build slot is reserved. All good? Leave this blank.", rows: 3 },
@@ -786,7 +786,7 @@
     const on = zapier.got || !!state.checks.zap;
     return `<div class="zap-row${on ? " on" : ""}">
       <button class="box" type="button" data-id="zap" aria-pressed="${on}" aria-label="Mark Zapier access as done" ${zapier.got ? "disabled" : ""}>${tick}</button>
-      <div><strong>Also due Oct 16: ${zapier.item}</strong><span class="how">${zapier.short}</span>
+      <div><strong>Also due Oct 20: ${zapier.item}</strong><span class="how">${zapier.short}</span>
       <details class="acc-more"><summary>More info</summary><p>${zapier.more}</p></details></div>
     </div>`;
   }
@@ -896,7 +896,7 @@
     e.currentTarget.textContent = open ? "Hide details" : "Show details";
   });
 
-  // Zapier checkbox on the Oct 16 stop
+  // Zapier checkbox on the Oct 20 stop
   document.getElementById("route").addEventListener("click", e => {
     const btn = e.target.closest(".zap-row button.box"); if (!btn || btn.disabled) return;
     state.checks.zap = !state.checks.zap; save();
