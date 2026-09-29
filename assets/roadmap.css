@@ -204,6 +204,7 @@
     font-family: var(--body); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
     color: var(--navy); background: var(--lime); padding: 7px 14px; border-radius: 3px;
   }
+  .review[hidden] { display: none; }
   .review-intro { margin: 0 0 6px; color: var(--muted); }
   #review-list { list-style: none; margin: 0; padding: 0; }
   #review-list li { display: grid; grid-template-columns: 1fr auto; gap: 6px 14px; align-items: start; padding: 18px 0; }
@@ -352,6 +353,7 @@
     margin: 36px 0 0; padding: 28px 30px;
     background: var(--hi-md); border-left: 3px solid var(--coral); border-radius: 0 var(--r-lg) var(--r-lg) 0;
   }
+  .headstart .phase-num { background: var(--navy); color: var(--lime); }
   .headstart h2 { margin: 0 0 10px; font-size: clamp(1.6rem, 4vw, 2rem); }
   .headstart p { margin: 0 0 10px; }
   .hs-row { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 16px; }
