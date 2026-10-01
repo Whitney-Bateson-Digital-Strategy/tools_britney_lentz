@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bethany's Funnel Roadmap | Whitney Bateson Digital Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/roadmap.css">
+</head>
+<body>
+<script>
+  // Bethany's settings. The design and wording live in /assets (shared by every client).
+  window.ROADMAP = {
+    client: "bethany",                       // must match the folder name and clients.json
+    token: "5V0oHuRuf3pwjOdutFFgW6xz",       // must match clients.json
+    firstName: "Bethany",
+    bonusWeek: true,                         // signed up within 24 hours: adds a second ad support week
+    digitalSeroUrl: "https://whitneybateson.digitalsero.app/clients/onboarding/0dd59983-bfc5-4351-b15b-5967f6b316d5",
+    commandCenterUrl: "#",                   // paste her Funnel Command Center link; the button unlocks on handoff day
+    showReview: false,                       // hides the "Ready for your review" card
+    reviewLinks: {
+      direction: "#",                        // lead magnet direction doc
+      lmemail: "#"                           // lead magnet + email sequence
+    },
+
+    // Mark each item true once it's in. When the first four are all true, Step 1 hides itself.
+    received: { email: false, web: false, fb: false, ack: false, zap: false },
+
+    dates: {
+      access: "2026-10-06",            // access + schedule acknowledgement due
+      directionArrives: "2026-10-09",  // we send the lead magnet direction
+      directionDue: "2026-10-14",      // she approves the direction
+      lmArrives: "2026-10-26",         // we send the lead magnet + emails
+      revisionsDue: "2026-10-29",      // her revisions + Zapier due
+      handoff: "2026-11-09",           // funnel handoff, Command Center opens
+      editsDue: "2026-11-11",          // her funnel edits due
+      complete: "2026-11-12",          // final fixes done
+      adsOn: "2026-11-12",             // she turns ads on, ad support starts
+      recap: "2026-11-27"              // ad support ends (moved past Thanksgiving)
+    }
+  };
+</script>
+<script src="/assets/roadmap.js"></script>
+</body>
+</html>

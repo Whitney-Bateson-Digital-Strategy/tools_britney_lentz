@@ -22,7 +22,7 @@
   const D = {};
   Object.keys(C.dates).forEach(k => { D[k] = parse(C.dates[k]); });
   D.bonus = addDays(D.adsOn, 7);
-  D.recap = addDays(D.adsOn, BONUS ? 14 : 7);
+  if (!D.recap) D.recap = addDays(D.adsOn, BONUS ? 14 : 7);  // a client can set dates.recap to override
   const WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
   const weeks = Math.ceil((D.complete - D.access) / 86400000 / 7);
 
