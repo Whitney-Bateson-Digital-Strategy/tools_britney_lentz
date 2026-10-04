@@ -163,6 +163,7 @@
     </div>
     <div class="p2-help">
       <p><strong>Ads on, or have a question during ad support?</strong> Email us at <a class="inline" href="mailto:admin@whitneybateson.com">admin@whitneybateson.com</a></p>
+      ${C.pause ? `<p><strong>Heads up:</strong> replies pause on ${fmt(parse(C.pause.date))} for ${esc(C.pause.reason)} and pick back up ${fmt(addDay(parse(C.pause.date)))}. Your ads keep running as usual.</p>` : ""}
     </div>
   </section>
 
