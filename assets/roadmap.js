@@ -6,6 +6,9 @@
   const NAME = C.firstName;
   const BONUS = !!C.bonusWeek;
   const API = "/api";
+  // Optional per-client wording: a client's settings can set copy.<key> to replace the default text
+  const COPY = C.copy || {};
+  const T = (k, d) => (k in COPY ? COPY[k] : d);
 
   const parse = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y, m-1, d); };
   const fmt = d => d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
@@ -67,7 +70,7 @@
     <p class="brand">Whitney Bateson Digital Strategy</p>
     <p class="eyebrow">Hi, ${NAME}!</p>
     <h1>Here's your funnel <span style="white-space:nowrap">roadmap 🗺️</span></h1>
-    <p class="lede">We are SO excited to get building for you. This is every stop between today and your ads going live.</p>
+    <p class="lede">${T("intro", "We are SO excited to get building for you. This is every stop between today and your ads going live.")}</p>
     <p class="lede">The coral pins are your stops, the few times we need something from you. Everything else is on us, and each stop gets a stamp once it's done.</p>
     <dl class="glance">
       <div><dt>Funnel handoff</dt><dd>${short(D.handoff)}</dd></div>
@@ -94,7 +97,7 @@
       <button type="button" class="s1-toggle" aria-expanded="false">Show details</button>
     </div>
     <div class="s1-body">
-      <p class="access-intro">Before we can start building, we need access to a few things. Tick each one off as you finish it.</p>
+      <p class="access-intro">${T("accessIntro", "Before we can start building")}, we need access to a few things. Tick each one off as you finish it.</p>
       <ul id="access-list"></ul>
       <div id="ack-form" class="form-slot" data-form="ack"></div>
       <p class="s1-later"><strong>Coming up later:</strong> Zapier access isn't needed until ${fmt(D.revisionsDue)}. You'll find it on that stop below.</p>
@@ -109,7 +112,7 @@
 
   <div class="phase-head">
     <span class="phase-num">Phase 1</span>
-    <h2>Building your funnel</h2>
+    <h2>${T("phase1Title", "Building your funnel")}</h2>
     <p>${short(D.access)} to ${short(D.complete)}. This is where we need you, just four quick stops.</p>
   </div>
 
@@ -148,7 +151,7 @@
         <span class="p2-dot" aria-hidden="true"></span>
         <span class="p2-date">${fmt(D.bonus)}</span>
         <h3>Bonus week kicks in 🎁</h3>
-        <p>You signed up within 24 hours, so you get a second week of us keeping watch and answering questions.</p>
+        <p>${T("bonusNote", "You signed up within 24 hours, so you get a second week of us keeping watch and answering questions.")}</p>
       </li>` : ""}
       <li class="p2-stop" data-date="${iso(D.recap)}">
         <span class="p2-dot" aria-hidden="true"></span>
@@ -196,7 +199,7 @@
       <svg viewBox="0 0 64 64"><path d="M16 58V8" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M18 10h30l-7 10 7 10H18z" fill="#E3F696" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>
     </div>
     <h2>Final destination: your funnel and ads are live 🎉</h2>
-    <p>Once everything's live, you'll have a strategic lead magnet that points people to the next step of working with you, a welcome sequence that does the nurturing for you, and ads that keep bringing new subscribers in.</p>
+    <p>Once everything's live, ${T("finalNote", "you'll have a strategic lead magnet that points people to the next step of working with you, a welcome sequence that does the nurturing for you, and ads that keep bringing new subscribers in.")}</p>
     <p class="more">After their funnel is live, clients often come back to us for ongoing ad support, another lead magnet funnel, SEO or private coaching.</p>
     <div class="finale-actions">
       <a class="portal" href="mailto:admin@whitneybateson.com?subject=Looking%20for%20more%20support">Need more support down the road? Send us an email</a>
@@ -216,20 +219,20 @@
       action: { href: "#access", text: "Get started", internal: true },
       calTitle: "Send Whitney's team access for your funnel (Whitney Bateson, " + EMAIL + ")",
       calDetails: "Hi, " + NAME + "! Today's the day to get your funnel build rolling. 🎉\n\n→ Email software: add " + EMAIL + " as a user (or share your login through LastPass with " + EMAIL + ")\n→ Website: add " + EMAIL + " as a user (skip this if you're already a WBDS website client)\n→ Facebook: click the DigitalSero link we sent you (it only works once)\n→ Read and acknowledge your schedule on your roadmap\n\nOnce these are in, we can start building." + sign },
-    { date: C.dates.directionArrives, yours: false, title: "Your lead magnet direction arrives",
-      note: "The direction we recommend for your freebie: what it is, who it's for, and why your people will want it." },
-    { date: C.dates.directionDue, yours: true, form: "direction", title: "Approve your direction",
-      note: "Give it the thumbs up, or tell us what to tweak, through the feedback form below.",
+    { date: C.dates.directionArrives, yours: false, title: T("directionArrivesTitle", "Your lead magnet direction arrives"),
+      note: T("directionArrivesNote", "The direction we recommend for your freebie: what it is, who it's for, and why your people will want it.") },
+    { date: C.dates.directionDue, yours: true, form: "direction", title: T("directionDueTitle", "Approve your direction"),
+      note: T("directionDueNote", "Give it the thumbs up, or tell us what to tweak, through the feedback form below."),
       calTitle: "Approve your lead magnet direction (Whitney Bateson, " + EMAIL + ")",
       calDetails: "Hi, " + NAME + "! Your lead magnet direction landed on " + dayName(D.directionArrives) + ", and today's the day we need your feedback.\n\nOpen the feedback form on your roadmap and either:\n→ Give the direction a thumbs up, or\n→ Tell us what you'd like tweaked\n\nOnce it's approved, we start building your lead magnet and welcome emails." + sign },
-    { date: C.dates.lmArrives, yours: false, title: "Lead magnet and email sequence arrive",
-      note: "Your finished freebie and the welcome emails that follow it." },
+    { date: C.dates.lmArrives, yours: false, title: T("lmArrivesTitle", "Lead magnet and email sequence arrive"),
+      note: T("lmArrivesNote", "Your finished freebie and the welcome emails that follow it.") },
     { date: C.dates.revisionsDue, yours: true, form: "lmemail", extra: "zap", title: "Send your revisions",
       note: "Send one consolidated list of changes for the lead magnet and emails through the feedback form below.",
       calTitle: "Send your lead magnet + email revisions (Whitney Bateson, " + EMAIL + ")",
       calDetails: "Hi, " + NAME + "! Today's the day to send your revisions for your lead magnet and welcome emails.\n\n→ Put all your changes in one list (it helps us move faster!)\n→ Send it through the feedback form on your roadmap\n→ Also due today: your Zapier login, shared through LastPass or another secure password tool (skip this if you're on GoHighLevel)\n\nNext up, we build your pages, ads and automations." + sign },
     { date: C.dates.handoff, yours: false, big: true, title: "🎉 Your funnel is handed off!",
-      note: "Your Funnel Command Center opens, with your opt-in and thank you pages, ads, automations and a video walkthrough of each piece, all ready for you to look through.",
+      note: T("handoffNote", "Your Funnel Command Center opens, with your opt-in and thank you pages, ads, automations and a video walkthrough of each piece, all ready for you to look through."),
       after: "Next up for you → a quick look and any edits by <mark>" + fmt(D.editsDue) + "</mark>" },
     { date: C.dates.editsDue, yours: true, form: "edits", title: "Send your funnel edits",
       note: "Take a quick, high-level look at your opt-in page, thank you page and ads, then send anything that looks off through the feedback form below.",
@@ -284,7 +287,7 @@
       submit: "Submit"
     },
     direction: {
-      title: "Lead Magnet Direction Form",
+      title: T("directionFormTitle", "Lead Magnet Direction Form"),
       button: "Open the feedback form",
       fields: [
         { type: "info", html: "<p>Here's where you tell us if we're on the right track. You're approving the direction (the idea, the title and who it's for), not the finished wording. That comes next, and you'll get a full review round on it.</p>" },
@@ -295,7 +298,7 @@
       submit: "Send my feedback"
     },
     lmemail: {
-      title: "Lead Magnet & Email Feedback Form",
+      title: T("lmemailFormTitle", "Lead Magnet & Email Feedback Form"),
       button: "Open the feedback form",
       fields: [
         { type: "note", html: "<strong>Heads up:</strong> this form doesn't save as you go. If you're collecting notes over a few days, write them in a separate document, then paste them here when you're ready." },
