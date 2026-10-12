@@ -17,6 +17,7 @@
   const ymd = d => d.getFullYear() + String(d.getMonth()+1).padStart(2,"0") + String(d.getDate()).padStart(2,"0");
   const iso = d => d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
   const addDay = d => { const n = new Date(d); n.setDate(n.getDate()+1); return n; };
+  const nextWeekday = d => { let n = addDay(d); while (n.getDay() === 0 || n.getDay() === 6) n = addDay(n); return n; };
   const addDays = (d, k) => { const n = new Date(d); n.setDate(n.getDate()+k); return n; };
   const today = new Date(); today.setHours(0,0,0,0);
   function esc(t) { return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }
@@ -114,6 +115,7 @@
     <span class="phase-num">Phase 1</span>
     <h2>${T("phase1Title", "Building your funnel")}</h2>
     <p>${short(D.access)} to ${short(D.complete)}. This is where we need you, just four quick stops.</p>
+    ${C.away ? `<p><strong>Heads up:</strong> our team is out ${fmt(parse(C.away.start))} to ${fmt(parse(C.away.end))}, and replies pick back up ${fmt(parse(C.away.back))}.${C.away.note ? " " + esc(C.away.note) : ""}</p>` : ""}
   </div>
 
   <div class="legend" aria-hidden="true">
@@ -166,7 +168,7 @@
     </div>
     <div class="p2-help">
       <p><strong>Ads on, or have a question during ad support?</strong> Email us at <a class="inline" href="mailto:admin@whitneybateson.com">admin@whitneybateson.com</a></p>
-      ${C.pause ? `<p><strong>Heads up:</strong> replies pause on ${fmt(parse(C.pause.date))} for ${esc(C.pause.reason)} and pick back up ${fmt(addDay(parse(C.pause.date)))}. Your ads keep running as usual.</p>` : ""}
+      ${C.pause ? `<p><strong>Heads up:</strong> replies pause ${C.pause.end ? "from " + fmt(parse(C.pause.date)) + " to " + fmt(parse(C.pause.end)) : "on " + fmt(parse(C.pause.date))} for ${esc(C.pause.reason)} and pick back up ${fmt(nextWeekday(parse(C.pause.end || C.pause.date)))}. Your ads keep running as usual.</p>` : ""}
     </div>
   </section>
 

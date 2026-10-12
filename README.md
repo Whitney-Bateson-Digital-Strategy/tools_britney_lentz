@@ -16,6 +16,7 @@ checkmarks are saved as rows in a Notion database.
 | `tracey/index.html` | Tracey's settings |
 | `nicole/index.html` | Nicole's settings |
 | `selena/index.html` | Selena's settings |
+| `amanda/index.html` | Amanda's settings |
 | `api/submit.js` | Saves a form or checkmark to Notion |
 | `api/status.js` | Tells the page what's already been submitted, so it matches on every device |
 | `api/_notion.js` | Shared Notion helper |
@@ -72,7 +73,10 @@ Create a full-page database called **Client Feedback** with these properties
    - `token`: a new long random string (letters and numbers)
    - `firstName`, `bonusWeek`, and her links once you have them
    - `pause` (optional): a day replies pause during ad support, like
-     `{ date: "2026-11-26", reason: "Thanksgiving" }`. Shows as a note under Phase 2.
+     `{ date: "2026-11-26", reason: "Thanksgiving" }`. Add `end` for a pause longer than a day.
+     Shows as a note under Phase 2.
+   - `away` (optional): days the team is out, like
+     `{ start: "2026-10-28", end: "2026-11-02", back: "2026-11-03", note: "..." }`. Shows as a note under Phase 1.
    - `dates`: her nine dates. Everything else on the page (phase ranges, calendar
      reminders, ad support weeks, the acknowledgement text) is worked out from these.
 3. Add her to `clients.json` with the same folder name, her full name, and the same token.
