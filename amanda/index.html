@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Amanda's Funnel Roadmap | Whitney Bateson Digital Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/roadmap.css">
+</head>
+<body>
+<script>
+  // Amanda's settings. The design and wording live in /assets (shared by every client).
+  window.ROADMAP = {
+    client: "amanda",                        // must match the folder name and clients.json
+    token: "MUFCfQyPqyGnisM1znkzSDkR",       // must match clients.json
+    firstName: "Amanda",
+    bonusWeek: true,                         // signed up within 24 hours: adds a second ad support week
+    digitalSeroUrl: "",                      // paste her DigitalSero link once you have it
+    commandCenterUrl: "#",                   // paste her Funnel Command Center link; the button unlocks on handoff day
+    showReview: false,                       // hides the "Ready for your review" card
+    reviewLinks: {
+      direction: "#",                        // lead magnet direction doc
+      lmemail: "#"                           // lead magnet + email sequence
+    },
+
+    // Mark each item true once it's in. When the first four are all true, Step 1 hides itself.
+    received: { email: false, web: false, fb: false, ack: false, zap: false },
+
+    dates: {
+      access: "2026-10-15",            // access + schedule acknowledgement due
+      directionArrives: "2026-10-16",  // we send the lead magnet direction + brand kit
+      directionDue: "2026-10-19",      // she approves the direction
+      lmArrives: "2026-10-27",         // we send the lead magnet + emails
+      revisionsDue: "2026-11-02",      // her revisions + Zapier due
+      handoff: "2026-11-13",           // funnel handoff, Command Center opens
+      editsDue: "2026-11-17",          // her funnel edits due
+      complete: "2026-11-18",          // final fixes done
+      adsOn: "2026-11-18",             // ads go live, ad support starts
+      recap: "2026-12-07"              // ad support ends, recap email
+    },
+
+    // The team is out during her lead magnet review window
+    away: { start: "2026-10-28", end: "2026-11-02", back: "2026-11-03",
+            note: "Your lead magnet and email review falls during this time, so review whenever suits you." },
+
+    // Replies pause for the holiday during ad support
+    pause: { date: "2026-11-26", end: "2026-11-27", reason: "Thanksgiving" }
+  };
+</script>
+<script src="/assets/roadmap.js"></script>
+</body>
+</html>
