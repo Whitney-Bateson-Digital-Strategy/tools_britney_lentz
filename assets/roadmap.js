@@ -52,10 +52,10 @@
       short: "What we recommend for your freebie: what it is, who it's for, and why your people will want it." },
     { form: "lmemail", item: "Your lead magnet and email sequence", ready: C.dates.lmArrives, due: C.dates.revisionsDue,
       links: RL.leadMagnet || RL.emails
-        ? [{ url: RL.leadMagnet, text: "Open your lead magnet" }, { url: RL.emails, text: "Open your emails" }]
+        ? [{ url: RL.leadMagnet, text: "Open your lead magnet" }, { url: RL.emails, text: "Open your emails" }, { url: RL.folder, text: "Open your Drive folder" }]
         : [{ url: RL.lmemail, text: "Open your lead magnet and emails" }],
       video: RL.editVideo,
-      short: "Your finished freebie and the welcome emails that follow it. Make your edits right in the files, then let us know you're done through the form." },
+      short: "Your finished freebie and the welcome emails that follow it. Leave comments right on your lead magnet and make your edits in your email doc, then let us know you're done." },
     { form: "edits", item: "Your pages and ads", ready: C.dates.handoff, due: C.dates.editsDue, links: [{ url: C.commandCenterUrl, text: "Open your Funnel Command Center" }],
       short: "A quick, high-level look at your opt-in page, thank you page and ads. Flag anything that's wrong or doesn't sound like you." }
   ];
@@ -234,9 +234,9 @@
     { date: C.dates.lmArrives, yours: false, title: T("lmArrivesTitle", "Lead magnet and email sequence arrive"),
       note: T("lmArrivesNote", "Your finished freebie and the welcome emails that follow it.") },
     { date: C.dates.revisionsDue, yours: true, form: "lmemail", extra: "zap", title: "Send your revisions",
-      note: "Make your edits right in your lead magnet and email doc, then let us know you're done through the form below.",
+      note: "Leave comments on your lead magnet and make your edits in your email doc, then let us know you're done through the form below.",
       calTitle: "Send your lead magnet + email revisions (Whitney Bateson, " + EMAIL + ")",
-      calDetails: "Hi, " + NAME + "! Today's the day to send your revisions for your lead magnet and welcome emails.\n\n→ Make all your edits right in your lead magnet and email doc\n→ Then let us know you're done through the form on your roadmap\n→ Also due today: your Zapier login, shared through LastPass or another secure password tool (skip this if you're on GoHighLevel)\n\nNext up, we build your pages, ads and automations." + sign },
+      calDetails: "Hi, " + NAME + "! Today's the day to send your revisions for your lead magnet and welcome emails.\n\n→ Leave comments on your lead magnet and make your edits in your email doc\n→ Then let us know you're done through the form on your roadmap\n→ Also due today: your Zapier login, shared through LastPass or another secure password tool (skip this if you're on GoHighLevel)\n\nNext up, we build your pages, ads and automations." + sign },
     { date: C.dates.handoff, yours: false, big: true, title: "🎉 Your funnel is handed off!",
       note: T("handoffNote", "Your Funnel Command Center opens, with your opt-in and thank you pages, ads, automations and a video walkthrough of each piece, all ready for you to look through."),
       after: "Next up for you → a quick look and any edits by <mark>" + fmt(D.editsDue) + "</mark>" },
@@ -307,9 +307,9 @@
       title: T("lmemailFormTitle", "Lead Magnet & Email Review Form"),
       button: "I'm done with my edits",
       fields: [
-        { type: "info", html: "<p>Make your edits right in your lead magnet and your email doc. Once you've been through everything, check the boxes below and send it over. This is your one round of revisions, so please only submit once you're finished.</p>" },
+        { type: "info", html: "<p>Leave your changes as comments on your lead magnet (the video above shows how) and make your edits right in your email doc. Once you've been through everything, check the boxes below and send it over. This is your one round of revisions, so please only submit once you're finished.</p>" },
         { type: "checks", items: [
-          "I've reviewed my full lead magnet and made my edits right in it.",
+          "I've reviewed my full lead magnet and left my changes as comments on it.",
           "I've reviewed all of my emails and made my edits right in the email doc.",
           "I've double-checked the details that need to be exactly right: names, credentials, program names, pricing and links.",
           "These are all of my changes, and I'm ready for you to get to work."
@@ -447,7 +447,7 @@
       const acts = later ? "" : `<span class="rv-acts">${live.length
           ? live.map(l => `<a class="acc-link" href="${l.url}" target="_blank" rel="noopener">${l.text} →</a>`).join("")
           : `<span class="rv-soon">Link coming soon</span>`}${sent ? "" : `<a class="acc-link" href="#${r.form}-form">${r.form === "lmemail" ? "Tell us you're done ↓" : "Send feedback ↓"}</a>`}</span>`;
-      const video = r.video && !later && !sent ? `<figure class="rv-video"><video src="${r.video}" autoplay muted loop playsinline aria-label="How to make your edits"></video><figcaption>How to make your edits</figcaption></figure>` : "";
+      const video = r.video && !later && !sent ? `<figure class="rv-video"><video src="${r.video}" autoplay muted loop playsinline controls preload="metadata" aria-label="How to leave comments on your lead magnet"></video><figcaption>How to leave comments on your lead magnet</figcaption></figure>` : "";
       return `<li class="${sent ? "sent" : later ? "later" : ""}">
         <div><strong>${r.item}</strong><span class="how">${r.short}</span>${video}${acts}</div>
         <span class="due${soon ? " soon" : ""}">${label}</span>
