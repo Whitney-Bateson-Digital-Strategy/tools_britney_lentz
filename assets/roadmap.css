@@ -212,9 +212,22 @@
   #review-list strong { display: block; font-weight: 700; color: var(--navy); }
   #review-list .how { display: block; color: var(--text); font-size: 15.5px; }
   #review-list .rv-acts { display: flex; flex-wrap: wrap; gap: 6px 18px; }
-  #review-list .rv-video { margin: 12px 0 4px; max-width: 520px; }
-  #review-list .rv-video video { display: block; width: 100%; height: auto; border-radius: var(--r); border: 1px solid var(--border); background: var(--cream); }
-  #review-list .rv-video figcaption { margin-top: 6px; font-size: 13.5px; font-weight: 700; color: var(--muted); }
+  #review-list .rv-steps { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 10px; }
+  #review-list .rv-steps li { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--r); background: var(--hi); }
+  #review-list .rv-steps li:not(:last-child) { border-bottom: 1px solid var(--border); }
+  #review-list .rv-n { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--navy); color: var(--white); font-weight: 800; font-size: 14px; display: grid; place-items: center; margin-top: 1px; }
+  #review-list .rv-steps b { display: block; color: var(--navy); font-weight: 800; }
+  #review-list .rv-steps span:not(.rv-n):not(.rv-row):not(.rv-soon) { display: block; font-size: 15px; color: var(--text); }
+  #review-list .rv-steps .rv-path b { display: inline; font-weight: 800; color: var(--text); }
+  #review-list .rv-row { display: flex; flex-wrap: wrap; gap: 8px 10px; margin-top: 10px; }
+  #review-list .rv-btn, #review-list .rv-watch { display: inline-block; padding: 9px 16px; border-radius: var(--r); font: 700 14.5px/1.2 var(--body); text-decoration: none; cursor: pointer; background: var(--coral); color: var(--white); border: 2px solid var(--coral); }
+  #review-list .rv-btn:hover { background: var(--coral-dk); border-color: var(--coral-dk); }
+  #review-list .rv-watch, #review-list .rv-ghost { background: transparent; color: var(--navy); border-color: var(--navy); }
+  #review-list .rv-watch:hover, #review-list .rv-ghost:hover { background: var(--navy); color: var(--white); }
+  .vid-modal { width: min(1200px, 94vw); max-width: none; padding: 0; border: 0; border-radius: var(--r-lg); background: #000; overflow: visible; }
+  .vid-modal::backdrop { background: rgba(0,0,0,.75); }
+  .vid-modal video { display: block; width: 100%; height: auto; aspect-ratio: 1588 / 838; max-height: 86vh; border-radius: var(--r-lg); }
+  .vid-close { position: absolute; top: -44px; right: 0; width: 38px; height: 38px; border: 0; border-radius: 50%; background: var(--white); color: var(--navy); font-size: 26px; line-height: 1; cursor: pointer; }
   #review-list .rv-soon { display: inline-block; margin-top: 8px; font-size: 14.5px; font-weight: 700; color: var(--muted); }
   #review-list li.later strong, #review-list li.later .how { color: var(--muted); }
   #review-list li.sent strong { text-decoration: line-through; text-decoration-thickness: 2px; color: var(--muted); }

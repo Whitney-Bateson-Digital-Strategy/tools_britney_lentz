@@ -52,10 +52,11 @@
       short: "What we recommend for your freebie: what it is, who it's for, and why your people will want it." },
     { form: "lmemail", item: "Your lead magnet and email sequence", ready: C.dates.lmArrives, due: C.dates.revisionsDue,
       links: RL.leadMagnet || RL.emails
-        ? [{ url: RL.leadMagnet, text: "Open your lead magnet" }, { url: RL.emails, text: "Open your emails" }, { url: RL.folder, text: "Open your Drive folder" }]
+        ? [{ url: RL.leadMagnet, text: "Open your lead magnet" }, { url: RL.emails, text: "Open your email doc" }]
         : [{ url: RL.lmemail, text: "Open your lead magnet and emails" }],
-      video: RL.editVideo,
-      short: "Your finished freebie and the welcome emails that follow it. Leave comments right on your lead magnet and make your edits in your email doc, then let us know you're done." },
+      // With separate links, the item becomes three numbered steps (see reviewSteps)
+      steps: !!(RL.leadMagnet || RL.emails), video: RL.editVideo,
+      short: "Your finished freebie and the welcome emails that follow it. Three quick steps:" },
     { form: "edits", item: "Your pages and ads", ready: C.dates.handoff, due: C.dates.editsDue, links: [{ url: C.commandCenterUrl, text: "Open your Funnel Command Center" }],
       short: "A quick, high-level look at your opt-in page, thank you page and ads. Flag anything that's wrong or doesn't sound like you." }
   ];
@@ -307,7 +308,7 @@
       title: T("lmemailFormTitle", "Lead Magnet & Email Review Form"),
       button: "I'm done with my edits",
       fields: [
-        { type: "info", html: "<p>Leave your changes as comments on your lead magnet (the video above shows how) and make your edits right in your email doc. Once you've been through everything, check the boxes below and send it over. This is your one round of revisions, so please only submit once you're finished.</p>" },
+        { type: "info", html: "<p>Leave your changes as comments on your lead magnet (tap Watch how above to see how) and make your edits right in your email doc. Once you've been through everything, check the boxes below and send it over. This is your one round of revisions, so please only submit once you're finished.</p>" },
         { type: "checks", items: [
           "I've reviewed my full lead magnet and left my changes as comments on it.",
           "I've reviewed all of my emails and made my edits right in the email doc.",
@@ -439,21 +440,48 @@
     document.getElementById("review-list").innerHTML = reviews.map(r => {
       const ready = parse(r.ready), due = parse(r.due);
       const sent = !!state.sent[r.form];
-      const later = ready > today;
+      const live = r.links.filter(l => l.url && l.url !== "#");
+      const later = ready > today && !live.length; // links added early? show them now
       const days = Math.round((due - today) / 86400000);
       const label = sent ? "Feedback sent" : later ? "Arrives " + fmt(ready) : days < 0 ? "Still open" : "Review by " + fmt(due);
       const soon = !sent && !later && days <= 2;
-      const live = r.links.filter(l => l.url && l.url !== "#");
       const acts = later ? "" : `<span class="rv-acts">${live.length
           ? live.map(l => `<a class="acc-link" href="${l.url}" target="_blank" rel="noopener">${l.text} →</a>`).join("")
           : `<span class="rv-soon">Link coming soon</span>`}${sent ? "" : `<a class="acc-link" href="#${r.form}-form">${r.form === "lmemail" ? "Tell us you're done ↓" : "Send feedback ↓"}</a>`}</span>`;
-      const video = r.video && !later && !sent ? `<figure class="rv-video"><video src="${r.video}" autoplay muted loop playsinline controls preload="metadata" aria-label="How to leave comments on your lead magnet"></video><figcaption>How to leave comments on your lead magnet</figcaption></figure>` : "";
+      const body = r.steps && live.length && !sent ? reviewSteps(r) : `<span class="how">${r.short}</span>${acts}`;
       return `<li class="${sent ? "sent" : later ? "later" : ""}">
-        <div><strong>${r.item}</strong><span class="how">${r.short}</span>${video}${acts}</div>
+        <div><strong>${r.item}</strong>${body}</div>
         <span class="due${soon ? " soon" : ""}">${label}</span>
       </li>`;
     }).join("");
   }
+
+  // Lead magnet + emails as three numbered steps, one button each
+  function reviewSteps(r) {
+    const btn = (l, cls) => l.url && l.url !== "#" ? `<a class="rv-btn${cls || ""}" href="${l.url}" target="_blank" rel="noopener">${l.text} →</a>` : `<span class="rv-soon">Link coming soon</span>`;
+    const watch = r.video ? `<button type="button" class="rv-watch" data-video="${r.video}">▶ Watch how</button>` : "";
+    return `<span class="how">${r.short}</span>
+      <ol class="rv-steps">
+        <li><span class="rv-n">1</span><div><b>Leave comments on your lead magnet.</b><span class="rv-path">Open it, then: <b>Comment</b> → <b>select the area</b> → <b>type your comment</b> → <b>Comment</b></span><span class="rv-row">${btn(r.links[0])}${watch}</span></div></li>
+        <li><span class="rv-n">2</span><div><b>Make your edits in your email doc.</b><span>Change anything you like, right in the doc.</span><span class="rv-row">${btn(r.links[1])}</span></div></li>
+        <li><span class="rv-n">3</span><div><b>Tell us you're done.</b><span>Check the boxes in the form so we know to get started.</span><span class="rv-row"><a class="rv-btn rv-ghost" href="#${r.form}-form">Go to the form ↓</a></span></div></li>
+      </ol>`;
+  }
+
+  // "Watch how" opens the video big, in a pop-up
+  document.addEventListener("click", e => {
+    const b = e.target.closest(".rv-watch"); if (!b) return;
+    let dlg = document.getElementById("vid-modal");
+    if (!dlg) {
+      document.body.insertAdjacentHTML("beforeend", `<dialog id="vid-modal" class="vid-modal" aria-label="How to leave comments on your lead magnet"><button type="button" class="vid-close" aria-label="Close">×</button><video autoplay muted loop playsinline controls></video></dialog>`);
+      dlg = document.getElementById("vid-modal");
+      dlg.addEventListener("click", ev => { if (ev.target === dlg || ev.target.closest(".vid-close")) dlg.close(); });
+      dlg.addEventListener("close", () => dlg.querySelector("video").pause());
+    }
+    const v = dlg.querySelector("video");
+    if (v.getAttribute("src") !== b.dataset.video) v.src = b.dataset.video;
+    dlg.showModal(); v.currentTime = 0; v.play().catch(() => {});
+  });
 
   function renderNext() {
     const next = stops.concat(phase2Yours).find(s => s.yours && !stopDone(s));
