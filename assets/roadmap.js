@@ -439,11 +439,11 @@
     document.getElementById("review-list").innerHTML = reviews.map(r => {
       const ready = parse(r.ready), due = parse(r.due);
       const sent = !!state.sent[r.form];
-      const later = ready > today;
+      const live = r.links.filter(l => l.url && l.url !== "#");
+      const later = ready > today && !live.length; // links added early? show them now
       const days = Math.round((due - today) / 86400000);
       const label = sent ? "Feedback sent" : later ? "Arrives " + fmt(ready) : days < 0 ? "Still open" : "Review by " + fmt(due);
       const soon = !sent && !later && days <= 2;
-      const live = r.links.filter(l => l.url && l.url !== "#");
       const acts = later ? "" : `<span class="rv-acts">${live.length
           ? live.map(l => `<a class="acc-link" href="${l.url}" target="_blank" rel="noopener">${l.text} →</a>`).join("")
           : `<span class="rv-soon">Link coming soon</span>`}${sent ? "" : `<a class="acc-link" href="#${r.form}-form">${r.form === "lmemail" ? "Tell us you're done ↓" : "Send feedback ↓"}</a>`}</span>`;
