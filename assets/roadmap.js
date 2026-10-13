@@ -462,7 +462,7 @@
     const watch = r.video ? `<button type="button" class="rv-watch" data-video="${r.video}">▶ Watch how</button>` : "";
     return `<span class="how">${r.short}</span>
       <ol class="rv-steps">
-        <li><span class="rv-n">1</span><div><b>Leave comments on your lead magnet.</b><span>Click Comment, drag over the spot you want changed, then type your note.</span><span class="rv-row">${btn(r.links[0])}${watch}</span></div></li>
+        <li><span class="rv-n">1</span><div><b>Leave comments on your lead magnet.</b><span class="rv-path">Open it, then: <b>Comment</b> → <b>select the area</b> → <b>type your comment</b> → <b>Comment</b></span><span class="rv-row">${btn(r.links[0])}${watch}</span></div></li>
         <li><span class="rv-n">2</span><div><b>Make your edits in your email doc.</b><span>Change anything you like, right in the doc.</span><span class="rv-row">${btn(r.links[1])}</span></div></li>
         <li><span class="rv-n">3</span><div><b>Tell us you're done.</b><span>Check the boxes in the form so we know to get started.</span><span class="rv-row"><a class="rv-btn rv-ghost" href="#${r.form}-form">Go to the form ↓</a></span></div></li>
       </ol>`;
