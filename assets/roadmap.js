@@ -48,11 +48,15 @@
   // Things to review. Links come from reviewLinks / commandCenterUrl; until then the page says "Link coming soon".
   const RL = C.reviewLinks || {};
   const reviews = [
-    { form: "direction", item: "Your lead magnet direction", ready: C.dates.directionArrives, due: C.dates.directionDue, url: RL.direction || "#", linkText: "Open your direction",
+    { form: "direction", item: "Your lead magnet direction", ready: C.dates.directionArrives, due: C.dates.directionDue, links: [{ url: RL.direction, text: "Open your direction" }],
       short: "What we recommend for your freebie: what it is, who it's for, and why your people will want it." },
-    { form: "lmemail", item: "Your lead magnet and email sequence", ready: C.dates.lmArrives, due: C.dates.revisionsDue, url: RL.lmemail || "#", linkText: "Open your lead magnet and emails",
-      short: "Your finished freebie and the welcome emails that follow it. Send all your changes in one list." },
-    { form: "edits", item: "Your pages and ads", ready: C.dates.handoff, due: C.dates.editsDue, url: C.commandCenterUrl || "#", linkText: "Open your Funnel Command Center",
+    { form: "lmemail", item: "Your lead magnet and email sequence", ready: C.dates.lmArrives, due: C.dates.revisionsDue,
+      links: RL.leadMagnet || RL.emails
+        ? [{ url: RL.leadMagnet, text: "Open your lead magnet" }, { url: RL.emails, text: "Open your emails" }]
+        : [{ url: RL.lmemail, text: "Open your lead magnet and emails" }],
+      video: RL.editVideo,
+      short: "Your finished freebie and the welcome emails that follow it. Make your edits right in the files, then let us know you're done through the form." },
+    { form: "edits", item: "Your pages and ads", ready: C.dates.handoff, due: C.dates.editsDue, links: [{ url: C.commandCenterUrl, text: "Open your Funnel Command Center" }],
       short: "A quick, high-level look at your opt-in page, thank you page and ads. Flag anything that's wrong or doesn't sound like you." }
   ];
   const zapier = { id: "zap", item: "Zapier access", short: "Share your Zapier login through LastPass (or another secure password tool) with " + EMAIL + ".", more: ZAPIER_NOTE, got: !!got.zap };
@@ -230,9 +234,9 @@
     { date: C.dates.lmArrives, yours: false, title: T("lmArrivesTitle", "Lead magnet and email sequence arrive"),
       note: T("lmArrivesNote", "Your finished freebie and the welcome emails that follow it.") },
     { date: C.dates.revisionsDue, yours: true, form: "lmemail", extra: "zap", title: "Send your revisions",
-      note: "Send one consolidated list of changes for the lead magnet and emails through the feedback form below.",
+      note: "Make your edits right in your lead magnet and email doc, then let us know you're done through the form below.",
       calTitle: "Send your lead magnet + email revisions (Whitney Bateson, " + EMAIL + ")",
-      calDetails: "Hi, " + NAME + "! Today's the day to send your revisions for your lead magnet and welcome emails.\n\n→ Put all your changes in one list (it helps us move faster!)\n→ Send it through the feedback form on your roadmap\n→ Also due today: your Zapier login, shared through LastPass or another secure password tool (skip this if you're on GoHighLevel)\n\nNext up, we build your pages, ads and automations." + sign },
+      calDetails: "Hi, " + NAME + "! Today's the day to send your revisions for your lead magnet and welcome emails.\n\n→ Make all your edits right in your lead magnet and email doc\n→ Then let us know you're done through the form on your roadmap\n→ Also due today: your Zapier login, shared through LastPass or another secure password tool (skip this if you're on GoHighLevel)\n\nNext up, we build your pages, ads and automations." + sign },
     { date: C.dates.handoff, yours: false, big: true, title: "🎉 Your funnel is handed off!",
       note: T("handoffNote", "Your Funnel Command Center opens, with your opt-in and thank you pages, ads, automations and a video walkthrough of each piece, all ready for you to look through."),
       after: "Next up for you → a quick look and any edits by <mark>" + fmt(D.editsDue) + "</mark>" },
@@ -280,7 +284,7 @@
       button: "Read and acknowledge",
       fields: [
         { type: "info", html: "<p>Here's your funnel schedule and how revisions will go, so you know exactly what's coming and when. Sticking to the schedule and getting us what we need on time means we launch your funnel ASAP (so you can start building your list ASAP, too!).</p><p>This follows the template project schedule you already agreed to in our terms when you purchased your funnel. This just puts real dates to everything. Four of the dates on this roadmap are for you, and the rest are ours. Hit your four and your funnel goes live on schedule! Your total time on all of this is about an hour, spread across " + WORDS[weeks] + " weeks.</p>" },
-        { type: "info", html: "<h5>How reviews work</h5><p>You get one round of revisions on your lead magnet and email sequence. Send all of your changes at once, using the form on this page, so we can work through them in one pass. After the funnel handoff, you have until " + fmt(D.editsDue) + " to request edits to your pages, ad copy and ad creative, also in one form.</p>" },
+        { type: "info", html: "<h5>How reviews work</h5><p>You get one round of revisions on your lead magnet and email sequence. Make all of your changes right in the files we share, then let us know you're done using the form on this page, so we can work through them in one pass. After the funnel handoff, you have until " + fmt(D.editsDue) + " to request edits to your pages, ad copy and ad creative, also in one form.</p>" },
         { type: "info", html: "<h5>Ad support</h5><p>Ad support runs by email and covers your ad campaign: performance, delivery and spend, audience and budget adjustments, Meta review or disapproval issues, and making sure leads are landing in your email platform. Priscilla replies within one business day. These dates are fixed, so please turn your ads on as soon as Meta approves them and you'll have live data to ask about.</p>" },
         { type: "info", html: "<h5>Three things to know before we start</h5><ul><li><strong>Zapier:</strong> you'll need a paid Zapier plan (unless you're on GoHighLevel) for your funnel to deliver leads to your email platform. It's about $20/month, separate from your build, and we recommend a monthly plan so you can pause it in months you're not running ads.</li><li><strong>Ad spend</strong> is paid directly to Meta. We recommend starting around $5/day. Your build fee doesn't include it.</li><li><strong>Your ads don't run</strong> until Meta approves them and you turn them on. We submit them for review as our final build step.</li></ul>" },
         { type: "textarea", label: "Any dates that won't work?", help: "Let us know within two business days and we'll see what we can do. Once we're underway, the dates are locked, since your build slot is reserved. All good? Leave this blank.", rows: 3 },
@@ -300,18 +304,19 @@
       submit: "Send my feedback"
     },
     lmemail: {
-      title: T("lmemailFormTitle", "Lead Magnet & Email Feedback Form"),
-      button: "Open the feedback form",
+      title: T("lmemailFormTitle", "Lead Magnet & Email Review Form"),
+      button: "I'm done with my edits",
       fields: [
-        { type: "note", html: "<strong>Heads up:</strong> this form doesn't save as you go. If you're collecting notes over a few days, write them in a separate document, then paste them here when you're ready." },
-        { type: "textarea", label: "Is there anything you would like us to change about your lead magnet?", required: true, help: "Tell us what and where. Something like \"page 3, second bullet, swap 'patients' for 'clients'\" is perfect. No changes? Just write none." },
-        { type: "textarea", label: "Is there anything you would like us to change about your emails?", required: true, help: "Give us the email number and where to look. Something like \"email 2, subject line, can we try something softer?\" No changes? Just write none." },
-        { type: "textarea", label: "Did we get anything wrong?", required: true, help: "Credentials, program names, pricing, clinical details. Anything that needs to be exactly right.", rows: 3 },
-        { type: "textarea", label: "What's your favorite part?", help: "We love hearing it, and it helps us know what's landing.", rows: 3 },
-        { type: "textarea", label: "Is there anything else you would like to share with us?", rows: 3 },
-        { type: "checks", items: ["I've reviewed my full lead magnet and all emails.", "This is my complete list of changes, and I'm ready for you to get to work."] }
+        { type: "info", html: "<p>Make your edits right in your lead magnet and your email doc. Once you've been through everything, check the boxes below and send it over. This is your one round of revisions, so please only submit once you're finished.</p>" },
+        { type: "checks", items: [
+          "I've reviewed my full lead magnet and made my edits right in it.",
+          "I've reviewed all of my emails and made my edits right in the email doc.",
+          "I've double-checked the details that need to be exactly right: names, credentials, program names, pricing and links.",
+          "These are all of my changes, and I'm ready for you to get to work."
+        ] },
+        { type: "textarea", label: "Is there anything else you would like to share with us?", rows: 3 }
       ],
-      submit: "Send my changes"
+      submit: "Send it over"
     },
     edits: {
       title: "Funnel Edits Form",
@@ -438,12 +443,13 @@
       const days = Math.round((due - today) / 86400000);
       const label = sent ? "Feedback sent" : later ? "Arrives " + fmt(ready) : days < 0 ? "Still open" : "Review by " + fmt(due);
       const soon = !sent && !later && days <= 2;
-      const hasLink = r.url && r.url !== "#";
-      const acts = later ? "" : `<span class="rv-acts">${hasLink
-          ? `<a class="acc-link" href="${r.url}" target="_blank" rel="noopener">${r.linkText} →</a>`
-          : `<span class="rv-soon">Link coming soon</span>`}${sent ? "" : `<a class="acc-link" href="#${r.form}-form">Send feedback ↓</a>`}</span>`;
+      const live = r.links.filter(l => l.url && l.url !== "#");
+      const acts = later ? "" : `<span class="rv-acts">${live.length
+          ? live.map(l => `<a class="acc-link" href="${l.url}" target="_blank" rel="noopener">${l.text} →</a>`).join("")
+          : `<span class="rv-soon">Link coming soon</span>`}${sent ? "" : `<a class="acc-link" href="#${r.form}-form">${r.form === "lmemail" ? "Tell us you're done ↓" : "Send feedback ↓"}</a>`}</span>`;
+      const video = r.video && !later && !sent ? `<figure class="rv-video"><video src="${r.video}" autoplay muted loop playsinline aria-label="How to make your edits"></video><figcaption>How to make your edits</figcaption></figure>` : "";
       return `<li class="${sent ? "sent" : later ? "later" : ""}">
-        <div><strong>${r.item}</strong><span class="how">${r.short}</span>${acts}</div>
+        <div><strong>${r.item}</strong><span class="how">${r.short}</span>${video}${acts}</div>
         <span class="due${soon ? " soon" : ""}">${label}</span>
       </li>`;
     }).join("");

@@ -212,6 +212,9 @@
   #review-list strong { display: block; font-weight: 700; color: var(--navy); }
   #review-list .how { display: block; color: var(--text); font-size: 15.5px; }
   #review-list .rv-acts { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+  #review-list .rv-video { margin: 12px 0 4px; max-width: 520px; }
+  #review-list .rv-video video { display: block; width: 100%; height: auto; border-radius: var(--r); border: 1px solid var(--border); background: var(--cream); }
+  #review-list .rv-video figcaption { margin-top: 6px; font-size: 13.5px; font-weight: 700; color: var(--muted); }
   #review-list .rv-soon { display: inline-block; margin-top: 8px; font-size: 14.5px; font-weight: 700; color: var(--muted); }
   #review-list li.later strong, #review-list li.later .how { color: var(--muted); }
   #review-list li.sent strong { text-decoration: line-through; text-decoration-thickness: 2px; color: var(--muted); }
