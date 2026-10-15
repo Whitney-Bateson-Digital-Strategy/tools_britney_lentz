@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jeani's Funnel Roadmap | Whitney Bateson Digital Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/roadmap.css">
+</head>
+<body>
+<script>
+  // Jeani's settings. The design and wording live in /assets (shared by every client).
+  window.ROADMAP = {
+    client: "jeani",                         // must match the folder name and clients.json
+    token: "tlEVpaK0vSS9aE8VlT8UvmWN",       // must match clients.json
+    firstName: "Jeani",
+    bonusWeek: false,                        // one ad support week (Days 34 to 40)
+    // digitalSeroUrl: "",                   // paste her DigitalSero link; until then the page says we'll email it
+    commandCenterUrl: "#",                   // paste her Funnel Command Center link; the button unlocks on handoff day
+    showReview: false,                       // hides the "Ready for your review" card
+    reviewLinks: {
+      direction: "#",                        // lead magnet direction doc
+      lmemail: "#"                           // lead magnet + email sequence
+    },
+
+    // Mark each item true once it's in. When the first four are all true, Step 1 hides itself.
+    received: { email: false, web: false, fb: false, ack: false, zap: false },
+
+    dates: {
+      access: "2026-10-22",            // access + schedule acknowledgement due (Day 3)
+      directionArrives: "2026-10-27",  // we send the lead magnet direction + brand kit (Day 6)
+      directionDue: "2026-10-29",      // she approves the direction (Day 8)
+      lmArrives: "2026-11-12",         // we send the lead magnet + emails (Day 18)
+      revisionsDue: "2026-11-17",      // her consolidated revisions + Zapier due (Day 21)
+      handoff: "2026-12-04",           // handoff: pages, ads, automations; Command Center opens (Day 31)
+      editsDue: "2026-12-08",          // her funnel edits due (Day 33)
+      complete: "2026-12-09",          // final fixes done
+      adsOn: "2026-12-09",             // she turns ads on, ad support starts (Day 34)
+      recap: "2026-12-17"              // ad support ends, recap email (Day 40)
+    }
+  };
+</script>
+<script src="/assets/roadmap.js"></script>
+</body>
+</html>
