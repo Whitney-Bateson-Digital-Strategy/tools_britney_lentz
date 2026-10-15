@@ -77,7 +77,7 @@ Create a full-page database called **Client Feedback** with these properties
      `{ date: "2026-11-26", reason: "Thanksgiving" }`. Add `end` for a pause longer than a day.
      Shows as a note under Phase 2.
    - `away` (optional): days the team is out, like
-     `{ start: "2026-10-28", end: "2026-11-02", back: "2026-11-03", note: "..." }`. Shows as a note under Phase 1.
+     `{ start: "2026-10-28", end: "2026-11-02", back: "2026-11-03", note: "..." }`. Add `reason` (like `"Thanksgiving"`) to name why. For more than one, use a list: `away: [{...}, {...}]`. Shows as a note under Phase 1.
    - `dates`: her nine dates. Everything else on the page (phase ranges, calendar
      reminders, ad support weeks, the acknowledgement text) is worked out from these.
 3. Add her to `clients.json` with the same folder name, her full name, and the same token.

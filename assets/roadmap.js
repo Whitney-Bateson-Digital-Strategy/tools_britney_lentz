@@ -120,7 +120,7 @@
     <span class="phase-num">Phase 1</span>
     <h2>${T("phase1Title", "Building your funnel")}</h2>
     <p>${short(D.access)} to ${short(D.complete)}. This is where we need you, just four quick stops.</p>
-    ${C.away ? `<p><strong>Heads up:</strong> our team is out ${fmt(parse(C.away.start))} to ${fmt(parse(C.away.end))}, and replies pick back up ${fmt(parse(C.away.back))}.${C.away.note ? " " + esc(C.away.note) : ""}</p>` : ""}
+    ${[].concat(C.away || []).map(a => `<p><strong>Heads up:</strong> our team is out ${fmt(parse(a.start))} to ${fmt(parse(a.end))}${a.reason ? " for " + esc(a.reason) : ""}, and replies pick back up ${fmt(parse(a.back))}.${a.note ? " " + esc(a.note) : ""}</p>`).join("")}
   </div>
 
   <div class="legend" aria-hidden="true">
