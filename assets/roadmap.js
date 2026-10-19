@@ -55,7 +55,7 @@
         ? [{ url: RL.leadMagnet, text: "Open your lead magnet" }, { url: RL.emails, text: "Open your email doc" }]
         : [{ url: RL.lmemail, text: "Open your lead magnet and emails" }],
       // With separate links, the item becomes three numbered steps (see reviewSteps)
-      steps: !!(RL.leadMagnet || RL.emails), video: RL.editVideo,
+      steps: !!(RL.leadMagnet || RL.emails), video: RL.editVideo, path: RL.commentPath,
       short: "Your finished freebie and the welcome emails that follow it. Three quick steps:" },
     { form: "edits", item: "Your pages and ads", ready: C.dates.handoff, due: C.dates.editsDue, links: [{ url: C.commandCenterUrl, text: "Open your Funnel Command Center" }],
       short: "A quick, high-level look at your opt-in page, thank you page and ads. Flag anything that's wrong or doesn't sound like you." }
@@ -308,7 +308,7 @@
       title: T("lmemailFormTitle", "Lead Magnet & Email Review Form"),
       button: "I'm done with my edits",
       fields: [
-        { type: "info", html: "<p>Leave your changes as comments on your lead magnet (tap Watch how above to see how) and make your edits right in your email doc. Once you've been through everything, check the boxes below and send it over. This is your one round of revisions, so please only submit once you're finished.</p>" },
+        { type: "info", html: "<p>Leave your changes as comments on your lead magnet" + (RL.editVideo ? " (tap Watch how above to see how)" : "") + " and make your edits right in your email doc. Once you've been through everything, check the boxes below and send it over. This is your one round of revisions, so please only submit once you're finished.</p>" },
         { type: "checks", items: [
           "I've reviewed my full lead magnet and left my changes as comments on it.",
           "I've reviewed all of my emails and made my edits right in the email doc.",
@@ -462,7 +462,7 @@
     const watch = r.video ? `<button type="button" class="rv-watch" data-video="${r.video}">▶ Watch how</button>` : "";
     return `<span class="how">${r.short}</span>
       <ol class="rv-steps">
-        <li><span class="rv-n">1</span><div><b>Leave comments on your lead magnet.</b><span class="rv-path">Open it, then: <b>Comment</b> → <b>select the area</b> → <b>type your comment</b> → <b>Comment</b></span><span class="rv-row">${btn(r.links[0])}${watch}</span></div></li>
+        <li><span class="rv-n">1</span><div><b>Leave comments on your lead magnet.</b><span class="rv-path">Open it, then: ${r.path || "<b>Comment</b> → <b>select the area</b> → <b>type your comment</b> → <b>Comment</b>"}</span><span class="rv-row">${btn(r.links[0])}${watch}</span></div></li>
         <li><span class="rv-n">2</span><div><b>Make your edits in your email doc.</b><span>Change anything you like, right in the doc.</span><span class="rv-row">${btn(r.links[1])}</span></div></li>
         <li><span class="rv-n">3</span><div><b>Tell us you're done.</b><span>Check the boxes in the form so we know to get started.</span><span class="rv-row"><a class="rv-btn rv-ghost" href="#${r.form}-form">Go to the form ↓</a></span></div></li>
       </ol>`;
