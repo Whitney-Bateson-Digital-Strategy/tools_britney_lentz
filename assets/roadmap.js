@@ -47,6 +47,9 @@
 
   // Things to review. Links come from reviewLinks / commandCenterUrl; until then the page says "Link coming soon".
   const RL = C.reviewLinks || {};
+  // Email doc: comments only, unless a client is set to edit it directly (emailEdits: true)
+  const EDIT_EMAILS = !!RL.emailEdits;
+  const emailsHow = EDIT_EMAILS ? "make your edits in your email doc" : "in your email doc";
   const reviews = [
     { form: "direction", item: "Your lead magnet direction", ready: C.dates.directionArrives, due: C.dates.directionDue, links: [{ url: RL.direction, text: "Open your direction" }],
       short: "What we recommend for your freebie: what it is, who it's for, and why your people will want it." },
@@ -55,7 +58,7 @@
         ? [{ url: RL.leadMagnet, text: "Open your lead magnet" }, { url: RL.emails, text: "Open your email doc" }]
         : [{ url: RL.lmemail, text: "Open your lead magnet and emails" }],
       // With separate links, the item becomes three numbered steps (see reviewSteps)
-      steps: !!(RL.leadMagnet || RL.emails), video: RL.editVideo,
+      steps: !!(RL.leadMagnet || RL.emails), video: RL.editVideo, path: RL.commentPath,
       short: "Your finished freebie and the welcome emails that follow it. Three quick steps:" },
     { form: "edits", item: "Your pages and ads", ready: C.dates.handoff, due: C.dates.editsDue, links: [{ url: C.commandCenterUrl, text: "Open your Funnel Command Center" }],
       short: "A quick, high-level look at your opt-in page, thank you page and ads. Flag anything that's wrong or doesn't sound like you." }
@@ -235,9 +238,9 @@
     { date: C.dates.lmArrives, yours: false, title: T("lmArrivesTitle", "Lead magnet and email sequence arrive"),
       note: T("lmArrivesNote", "Your finished freebie and the welcome emails that follow it.") },
     { date: C.dates.revisionsDue, yours: true, form: "lmemail", extra: "zap", title: "Send your revisions",
-      note: "Leave comments on your lead magnet and make your edits in your email doc, then let us know you're done through the form below.",
+      note: "Leave comments on your lead magnet and " + emailsHow + ", then let us know you're done through the form below.",
       calTitle: "Send your lead magnet + email revisions (Whitney Bateson, " + EMAIL + ")",
-      calDetails: "Hi, " + NAME + "! Today's the day to send your revisions for your lead magnet and welcome emails.\n\n→ Leave comments on your lead magnet and make your edits in your email doc\n→ Then let us know you're done through the form on your roadmap\n→ Also due today: your Zapier login, shared through LastPass or another secure password tool (skip this if you're on GoHighLevel)\n\nNext up, we build your pages, ads and automations." + sign },
+      calDetails: "Hi, " + NAME + "! Today's the day to send your revisions for your lead magnet and welcome emails.\n\n→ Leave comments on your lead magnet and " + emailsHow + "\n→ Then let us know you're done through the form on your roadmap\n→ Also due today: your Zapier login, shared through LastPass or another secure password tool (skip this if you're on GoHighLevel)\n\nNext up, we build your pages, ads and automations." + sign },
     { date: C.dates.handoff, yours: false, big: true, title: "🎉 Your funnel is handed off!",
       note: T("handoffNote", "Your Funnel Command Center opens, with your opt-in and thank you pages, ads, automations and a video walkthrough of each piece, all ready for you to look through."),
       after: "Next up for you → a quick look and any edits by <mark>" + fmt(D.editsDue) + "</mark>" },
@@ -308,10 +311,10 @@
       title: T("lmemailFormTitle", "Lead Magnet & Email Review Form"),
       button: "I'm done with my edits",
       fields: [
-        { type: "info", html: "<p>Leave your changes as comments on your lead magnet (tap Watch how above to see how) and make your edits right in your email doc. Once you've been through everything, check the boxes below and send it over. This is your one round of revisions, so please only submit once you're finished.</p>" },
+        { type: "info", html: "<p>Leave your changes as comments on your lead magnet" + (RL.editVideo ? " (tap Watch how above to see how)" : "") + " and " + (EDIT_EMAILS ? "make your edits right in your email doc" : "in your email doc") + ". Once you've been through everything, check the boxes below and send it over. This is your one round of revisions, so please only submit once you're finished.</p>" },
         { type: "checks", items: [
           "I've reviewed my full lead magnet and left my changes as comments on it.",
-          "I've reviewed all of my emails and made my edits right in the email doc.",
+          EDIT_EMAILS ? "I've reviewed all of my emails and made my edits right in the email doc." : "I've reviewed all of my emails and left my changes as comments in the email doc.",
           "I've double-checked the details that need to be exactly right: names, credentials, program names, pricing and links.",
           "These are all of my changes, and I'm ready for you to get to work."
         ] },
@@ -462,8 +465,8 @@
     const watch = r.video ? `<button type="button" class="rv-watch" data-video="${r.video}">▶ Watch how</button>` : "";
     return `<span class="how">${r.short}</span>
       <ol class="rv-steps">
-        <li><span class="rv-n">1</span><div><b>Leave comments on your lead magnet.</b><span class="rv-path">Open it, then: <b>Comment</b> → <b>select the area</b> → <b>type your comment</b> → <b>Comment</b></span><span class="rv-row">${btn(r.links[0])}${watch}</span></div></li>
-        <li><span class="rv-n">2</span><div><b>Make your edits in your email doc.</b><span>Change anything you like, right in the doc.</span><span class="rv-row">${btn(r.links[1])}</span></div></li>
+        <li><span class="rv-n">1</span><div><b>Leave comments on your lead magnet.</b><span class="rv-path">Open it, then: ${r.path || "<b>Comment</b> → <b>select the area</b> → <b>type your comment</b> → <b>Comment</b>"}</span><span class="rv-row">${btn(r.links[0])}${watch}</span></div></li>
+        <li><span class="rv-n">2</span><div>${EDIT_EMAILS ? `<b>Make your edits in your email doc.</b><span>Change anything you like, right in the doc.</span>` : `<b>Leave comments in your email doc.</b><span class="rv-path">Open it, then: <b>highlight the words</b> → <b>Add comment</b> (speech bubble with a +) → <b>type your change</b> → <b>Comment</b></span>`}<span class="rv-row">${btn(r.links[1])}</span></div></li>
         <li><span class="rv-n">3</span><div><b>Tell us you're done.</b><span>Check the boxes in the form so we know to get started.</span><span class="rv-row"><a class="rv-btn rv-ghost" href="#${r.form}-form">Go to the form ↓</a></span></div></li>
       </ol>`;
   }
