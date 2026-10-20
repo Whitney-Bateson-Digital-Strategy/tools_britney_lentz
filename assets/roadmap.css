@@ -163,6 +163,11 @@
   }
   .pin::after { content: ""; position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: #FFFFFF; }
   .yours .pin, .legend .pin.y { background: var(--coral); }
+  /* Team-away marker between stops */
+  .away-row { position: relative; padding: 0 0 26px 64px; }
+  .away-dot { position: absolute; left: 17px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); border: 2px dashed var(--muted); z-index: 1; }
+  .away-row p { margin: 0; max-width: 58ch; font-size: 14px; color: var(--muted); }
+  .away-row strong { color: var(--navy); }
   .done .pin { background: #B9C3C4; }
   .card { position: relative; }
   .date { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }

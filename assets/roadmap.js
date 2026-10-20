@@ -27,6 +27,8 @@
   Object.keys(C.dates).forEach(k => { D[k] = parse(C.dates[k]); });
   D.bonus = addDays(D.adsOn, 7);
   if (!D.recap) D.recap = addDays(D.adsOn, BONUS ? 14 : 7);  // a client can set dates.recap to override
+  // Team-away periods: dated ones sit on the route between stops, free-text ones stay under the Phase 1 heading
+  const AWAY = [].concat(C.away || []);
   const WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
   const weeks = Math.ceil((D.complete - D.access) / 86400000 / 7);
 
@@ -123,7 +125,7 @@
     <span class="phase-num">Phase 1</span>
     <h2>${T("phase1Title", "Building your funnel")}</h2>
     <p>${short(D.access)} to ${short(D.complete)}. This is where we need you, just four quick stops.</p>
-    ${[].concat(C.away || []).map(a => a.text ? `<p><strong>Heads up:</strong> ${esc(a.text)}</p>` : `<p><strong>Heads up:</strong> our team is out ${fmt(parse(a.start))} to ${fmt(parse(a.end))}${a.reason ? " for " + esc(a.reason) : ""}, and replies pick back up ${fmt(parse(a.back))}.${a.note ? " " + esc(a.note) : ""}</p>`).join("")}
+    ${AWAY.filter(a => a.text).map(a => `<p><strong>Heads up:</strong> ${esc(a.text)}</p>`).join("")}
   </div>
 
   <div class="legend" aria-hidden="true">
@@ -390,8 +392,25 @@
     </div>`;
   }
 
+  function awayRow(a) {
+    const start = parse(a.start), end = parse(a.end);
+    const range = start.getMonth() === end.getMonth() ? short(start) + " to " + end.getDate() : short(start) + " to " + short(end);
+    return `<li class="away-row">
+        <span class="away-dot" aria-hidden="true"></span>
+        <p><strong>${a.reason ? "Out for " + esc(a.reason) : "Team away"} · ${range}.</strong> Replies pick back up ${fmt(parse(a.back))}.${a.note ? " " + esc(a.note) : ""}</p>
+      </li>`;
+  }
+
   function renderRoute() {
-    document.getElementById("route").innerHTML = stops.map(s => {
+    const breaks = AWAY.filter(a => a.start).sort((a, b) => a.start < b.start ? -1 : 1);
+    const placed = new Set();
+    // Each break goes just before the first stop that comes after it starts
+    const before = s => breaks.filter(a => !placed.has(a) && a.start <= s.date).map(a => { placed.add(a); return awayRow(a); }).join("");
+    document.getElementById("route").innerHTML = stops.map(s => before(s) + stopRow(s)).join("") + breaks.filter(a => !placed.has(a)).map(awayRow).join("");
+    fillForms(document.getElementById("route"));
+  }
+
+  function stopRow(s) {
       const d = parse(s.date);
       const done = stopDone(s);
       const late = s.yours && !done && d < today;
@@ -409,8 +428,6 @@
           ${s.form ? `<div class="form-slot" id="${s.form}-form" data-form="${s.form}"></div>` : ""}
         </div>
       </li>`;
-    }).join("");
-    fillForms(document.getElementById("route"));
   }
 
   function renderAccess() {
