@@ -18,6 +18,7 @@ checkmarks are saved as rows in a Notion database.
 | `selena/index.html` | Selena's settings |
 | `amanda/index.html` | Amanda's settings |
 | `jeani/index.html` | Jeani's settings |
+| `tracyc/index.html` | Tracy C.'s settings (`tracyc` so it isn't confused with `/tracey`) |
 | `api/submit.js` | Saves a form or checkmark to Notion |
 | `api/status.js` | Tells the page what's already been submitted, so it matches on every device |
 | `api/_notion.js` | Shared Notion helper |
@@ -77,7 +78,7 @@ Create a full-page database called **Client Feedback** with these properties
      `{ date: "2026-11-26", reason: "Thanksgiving" }`. Add `end` for a pause longer than a day.
      Shows as a note under Phase 2.
    - `away` (optional): days the team is out, like
-     `{ start: "2026-10-28", end: "2026-11-02", back: "2026-11-03", note: "..." }`. Add `reason` (like `"Thanksgiving"`) to name why. For more than one, use a list: `away: [{...}, {...}]`, or write your own wording with `{ text: "..." }`. Shows as a note under Phase 1.
+     `{ start: "2026-10-28", end: "2026-11-02", back: "2026-11-03", note: "..." }`. Add `reason` (like `"Thanksgiving"`) to name why. For more than one, use a list: `away: [{...}, {...}]`, or write your own wording with `{ text: "..." }`. Dated ones show as a small marker on the route, between the stops they fall between; `text` ones show as a note under Phase 1.
    - `reviewLinks`: her lead magnet and email doc links. The page asks her to leave comments
      in the email doc, so share it with her as a Commenter. Add `emailEdits: true` to have her
      edit it directly instead.

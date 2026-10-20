@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tracy's Funnel Roadmap | Whitney Bateson Digital Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/roadmap.css">
+</head>
+<body>
+<script>
+  // Tracy C.'s settings. The design and wording live in /assets (shared by every client).
+  // Folder is "tracyc" so her link can't be mixed up with Tracey Sinibaldi's (/tracey).
+  window.ROADMAP = {
+    client: "tracyc",                        // must match the folder name and clients.json
+    token: "ITWWV7AZSztkeCHKvlPKhzA1",       // must match clients.json
+    firstName: "Tracy",
+    bonusWeek: false,                        // standard one week of ad support, no bonus week
+    digitalSeroUrl: "https://whitneybateson.digitalsero.app/clients/onboarding/95b57b68-d8ca-4780-a7c4-07d799f7f2d5",
+    commandCenterUrl: "#",                   // paste her Funnel Command Center link; the button unlocks on handoff day
+    showReview: false,                       // hides the "Ready for your review" card
+    reviewLinks: {
+      direction: "#",                        // lead magnet direction doc
+      lmemail: "#"                           // lead magnet + email sequence
+    },
+
+    // Mark each item true once it's in. When the first four are all true, Step 1 hides itself.
+    received: { email: false, web: false, fb: false, ack: false, zap: false },
+
+    dates: {
+      access: "2026-10-23",            // access + schedule acknowledgement due (timeline lands Oct 21)
+      directionArrives: "2026-10-27",  // we send the lead magnet direction + brand kit
+      directionDue: "2026-11-02",      // she approves the direction (longer window: team away Oct 28 to Nov 2)
+      lmArrives: "2026-11-13",         // we send the lead magnet + emails
+      revisionsDue: "2026-11-18",      // her revisions + Zapier due
+      handoff: "2026-12-01",           // funnel handoff, Command Center opens
+      editsDue: "2026-12-04",          // her funnel edits due
+      complete: "2026-12-07",          // final fixes done
+      adsOn: "2026-12-07"              // she turns ads on, ad support starts (recap Dec 14)
+    },
+
+    // Why some windows are longer than usual
+    away: [
+      { start: "2026-10-28", end: "2026-11-02", back: "2026-11-03",
+        note: "That's why you get extra time to approve your direction." },
+      { start: "2026-11-23", end: "2026-11-27", back: "2026-11-30", reason: "Thanksgiving week",
+        note: "Your funnel is still on track for Dec 1." }
+    ]
+  };
+</script>
+<script src="/assets/roadmap.js"></script>
+</body>
+</html>
