@@ -18,6 +18,7 @@ checkmarks are saved as rows in a Notion database.
 | `selena/index.html` | Selena's settings |
 | `amanda/index.html` | Amanda's settings |
 | `jeani/index.html` | Jeani's settings |
+| `tracyc/index.html` | Tracy C.'s settings (`tracyc` so it isn't confused with `/tracey`) |
 | `api/submit.js` | Saves a form or checkmark to Notion |
 | `api/status.js` | Tells the page what's already been submitted, so it matches on every device |
 | `api/_notion.js` | Shared Notion helper |
