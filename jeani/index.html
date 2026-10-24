@@ -30,18 +30,19 @@
 
     dates: {
       access: "2026-10-19",            // access + schedule acknowledgement due (timeline sent Oct 16)
-      directionArrives: "2026-10-22",  // we send the lead magnet direction + brand kit
-      directionDue: "2026-10-26",      // she approves the direction
-      lmArrives: "2026-11-09",         // we send the lead magnet + emails
-      revisionsDue: "2026-11-13",      // her revisions + Zapier due
-      handoff: "2026-11-23",           // funnel handoff, Command Center opens
-      editsDue: "2026-11-30",          // her funnel edits due (window covers Thanksgiving)
-      complete: "2026-12-01",          // final fixes done
-      adsOn: "2026-12-01"              // she turns ads on, ad support starts (bonus week Dec 8, recap Dec 15)
+      directionArrives: "2026-11-06",  // we send the lead magnet direction + brand kit
+      directionDue: "2026-11-11",      // she approves the direction
+      lmArrives: "2026-11-23",         // we send the lead magnet + emails
+      revisionsDue: "2026-12-04",      // her revisions + Zapier due (window covers Thanksgiving)
+      handoff: "2026-12-18",           // funnel handoff, Command Center opens
+      editsDue: "2026-12-31",          // her funnel edits due
+      complete: "2027-01-06",          // final fixes done
+      adsOn: "2027-01-06"              // she turns ads on, ad support starts (bonus week Jan 13, recap Jan 20)
     },
 
-    // Thanksgiving falls during her funnel review
-    away: { text: "our team is out Thu, Nov 26 to Fri, Nov 27 for Thanksgiving. Your funnel review runs over the holiday, so you have until Mon, Nov 30 to send your edits." }
+    // Thanksgiving falls during her lead magnet + email review
+    away: { start: "2026-11-25", end: "2026-11-28", back: "2026-11-30", reason: "Thanksgiving",
+            note: "That's why you have until Fri, Dec 4 for your feedback." }
   };
 </script>
 <script src="/assets/roadmap.js"></script>
