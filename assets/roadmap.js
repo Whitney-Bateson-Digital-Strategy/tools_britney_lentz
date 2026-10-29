@@ -118,6 +118,7 @@
   <section class="review" id="review" aria-labelledby="review-h"${C.showReview === false ? " hidden" : ""}>
     <h2 id="review-h">Ready for your review 👀</h2>
     <p class="review-intro">Everything we send you to look over lands here. Open it, then send your feedback through the form on that stop.</p>
+    ${T("reviewNote", "") ? `<p class="review-note">${T("reviewNote", "")}</p>` : ""}
     <ul id="review-list"></ul>
   </section>
 
