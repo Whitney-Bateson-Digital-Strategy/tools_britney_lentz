@@ -19,10 +19,13 @@
     bonusWeek: true,                         // signed up within 24 hours: adds a second ad support week
     digitalSeroUrl: "https://whitneybateson.digitalsero.app/clients/onboarding/23d60ebc-0299-4691-bf0c-1e3d72f5c352",
     commandCenterUrl: "#",                   // paste her Funnel Command Center link; the button unlocks on handoff day
-    showReview: false,                       // hides the "Ready for your review" card
+    showReview: true,                        // shows the "Ready for your review" card
     reviewLinks: {
       direction: "#",                        // lead magnet direction doc
-      lmemail: "#"                           // lead magnet + email sequence
+      leadMagnet: "https://canva.link/dfgg83maid4a4ed",
+      emails: "https://docs.google.com/document/d/1_hH4_Xp-rFw7l8-32EkQKqdmZpQqdH0yEIL9vaJIRmc/edit?usp=sharing",
+      // Her lead magnet is in Canva, so step 1 shows Canva's comment steps
+      commentPath: "<b>click the spot you want to change</b> → <b>Comment</b> (speech bubble) → <b>type your comment</b> → <b>Comment</b>"
     },
 
     // Mark each item true once it's in. When the first four are all true, Step 1 hides itself.
@@ -41,7 +44,12 @@
     },
 
     // Replies pause for the holiday during ad support
-    pause: { date: "2026-11-26", reason: "Thanksgiving" }
+    pause: { date: "2026-11-26", reason: "Thanksgiving" },
+
+    copy: {
+      // Shown in the "Ready for your review" card. Her lead magnet and emails reached her late, so she has extra time (dates on the page stay as they are)
+      reviewNote: "<strong>Need a little more time?</strong> We got your lead magnet and emails to you later than planned, so if you need it, you can send us your feedback as late as <strong>Wed, Nov 4</strong>."
+    }
   };
 </script>
 <script src="/assets/roadmap.js"></script>
