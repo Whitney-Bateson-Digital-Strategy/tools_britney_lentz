@@ -82,6 +82,8 @@ Create a full-page database called **Client Feedback** with these properties
    - `reviewLinks`: her lead magnet and email doc links. The page asks her to leave comments
      in the email doc, so share it with her as a Commenter. Add `emailEdits: true` to have her
      edit it directly instead.
+   - `reviewLinks.optIn` / `reviewLinks.thankYou` (optional): her live opt-in and thank you pages.
+     They show as buttons on the "Your pages and ads" review, next to the Command Center link.
    - `copy.reviewNote` (optional): a short note shown at the top of the "Ready for your review"
      card, like extra time to send feedback. It doesn't change any dates on the page.
    - `dates`: her nine dates. Everything else on the page (phase ranges, calendar
