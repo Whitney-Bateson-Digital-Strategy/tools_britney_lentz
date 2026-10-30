@@ -62,7 +62,9 @@
       // With separate links, the item becomes three numbered steps (see reviewSteps)
       steps: !!(RL.leadMagnet || RL.emails), video: RL.editVideo, path: RL.commentPath,
       short: "Your finished freebie and the welcome emails that follow it. Three quick steps:" },
-    { form: "edits", item: "Your pages and ads", ready: C.dates.handoff, due: C.dates.editsDue, links: [{ url: C.commandCenterUrl, text: "Open your Funnel Command Center" }],
+    // Optional direct links to the live pages (reviewLinks.optIn / thankYou) sit next to the Command Center
+    { form: "edits", item: "Your pages and ads", ready: C.dates.handoff, due: C.dates.editsDue,
+      links: [{ url: RL.optIn, text: "Open your opt-in page" }, { url: RL.thankYou, text: "Open your thank you page" }, { url: C.commandCenterUrl, text: "Open your Funnel Command Center" }],
       short: "A quick, high-level look at your opt-in page, thank you page and ads. Flag anything that's wrong or doesn't sound like you." }
   ];
   const zapier = { id: "zap", item: "Zapier access", short: "Share your Zapier login through LastPass (or another secure password tool) with " + EMAIL + ".", more: ZAPIER_NOTE, got: !!got.zap };
