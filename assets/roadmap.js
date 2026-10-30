@@ -62,11 +62,13 @@
       // With separate links, the item becomes three numbered steps (see reviewSteps)
       steps: !!(RL.leadMagnet || RL.emails), video: RL.editVideo, path: RL.commentPath,
       short: "Your finished freebie and the welcome emails that follow it. Three quick steps:" },
-    // Optional direct links to the live pages (reviewLinks.optIn / thankYou) sit next to the Command Center
-    { form: "edits", item: "Your pages and ads", ready: C.dates.handoff, due: C.dates.editsDue,
-      links: [{ url: RL.optIn, text: "Open your opt-in page" }, { url: RL.thankYou, text: "Open your thank you page" }, { url: C.commandCenterUrl, text: "Open your Funnel Command Center" }],
+    // Command Center is the big button; the live pages (reviewLinks.optIn / thankYou) sit under it (see reviewHub)
+    { form: "edits", item: "Your pages and ads", ready: C.dates.handoff, due: C.dates.editsDue, hub: true,
+      links: [{ url: C.commandCenterUrl, text: "Open your Funnel Command Center" }, { url: RL.optIn, text: "Opt-in page" }, { url: RL.thankYou, text: "Thank you page" }],
       short: "A quick, high-level look at your opt-in page, thank you page and ads. Flag anything that's wrong or doesn't sound like you." }
   ];
+  // The Command Center opens on handoff day, once its link is in
+  const CC_OPEN = D.handoff <= today && !!C.commandCenterUrl && C.commandCenterUrl !== "#";
   const zapier = { id: "zap", item: "Zapier access", short: "Share your Zapier login through LastPass (or another secure password tool) with " + EMAIL + ".", more: ZAPIER_NOTE, got: !!got.zap };
 
   // ---- Page shell ----
@@ -471,7 +473,9 @@
       const acts = later ? "" : `<span class="rv-acts">${live.length
           ? live.map(l => `<a class="acc-link" href="${l.url}" target="_blank" rel="noopener">${l.text} →</a>`).join("")
           : `<span class="rv-soon">Link coming soon</span>`}${sent ? "" : `<a class="acc-link" href="#${r.form}-form">${r.form === "lmemail" ? "Tell us you're done ↓" : "Send feedback ↓"}</a>`}</span>`;
-      const body = r.steps && live.length && !sent ? reviewSteps(r) : `<span class="how">${r.short}</span>${acts}`;
+      const body = r.steps && live.length && !sent ? reviewSteps(r)
+        : r.hub && CC_OPEN && !sent ? reviewHub(r)
+        : `<span class="how">${r.short}</span>${acts}`;
       return `<li class="${sent ? "sent" : later ? "later" : ""}">
         <div><strong>${r.item}</strong>${body}</div>
         <span class="due${soon ? " soon" : ""}">${label}</span>
@@ -489,6 +493,18 @@
         <li><span class="rv-n">2</span><div>${EDIT_EMAILS ? `<b>Make your edits in your email doc.</b><span>Change anything you like, right in the doc.</span>` : `<b>Leave comments in your email doc.</b><span class="rv-path">Open it, then: <b>highlight the words</b> → <b>Add comment</b> (speech bubble with a +) → <b>type your change</b> → <b>Comment</b></span>`}<span class="rv-row">${btn(r.links[1])}</span></div></li>
         <li><span class="rv-n">3</span><div><b>Tell us you're done.</b><span>Check the boxes in the form so we know to get started.</span><span class="rv-row"><a class="rv-btn rv-ghost" href="#${r.form}-form">Go to the form ↓</a></span></div></li>
       </ol>`;
+  }
+
+  // Pages and ads: one big Command Center button, with the live pages underneath
+  function reviewHub(r) {
+    const pages = r.links.slice(1).filter(l => l.url && l.url !== "#");
+    return `<span class="how">${r.short}</span>
+      <div class="rv-hub">
+        <a class="rv-hub-btn" href="${r.links[0].url}" target="_blank" rel="noopener">${r.links[0].text} →</a>
+        <span class="rv-hub-sub">Everything we built for you, with a video walkthrough of each piece. Start here.</span>
+        ${pages.length ? `<span class="rv-hub-pages">Or jump straight to your ${pages.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.text}</a>`).join(" or ")}</span>` : ""}
+      </div>
+      <span class="rv-acts"><a class="acc-link" href="#${r.form}-form">Send feedback ↓</a></span>`;
   }
 
   // "Watch how" opens the video big, in a pop-up
@@ -519,6 +535,7 @@
           <h2>Your next stop</h2>
           <h3>${next.title}</h3>
           <p>Due end of day ${fmt(parse(next.date))}.</p>
+          ${CC_OPEN && next.form === "edits" ? `<a class="portal next-cc" href="${C.commandCenterUrl}" target="_blank" rel="noopener">Open your Funnel Command Center →</a>` : ""}
           ${calLinks(next)}
         </div>`;
     } else {
