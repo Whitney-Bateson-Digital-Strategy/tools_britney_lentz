@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Angie's Funnel Roadmap | Whitney Bateson Digital Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/roadmap.css">
+</head>
+<body>
+<script>
+  // Angie's settings. The design and wording live in /assets (shared by every client).
+  // Angie Nyp (Functional Vitality). Second funnel: this one is for her courses and programs.
+  // Her first funnel (3-Day Symptom Map, for 1:1 clients) stays as it is.
+  window.ROADMAP = {
+    client: "angie",                         // must match the folder name and clients.json
+    token: "nIbvWxoBJOjspTz43cjkTV5q",       // must match clients.json
+    firstName: "Angie",
+    bonusWeek: false,                        // returning client, no 24-hour bonus week
+    digitalSeroUrl: "",                      // paste her DigitalSero link if she still needs to connect Facebook
+    commandCenterUrl: "#",                   // paste her Funnel Command Center link; the button unlocks on handoff day
+    showReview: false,                       // turn on once the direction doc is ready
+    reviewLinks: {
+      direction: "#",                        // lead magnet direction doc
+      lmemail: "#"                           // lead magnet + email sequence
+    },
+
+    // Mark each item true once it's in. When the first four are all true, Step 1 hides itself.
+    // email: we already have her String Connect login from funnel #1.
+    // zap: String Connect runs on GoHighLevel, so she doesn't need Zapier.
+    // fb: we still have her ad account access from funnel #1.
+    // web: flip to true if her website access from funnel #1 still works.
+    received: { email: true, web: false, fb: true, ack: false, zap: true },
+
+    // Compressed schedule so her ads are live before Black Friday (Fri, Nov 27).
+    // Her intake, brand kit and voice work carry over from funnel #1, which is what makes this possible.
+    dates: {
+      access: "2026-11-05",            // access, schedule acknowledgement + answers to the email questions
+      directionArrives: "2026-11-09",  // we send the lead magnet direction
+      directionDue: "2026-11-11",      // she approves the direction (48 hours)
+      lmArrives: "2026-11-16",         // we send the lead magnet + emails
+      revisionsDue: "2026-11-18",      // her revisions + tripwire link due (48 hours)
+      handoff: "2026-11-23",           // funnel handoff, Command Center opens
+      editsDue: "2026-11-24",          // her funnel edits due by noon
+      complete: "2026-11-24",          // final fixes done
+      adsOn: "2026-11-24"              // ads on before the Thanksgiving break, running through Black Friday
+    },
+
+    // Team is out over Thanksgiving, right after her ads go live
+    pause: { date: "2026-11-25", end: "2026-11-28", reason: "Thanksgiving" },
+
+    copy: {
+      intro: "We are SO excited to build your second funnel, this time for your courses and programs. This is every stop between today and your ads going live before Black Friday.",
+      phase1Title: "Building your course and program funnel",
+      accessIntro: "Most of your access carries over from your first funnel. Before we start building",
+      directionArrivesNote: "The direction we recommend for your new freebie: what it is, which course or program it leads to, and why the people who buy those will want it.",
+      lmArrivesNote: "Your new freebie and the welcome emails that walk people toward your course or program.",
+      handoffNote: "Your Funnel Command Center opens, with your new opt-in and thank you pages (tripwire included), ads, automations and a video walkthrough of each piece. Your first funnel keeps running as it is.",
+      finalNote: "you'll have two funnels working side by side: your first one bringing in 1:1 clients, and this one bringing in people ready for your courses and programs.",
+      reviewNote: "<strong>A quicker turnaround than usual.</strong> To get your ads live before Black Friday, each review window is 48 hours. If you need more time on any of them, tell us and we'll move your ads-on date to Mon, Nov 30."
+    }
+  };
+</script>
+<script src="/assets/roadmap.js"></script>
+</body>
+</html>
