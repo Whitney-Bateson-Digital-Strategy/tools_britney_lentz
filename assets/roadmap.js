@@ -69,6 +69,8 @@
   ];
   // The Command Center opens on handoff day, once its link is in
   const CC_OPEN = D.handoff <= today && !!C.commandCenterUrl && C.commandCenterUrl !== "#";
+  // From handoff day on, the page switches to "where things stand": finished things fold away
+  const HANDED = D.handoff <= today;
   const zapier = { id: "zap", item: "Zapier access", short: "Share your Zapier login through LastPass (or another secure password tool) with " + EMAIL + ".", more: ZAPIER_NOTE, got: !!got.zap };
 
   // ---- Page shell ----
@@ -85,7 +87,9 @@
     <p class="brand">Whitney Bateson Digital Strategy</p>
     <p class="eyebrow">Hi, ${NAME}!</p>
     <h1>Here's your funnel <span style="white-space:nowrap">roadmap 🗺️</span></h1>
-    <p class="lede">${T("intro", "We are SO excited to get building for you. This is every stop between today and your ads going live.")}</p>
+    <p class="lede">${HANDED
+      ? T("introHandoff", "Your funnel is built! 🎉 Here's where things stand, and the few steps left before your ads go live.")
+      : T("intro", "We are SO excited to get building for you. This is every stop between today and your ads going live.")}</p>
     <p class="lede">The coral pins are your stops, the few times we need something from you. Everything else is on us, and each stop gets a stamp once it's done.</p>
     <dl class="glance">
       <div><dt>Funnel handoff</dt><dd>${short(D.handoff)}</dd></div>
@@ -121,7 +125,7 @@
 
   <section class="review" id="review" aria-labelledby="review-h"${C.showReview === false ? " hidden" : ""}>
     <h2 id="review-h">Ready for your review 👀</h2>
-    <p class="review-intro">Everything we send you to look over lands here. Open it, then send your feedback through the form on that stop.</p>
+    <p class="review-intro" id="review-intro">Everything we send you to look over lands here. Open it, then send your feedback through the form on that stop.</p>
     ${T("reviewNote", "") ? `<p class="review-note">${T("reviewNote", "")}</p>` : ""}
     <ul id="review-list"></ul>
   </section>
@@ -232,7 +236,7 @@
   const stops = [
     { date: C.dates.access, yours: true, title: "Send us access and acknowledge your schedule",
       step1: true,
-      note: "Everything in Step 1 above.",
+      note: step1Hidden || HANDED ? "Your access and schedule acknowledgement." : "Everything in Step 1 above.",
       action: { href: "#access", text: "Get started", internal: true },
       calTitle: "Send Whitney's team access for your funnel (Whitney Bateson, " + EMAIL + ")",
       calDetails: "Hi, " + NAME + "! Today's the day to get your funnel build rolling. 🎉\n\n→ Email software: add " + EMAIL + " as a user (or share your login through LastPass with " + EMAIL + ")\n→ Website: add " + EMAIL + " as a user (skip this if you're already a WBDS website client)\n→ Facebook: click the DigitalSero link we sent you (it only works once)\n→ Read and acknowledge your schedule on your roadmap\n\nOnce these are in, we can start building." + sign },
@@ -406,14 +410,28 @@
       </li>`;
   }
 
+  // Finished stops at the start of the route fold into one "done so far" row (two or more of them)
+  let showPast = false;
   function renderRoute() {
     const breaks = AWAY.filter(a => a.start).sort((a, b) => a.start < b.start ? -1 : 1);
     const placed = new Set();
+    const firstOpen = stops.findIndex(s => !stopDone(s));
+    const nPast = firstOpen < 0 ? stops.length - 1 : firstOpen; // when all are done, keep the finish stop showing
+    const fold = nPast >= 2;
+    const past = i => fold && i < nPast;
+    const tag = (html, i) => past(i) ? html.replace('<li class="', '<li class="past ') : html;
     // Each break goes just before the first stop that comes after it starts
-    const before = s => breaks.filter(a => !placed.has(a) && a.start <= s.date).map(a => { placed.add(a); return awayRow(a); }).join("");
-    document.getElementById("route").innerHTML = stops.map(s => before(s) + stopRow(s)).join("") + breaks.filter(a => !placed.has(a)).map(awayRow).join("");
-    fillForms(document.getElementById("route"));
+    const before = (s, i) => breaks.filter(a => !placed.has(a) && a.start <= s.date).map(a => { placed.add(a); return tag(awayRow(a), i); }).join("");
+    const sum = fold ? `<li class="past-sum"><span class="past-ic" aria-hidden="true">${tick}</span><div><strong>${WORDS[nPast] ? WORDS[nPast][0].toUpperCase() + WORDS[nPast].slice(1) : nPast} stops done</strong><span>${short(parse(stops[0].date))} to ${short(parse(stops[nPast - 1].date))}</span></div><button type="button" class="past-toggle" aria-expanded="${showPast}">${showPast ? "Hide them" : "Show them"}</button></li>` : "";
+    const route = document.getElementById("route");
+    route.classList.toggle("show-past", showPast);
+    route.innerHTML = sum + stops.map((s, i) => before(s, i) + tag(stopRow(s), i)).join("") + breaks.filter(a => !placed.has(a)).map(awayRow).join("");
+    fillForms(route);
   }
+  document.addEventListener("click", e => {
+    if (!e.target.closest(".past-toggle")) return;
+    showPast = !showPast; renderRoute();
+  });
 
   function stopRow(s) {
       const d = parse(s.date);
@@ -459,10 +477,19 @@
     sec.classList.toggle("complete", complete);
     document.querySelector(".s1-complete").hidden = !complete;
     if (!complete) sec.classList.remove("expanded");
+    // After handoff, a finished Step 1 is just history: hide it (the route's "done so far" row covers it)
+    sec.hidden = step1Hidden || (complete && HANDED);
   }
 
   function renderReview() {
-    document.getElementById("review-list").innerHTML = reviews.map(r => {
+    // Finished reviews fold into one short "already sent" line, so only what's open gets room
+    const open = reviews.filter(r => !state.sent[r.form]);
+    const sent = reviews.filter(r => state.sent[r.form]);
+    const doneRow = sent.length ? `<li class="rv-done"><span class="rv-done-ic">${tick}</span><p><strong>Already sent, thank you!</strong> ${sent.map(r => esc(r.item)).join(" · ")}</p></li>` : "";
+    document.getElementById("review-intro").textContent = open.length
+      ? "Everything we send you to look over lands here. Open it, then send your feedback through the form on that stop."
+      : "All of your reviews are in. Nothing left to look over here.";
+    document.getElementById("review-list").innerHTML = open.map(r => {
       const ready = parse(r.ready), due = parse(r.due);
       const sent = !!state.sent[r.form];
       const live = r.links.filter(l => l.url && l.url !== "#");
@@ -480,7 +507,7 @@
         <div><strong>${r.item}</strong>${body}</div>
         <span class="due${soon ? " soon" : ""}">${label}</span>
       </li>`;
-    }).join("");
+    }).join("") + doneRow;
   }
 
   // Lead magnet + emails as three numbered steps, one button each
