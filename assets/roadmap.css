@@ -198,6 +198,15 @@
   .yours.done .card, .big.done .card { padding-right: 100px; }
 
   .access[hidden] { display: none; }
+  /* Finished stops fold into one row at the top of the route */
+  .route:not(.show-past) > .past { display: none; }
+  .past-sum { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin: 0 0 26px 64px; padding: 12px 16px; background: var(--hi-md); border-radius: var(--r); }
+  .past-ic { position: absolute; left: -53px; top: 50%; margin-top: -13px; width: 26px; height: 26px; border-radius: 50%; background: var(--navy); display: grid; place-items: center; z-index: 1; }
+  .past-ic svg { width: 14px; height: 14px; }
+  .past-sum div { flex: 1 1 200px; }
+  .past-sum strong { display: block; color: var(--navy); }
+  .past-sum div span { font-size: 14px; color: var(--muted); }
+  .past-toggle { font: inherit; font-size: 13px; font-weight: 700; color: var(--navy); background: transparent; border: 1px solid rgba(2,82,93,.3); border-radius: 4px; padding: 6px 12px; cursor: pointer; }
 
   /* Ready for your review (same card as the old Step 1) */
   .review {
@@ -245,6 +254,11 @@
   #review-list li.later strong, #review-list li.later .how { color: var(--muted); }
   #review-list li.sent strong { text-decoration: line-through; text-decoration-thickness: 2px; color: var(--muted); }
   #review-list li.sent .how { color: var(--muted); }
+  #review-list li.rv-done { display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 16px; }
+  #review-list li.rv-done p { margin: 0; font-size: 15px; color: var(--muted); }
+  #review-list li.rv-done strong { display: inline; color: var(--navy); margin-right: 4px; }
+  .rv-done-ic { flex: none; width: 22px; height: 22px; margin-top: 1px; border-radius: 50%; background: var(--navy); display: grid; place-items: center; }
+  .rv-done-ic svg { width: 12px; height: 12px; }
   #review-list li.later .due, #review-list li.sent .due { background: var(--hi-md); color: var(--navy); }
   @media (max-width: 560px) {
     .review { padding: 26px 22px 12px; }

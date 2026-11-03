@@ -95,6 +95,13 @@ Create a full-page database called **Client Feedback** with these properties
 As things come in, flip them to `true` under `received`. Once her four Step 1 items are all
 `true`, Step 1 hides itself and the "Ready for your review" card takes its place.
 
+The page tidies itself as she moves along, so the current step stays near the top:
+- Reviews she's already sent fold into one "Already sent" line at the bottom of the review card.
+- Two or more finished stops at the start of the route fold into one "stops done" row, with a
+  "Show them" button.
+- From handoff day on, Step 1 hides once it's done, and the intro at the top says her funnel is
+  built. Change that line with `copy.introHandoff`.
+
 ## Notes
 - Pages are hidden from search engines (`noindex`), but anyone with the link can open
   one, so keep passwords off the page.
