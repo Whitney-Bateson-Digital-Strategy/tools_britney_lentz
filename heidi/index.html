@@ -18,14 +18,16 @@
     firstName: "Heidi",
     bonusWeek: true,                         // signed up within 24 hours: adds a second ad support week
     digitalSeroUrl: "https://whitneybateson.digitalsero.app/clients/onboarding/0493d31c-229e-43fa-9ac4-e418461c2888",
-    commandCenterUrl: "#",                   // paste her Funnel Command Center link; the button unlocks on handoff day
+    commandCenterUrl: "https://meteor-piranha-968.notion.site/Heidi-Litton-Wellness-Funnel-Handoff-40d24a1f47f181999429ede6cdbe33b2", // her Funnel Handoff page in Notion
     showReview: true,                        // shows the "Ready for your review" card
     reviewLinks: {
       direction: "#",                        // lead magnet direction doc
       leadMagnet: "https://canva.link/yhihk8kgp73u5f8",
       emails: "https://docs.google.com/document/d/1iIu7SM1LCBxpQBm01zz_DVSuRo-6ddZld54APuQOjOc/edit?usp=sharing",
       // Her lead magnet is in Canva, so step 1 shows Canva's comment steps
-      commentPath: "<b>click the spot you want to change</b> → <b>Comment</b> (speech bubble) → <b>type your comment</b> → <b>Comment</b>"
+      commentPath: "<b>click the spot you want to change</b> → <b>Comment</b> (speech bubble) → <b>type your comment</b> → <b>Comment</b>",
+      optIn: "https://unique-speaker-9231.kit.com/8dc5834947", // live opt-in page (Kit)
+      thankYou: "https://heidilitton.com/thanks/"              // live thank you page
     },
 
     // Mark each item true once it's in. When the first four are all true, Step 1 hides itself.
@@ -37,10 +39,15 @@
       directionDue: "2026-10-08",      // she approves the direction
       lmArrives: "2026-10-19",         // we send the lead magnet + emails
       revisionsDue: "2026-10-22",      // her revisions + Zapier due
-      handoff: "2026-11-02",           // funnel handoff, Command Center opens
-      editsDue: "2026-11-05",          // her funnel edits due
+      handoff: "2026-11-03",           // funnel handoff, Command Center opens (went out a day late, Nov 3)
+      editsDue: "2026-11-06",          // her funnel edits due (moved from Nov 5 to give her the extra day)
       complete: "2026-11-09",          // final fixes done
       adsOn: "2026-11-10"              // she turns ads on, ad support starts
+    },
+
+    copy: {
+      // Shown in the "Ready for your review" card. Her handoff went out a day late, so her edits deadline moved back a day
+      reviewNote: "<strong>A little extra time.</strong> Your funnel handoff reached you a day later than planned, so we've moved your edits deadline back a day to <strong>Fri, Nov 6</strong>."
     }
   };
 </script>
