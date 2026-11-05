@@ -38,7 +38,7 @@
   // "got" comes from received in the client's settings (your confirmation)
   const got = C.received || {};
   const access = [
-    { id: "email", item: "Email software access", short: "Add " + EMAIL + " as a user on your email platform.", more: "If your plan doesn't allow extra users, share your login through LastPass (or another secure password tool) with " + EMAIL + " instead.", due: C.dates.access, got: !!got.email },
+    { id: "email", item: T("emailItem", "Email software access"), short: T("emailShort", "Add " + EMAIL + " as a user on your email platform."), more: T("emailMore", "If your plan doesn't allow extra users, share your login through LastPass (or another secure password tool) with " + EMAIL + " instead."), due: C.dates.access, got: !!got.email },
     { id: "web", item: "Website access", short: "Add " + EMAIL + " as a user on your website. Already a WBDS website client? Skip this one, we already have access.", due: C.dates.access, got: !!got.web },
     C.digitalSeroUrl
       ? { id: "fb", item: "Facebook access", short: "Click your DigitalSero link. It only works once, so open it when you're ready to finish.", due: C.dates.access, got: !!got.fb, link: C.digitalSeroUrl, linkText: "Open my DigitalSero link" }

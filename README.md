@@ -20,6 +20,7 @@ checkmarks are saved as rows in a Notion database.
 | `jeani/index.html` | Jeani's settings |
 | `tracyc/index.html` | Tracy C.'s settings (`tracyc` so it isn't confused with `/tracey`) |
 | `angie/index.html` | Angie's settings (her second funnel, for courses and programs) |
+| `kristie/index.html` | Kristie's settings |
 | `api/submit.js` | Saves a form or checkmark to Notion |
 | `api/status.js` | Tells the page what's already been submitted, so it matches on every device |
 | `api/_notion.js` | Shared Notion helper |
@@ -87,6 +88,8 @@ Create a full-page database called **Client Feedback** with these properties
      They show as buttons on the "Your pages and ads" review, next to the Command Center link.
    - `copy.reviewNote` (optional): a short note shown at the top of the "Ready for your review"
      card, like extra time to send feedback. It doesn't change any dates on the page.
+   - `copy.emailItem` / `copy.emailShort` / `copy.emailMore` (optional): replace the wording of the
+     email access item in Step 1, for example when she still needs to choose an email platform.
    - `dates`: her nine dates. Everything else on the page (phase ranges, calendar
      reminders, ad support weeks, the acknowledgement text) is worked out from these.
 3. Add her to `clients.json` with the same folder name, her full name, and the same token.

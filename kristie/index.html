@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kristie's Funnel Roadmap | Whitney Bateson Digital Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/roadmap.css">
+</head>
+<body>
+<script>
+  // Kristie's settings. The design and wording live in /assets (shared by every client).
+  window.ROADMAP = {
+    client: "kristie",                       // must match the folder name and clients.json
+    token: "y4cPGG0sKzXFpkARBW8ibmsj",       // must match clients.json
+    firstName: "Kristie",
+    bonusWeek: false,                        // standard one week of ad support (Jan 4 to 11)
+    digitalSeroUrl: "",                      // paste her DigitalSero link; until then the page says we'll email it
+    commandCenterUrl: "#",                   // paste her Funnel Command Center link; the button unlocks on handoff day
+    showReview: false,                       // hides the "Ready for your review" card
+    reviewLinks: {
+      direction: "#",                        // lead magnet direction doc
+      lmemail: "#"                           // lead magnet + email sequence
+    },
+
+    // Mark each item true once it's in. When the first four are all true, Step 1 hides itself.
+    received: { email: false, web: false, fb: false, ack: false, zap: false },
+
+    dates: {
+      access: "2026-11-12",            // acknowledge timeline, website access, choose email platform (timeline sent Nov 9)
+      directionArrives: "2026-11-16",  // we send the lead magnet direction
+      directionDue: "2026-11-19",      // she approves the direction
+      lmArrives: "2026-12-03",         // we send the lead magnet + emails
+      revisionsDue: "2026-12-08",      // her consolidated feedback on lead magnet + emails
+      handoff: "2026-12-18",           // finished funnel + handoff page, Command Center opens
+      editsDue: "2026-12-22",          // her funnel edit requests due
+      complete: "2027-01-04",          // final fixes done (tentative, same day ads go live)
+      adsOn: "2027-01-04"              // ads go live (tentative), ad support Jan 4 to 11, recap email Jan 11
+    },
+
+    copy: {
+      // She's still choosing her email platform, so Step 1 asks her to pick one first
+      emailItem: "Choose your email platform",
+      emailShort: "Let us know which email platform you'll use, then add admin@whitneybateson.com as a user on it.",
+      emailMore: "Not sure which to pick? Reply to our email and we'll help you decide. If your plan doesn't allow extra users, share your login through LastPass (or another secure password tool) with admin@whitneybateson.com instead."
+    }
+  };
+</script>
+<script src="/assets/roadmap.js"></script>
+</body>
+</html>
