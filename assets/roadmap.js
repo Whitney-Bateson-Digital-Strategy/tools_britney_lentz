@@ -52,6 +52,11 @@
   // Email doc: comments only, unless a client is set to edit it directly (emailEdits: true)
   const EDIT_EMAILS = !!RL.emailEdits;
   const emailsHow = EDIT_EMAILS ? "make your edits in your email doc" : "in your email doc";
+
+  // From ads-on day, a client with finale settings gets the "your funnel is live" page instead of the roadmap.
+  // Add ?preview=finale to the link to see it early.
+  const PREVIEW_FINALE = /[?&]preview=finale\b/.test(location.search);
+  if (C.finale && (D.adsOn <= today || PREVIEW_FINALE)) { renderFinale(); return; }
   const reviews = [
     { form: "direction", item: "Your lead magnet direction", ready: C.dates.directionArrives, due: C.dates.directionDue, links: [{ url: RL.direction, text: "Open your direction" }],
       short: "What we recommend for your freebie: what it is, who it's for, and why your people will want it." },
@@ -689,4 +694,123 @@
     }
   });
 
+  // ---- Finale: the page she keeps once her ads are on ----
+  function renderFinale() {
+    const F = C.finale || {};
+    const L = Object.assign({ optIn: RL.optIn, thankYou: RL.thankYou, emails: RL.emails }, F.links || {});
+    const ok = u => u && u !== "#";
+    const ext = u => `href="${esc(u)}" target="_blank" rel="noopener"`;
+    const CC = ok(C.commandCenterUrl) ? C.commandCenterUrl : "";
+    const ccLink = t => CC ? `<a ${ext(CC)}>${t}</a>` : t;
+    const supportOn = today <= D.recap;
+    const day = Math.min(Math.max(Math.round((today - D.adsOn) / 86400000) + 1, 1), Math.round((D.recap - D.adsOn) / 86400000));
+    const total = Math.round((D.recap - D.adsOn) / 86400000);
+
+    const tile = (key, ic, title, text, cta) => ok(L[key]) ? `<a class="fn-tile" ${ext(L[key])}><span class="fn-ic" aria-hidden="true">${ic}</span><div><b>${title}</b><span>${text}</span><em>${cta} →</em></div></a>` : "";
+    const tiles = [
+      tile("optIn", "📝", "Opt-in page", "Where new subscribers sign up for your freebie.", "Open page"),
+      tile("thankYou", "💌", "Thank you page", "What people see right after they sign up.", "Open page"),
+      tile("pdf", "📄", "Lead magnet PDF", "The file all of your welcome emails link to.", "Open PDF"),
+      ok(L.canva) ? `<div class="fn-tile warn"><span class="fn-ic" aria-hidden="true">🎨</span><div><b>Lead magnet in Canva</b><span>Where you edit your freebie's design and wording.</span><p class="fn-must"><strong>Important:</strong> before you change anything, watch the steps in your ${ccLink("Command Center")} for updating your PDF.</p><a class="fn-tlink" ${ext(L.canva)}>Edit in Canva →</a></div></div>` : "",
+      tile("adCreative", "📣", "Ad creative in Canva", "Your ad images, ready to tweak or refresh.", "Edit in Canva"),
+      tile("emails", "✉️", "Welcome emails", T("emailsTileNote", "The doc with your welcome email copy."), "Open doc"),
+      ok(L.recap)
+        ? `<a class="fn-tile wide" ${ext(L.recap)}><span class="fn-ic" aria-hidden="true">📊</span><div><b>Your ad support recap</b><span>Your results and our recommendations for what's next.</span><em>Read your recap →</em></div></a>`
+        : supportOn ? `<div class="fn-tile wide soon"><span class="fn-ic" aria-hidden="true">📊</span><div><b>Your ad support recap</b><span>Your results and our recommendations for what's next. This turns into a link on ${short(D.recap)}.</span></div></div>` : ""
+    ].join("");
+
+    const tl = [
+      ["access", "Access and schedule acknowledgement"], ["directionArrives", "Lead magnet direction arrives"],
+      ["directionDue", "Direction approved"], ["lmArrives", "Lead magnet and emails arrive"],
+      ["revisionsDue", "Revisions sent"], ["handoff", "Funnel handoff"], ["editsDue", "Funnel edits sent"],
+      ["complete", "Funnel complete 🏁"], ["adsOn", "Ads on 🚀"]
+    ].filter(([k]) => D[k]);
+
+    const pause = C.pause && supportOn ? ` <strong>Heads up:</strong> replies pause ${C.pause.end ? "from " + fmt(parse(C.pause.date)) + " to " + fmt(parse(C.pause.end)) : "on " + fmt(parse(C.pause.date))} for ${esc(C.pause.reason)} and pick back up ${fmt(nextWeekday(parse(C.pause.end || C.pause.date)))}.` : "";
+    const mail = subj => `mailto:${EMAIL}?subject=${encodeURIComponent(subj)}`;
+
+    document.title = NAME + "'s Funnel | Whitney Bateson Digital Strategy";
+    document.body.classList.add("fn");
+    document.body.insertAdjacentHTML("afterbegin", `
+  <header class="hero fn-hero">
+  <svg class="hero-map" viewBox="0 0 420 320" aria-hidden="true" preserveAspectRatio="xMaxYMid meet">
+    <path d="M330 300 C 400 260, 300 210, 350 160 S 420 110, 370 70 S 380 20, 405 20" fill="none" stroke="#02525D" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+    <g transform="translate(330 300)"><path d="M0-22a11 11 0 0 1 11 11c0 8-11 18-11 18s-11-10-11-18a11 11 0 0 1 11-11z" fill="#02525D"/><circle cy="-11" r="4" fill="#FFFFFF"/></g>
+    <g transform="translate(350 160)"><path d="M0-22a11 11 0 0 1 11 11c0 8-11 18-11 18s-11-10-11-18a11 11 0 0 1 11-11z" fill="#02525D"/><circle cy="-11" r="4" fill="#FFFFFF"/></g>
+    <g transform="translate(405 20)"><path d="M16 26V-6" stroke="#02525D" stroke-width="3" stroke-linecap="round"/><path d="M17-5h20l-5 7 5 7H17z" fill="#FF7F50"/></g>
+  </svg>
+  <div class="hero-inner">
+    <p class="brand">Whitney Bateson Digital Strategy</p>
+    <p class="eyebrow">You made it, ${esc(NAME)}!</p>
+    <h1>Your funnel is live 🎉</h1>
+    <p class="lede fn-lede">${T("finaleIntro", "Your lead magnet, welcome emails and ads are all up and running. Everything we built for you lives in your Funnel Command Center, so start there any time you need a file, a video walkthrough or a quick refresher.")}</p>
+    ${CC ? `<a class="portal fn-big" ${ext(CC)}>Open your Funnel Command Center →</a>` : ""}
+    <p class="fn-built">Built ${short(D.access)} to ${short(D.complete)} · Ads live ${short(D.adsOn)}</p>
+  </div>
+  </header>
+  <div class="wrap">
+
+  ${supportOn ? `<section class="fn-support" aria-label="Ad support">
+    <div class="fn-ring" aria-hidden="true"><b>${day}</b><small>of ${total} days</small></div>
+    <div>
+      <h2>Ad support is on</h2>
+      <p>We're watching your ads and your funnel through <strong>${fmt(D.recap)}</strong>. Questions about performance, spend or leads? Email <a href="mailto:${EMAIL}">${EMAIL}</a> and Priscilla will reply within one business day.${pause}</p>
+    </div>
+  </section>` : ""}
+
+  ${tiles ? `<section class="fn-sec" aria-labelledby="fn-links-h">
+    <span class="phase-num">Quick links</span>
+    <h2 id="fn-links-h">Your funnel at a glance</h2>
+    <p class="fn-sub">Shortcuts to the pieces you'll reach for most. The how-to videos for each one are in your Command Center.</p>
+    <div class="fn-tiles">${tiles}</div>
+    ${CC ? `<p class="fn-ccnote">Looking for something else? Everything is in your <a ${ext(CC)}>Funnel Command Center</a>.</p>` : ""}
+  </section>` : ""}
+
+  <section class="fn-sec">
+    <div class="fn-course">
+      <div>
+        <span class="phase-num">Yours to keep</span>
+        <h2>Ads Made Simple 🎓</h2>
+        <p>Come back any time you want to read your results, make simple edits or refresh your ads.</p>
+        <dl class="fn-login"><dt>Username</dt><dd>your email address</dd><dt>Password</dt><dd>your last name, all lowercase</dd></dl>
+      </div>
+      <a class="xbtn" href="https://tools.whitneybateson.com/ads/course-login/" target="_blank" rel="noopener">Go to the course</a>
+    </div>
+  </section>
+
+  <section class="fn-timeline">
+    <div class="fn-tl-head">
+      <span class="fn-tick" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <div><strong>Your project timeline</strong><span>${tl.length} stops · ${short(D.access)} to ${short(D.adsOn)}</span></div>
+      <button type="button" class="past-toggle" aria-expanded="false" aria-controls="fn-tl">Show it</button>
+    </div>
+    <ol class="fn-tl" id="fn-tl" hidden>${tl.map(([k, t]) => `<li><b>${short(D[k])}</b>${t}</li>`).join("")}</ol>
+  </section>
+
+  </div>
+
+  <section class="finale fn-finale" aria-labelledby="fn-next-h">
+  <div class="finale-inner">
+    <h2 id="fn-next-h">Ready for what's next?</h2>
+    <p>Plenty of clients keep working with us once their funnel is live. If any of these sound good, tap one to get started.</p>
+    <div class="fn-offers">
+      <a class="fn-offer" href="${mail("Ongoing ad support")}"><b>Ongoing ad support</b><span>We keep managing and improving your ads month to month.</span><em>Email Priscilla →</em></a>
+      <a class="fn-offer" href="${mail("Another funnel")}"><b>Another funnel</b><span>A new lead magnet funnel for another offer or audience.</span><em>Email Priscilla →</em></a>
+      <a class="fn-offer" href="https://offers.whitneybateson.com/seo-services/" target="_blank" rel="noopener"><b>SEO support</b><span>Help people find you on Google, not just through ads.</span><em>See SEO services →</em></a>
+      <a class="fn-offer" href="https://whitneybateson.as.me/coaching-call" target="_blank" rel="noopener"><b>Private coaching</b><span>One-on-one time to plan your marketing and grow your business.</span><em>Book a coaching call →</em></a>
+    </div>
+    <p class="fn-alt">Not sure which fits? Email Priscilla at <a href="mailto:${EMAIL}">${EMAIL}</a></p>
+  </div>
+  <footer class="site-foot" aria-hidden="true"></footer>
+  </section>
+  `);
+
+    const btn = document.querySelector(".fn-timeline .past-toggle");
+    btn.addEventListener("click", () => {
+      const list = document.getElementById("fn-tl");
+      list.hidden = !list.hidden;
+      btn.setAttribute("aria-expanded", !list.hidden);
+      btn.textContent = list.hidden ? "Show it" : "Hide it";
+    });
+  }
 })();

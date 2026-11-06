@@ -106,7 +106,25 @@ The page tidies itself as she moves along, so the current step stays near the to
 - From handoff day on, Step 1 hides once it's done, and the intro at the top says her funnel is
   built. Change that line with `copy.introHandoff`.
 
-## Notes
+## After the ads go on: the finale page
+Add `finale` to a client's settings and, from her `adsOn` date, her link shows a "your funnel is live" page
+instead of the roadmap: a big Command Center button, an "Ad support is on" box (it hides itself after the
+recap date), quick links to her funnel, Ads Made Simple, her folded project timeline, and the
+"Ready for what's next?" cards. Clients without `finale` keep the roadmap as before.
+
+```js
+finale: {
+  links: {
+    pdf: "...",          // the PDF her emails link to
+    canva: "...",        // lead magnet in Canva (shows the "check your Command Center first" warning)
+    adCreative: "...",   // ad images in Canva
+    recap: "..."         // optional: her recap, once it's ready
+  }
+}
+```
+Opt-in, thank you page and email doc come from `reviewLinks`, and any link left out just doesn't show.
+To see it before her ads-on date, add `?preview=finale` to her link (for example `/heidi?preview=finale`).
+
 - Pages are hidden from search engines (`noindex`), but anyone with the link can open
   one, so keep passwords off the page.
 - Screenshots: for now the forms ask clients to email screenshots. Uploads straight
