@@ -21,6 +21,7 @@ checkmarks are saved as rows in a Notion database.
 | `tracyc/index.html` | Tracy C.'s settings (`tracyc` so it isn't confused with `/tracey`) |
 | `angie/index.html` | Angie's settings (her second funnel, for courses and programs) |
 | `kristie/index.html` | Kristie's settings |
+| `sara/index.html` | Sara Kahn's String → Kit migration roadmap (a standalone page, not a DFY funnel; its settings and script are both in the file) |
 | `api/submit.js` | Saves a form or checkmark to Notion |
 | `api/status.js` | Tells the page what's already been submitted, so it matches on every device |
 | `api/_notion.js` | Shared Notion helper |

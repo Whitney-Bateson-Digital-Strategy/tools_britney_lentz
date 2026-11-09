@@ -29,6 +29,9 @@ const FORM_NAMES = {
   direction: "Lead magnet direction",
   lmemail: "Lead magnet & email feedback",
   edits: "Funnel edits",
+  // Migration roadmaps (sara/index.html)
+  npro: "Nutrition Professionals funnel feedback",
+  nclient: "Client funnels feedback",
   access: "Access checklist"
 };
 
@@ -36,7 +39,15 @@ const ACCESS_NAMES = {
   email: "Email software access",
   web: "Website access",
   fb: "Facebook access",
-  zap: "Zapier access"
+  zap: "Zapier access",
+  // Migration roadmaps (sara/index.html)
+  kit: "Kit access",
+  docs: "Funnel docs",
+  pdfs: "Lead magnet PDFs",
+  tags: "Tag list",
+  domain: "Domain access",
+  list: "Subscriber list export",
+  final: "Final String export"
 };
 
 function findClient(slug, token) {
