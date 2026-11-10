@@ -2,312 +2,448 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sara's Kit Migration Roadmap | Whitney Bateson Digital Strategy</title>
-<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Belly Bliss migration roadmap</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/roadmap.css">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* Small additions for the migration roadmap; everything else comes from roadmap.css */
-  .later-list { margin: 10px 0 0; padding-left: 20px; }
-  .later-list li { margin: 4px 0; }
-  .stop.ours-host .card { border-style: dashed; }
-  .f-tip { background: #F4F9F8; border-radius: 10px; padding: 10px 14px; margin: 10px 0; font-size: .95em; }
+/* Layout idea: one calm reading column. Summary first, then Sara's own dates, then the full phase-by-phase timeline. */
+:root {
+  --bg: #F3F6F4;
+  --surface: #FFFFFF;
+  --ink: #1B2A27;
+  --muted: #586864;
+  --line: #D9E2DE;
+  --accent: #1E5F56;
+  --accent-tint: #E3F0EC;
+  --you: #9A5A08;
+  --you-tint: #FBEED6;
+  --font-display: "Bricolage Grotesque", "Trebuchet MS", "Segoe UI", sans-serif;
+  --font-body: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111917;
+    --surface: #19231F;
+    --ink: #E5ECE9;
+    --muted: #9AAAA5;
+    --line: #2A3834;
+    --accent: #74C6B6;
+    --accent-tint: #1D332E;
+    --you: #EBAD52;
+    --you-tint: #382B12;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111917;
+  --surface: #19231F;
+  --ink: #E5ECE9;
+  --muted: #9AAAA5;
+  --line: #2A3834;
+  --accent: #74C6B6;
+  --accent-tint: #1D332E;
+  --you: #EBAD52;
+  --you-tint: #382B12;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+}
+.wrap {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 48px 20px 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(2rem, 6vw, 2.75rem); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1.5rem; font-weight: 700; }
+h3 { font-size: 1.15rem; font-weight: 700; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+.eyebrow {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+header { display: flex; flex-direction: column; gap: 14px; }
+.lede { color: var(--muted); max-width: 62ch; }
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 10px;
+}
+.fact {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.fact span { font-size: 0.82rem; color: var(--muted); font-weight: 500; }
+.fact strong { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; }
+
+section { display: flex; flex-direction: column; gap: 16px; }
+.section-note { color: var(--muted); max-width: 62ch; }
+
+/* Sara's own dates */
+.asks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: var(--you-tint);
+  border-radius: 12px;
+  border-left: 5px solid var(--you);
+}
+.asks > li {
+  display: grid;
+  grid-template-columns: 108px 1fr;
+  gap: 4px 18px;
+  padding: 16px 18px;
+}
+.asks > li + li { border-top: 1px solid color-mix(in srgb, var(--you) 22%, transparent); }
+.asks .when { font-weight: 700; color: var(--you); font-variant-numeric: tabular-nums; }
+.asks .what { display: flex; flex-direction: column; gap: 4px; }
+.asks .what strong { font-weight: 600; }
+.asks .what span { color: var(--muted); font-size: 0.95rem; }
+.asks .cal { font-size: 0.9rem; font-weight: 600; }
+
+/* Timeline */
+.phase {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px 20px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.phase.current { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.phase-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+}
+.phase-dates { color: var(--muted); font-weight: 600; font-size: 0.95rem; font-variant-numeric: tabular-nums; }
+.phase-sum { color: var(--muted); font-size: 0.97rem; max-width: 62ch; }
+.now-tag {
+  display: none;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-tint);
+  padding: 3px 8px;
+  border-radius: 99px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.phase.current .now-tag { display: inline-block; }
+.rows { list-style: none; margin: 0; padding: 0; }
+.rows li {
+  display: grid;
+  grid-template-columns: 108px 1fr auto;
+  gap: 4px 18px;
+  align-items: start;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+.rows .when { font-weight: 600; font-variant-numeric: tabular-nums; }
+.rows .what { min-width: 0; }
+.who {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 99px;
+  white-space: nowrap;
+  background: var(--accent-tint);
+  color: var(--accent);
+}
+.who.you { background: var(--you-tint); color: var(--you); }
+.rows li.milestone .what { font-weight: 600; }
+
+.closed {
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 14px 20px;
+  color: var(--muted);
+  font-size: 0.97rem;
+}
+.closed strong { color: var(--ink); }
+
+.notes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.notes li {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.notes strong { font-weight: 700; }
+.notes span { color: var(--muted); font-size: 0.95rem; }
+
+footer { color: var(--muted); font-size: 0.88rem; border-top: 1px solid var(--line); padding-top: 18px; }
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .wrap { padding-top: 32px; gap: 36px; }
+  .facts { grid-template-columns: 1fr; }
+  .asks > li { grid-template-columns: 1fr; }
+  .rows li { grid-template-columns: 1fr auto; }
+  .rows .when { grid-column: 1 / -1; }
+  .notes { grid-template-columns: 1fr; }
+}
+
+.asks .what ul { margin: 2px 0 0; padding-left: 18px; color: var(--muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 3px; }
+.step-num { color: var(--accent); }
+.build { margin: 0; padding: 14px 16px; border-radius: 8px; background: var(--bg); display: flex; flex-direction: column; gap: 6px; }
+.build p { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.build ul { margin: 0; padding-left: 18px; font-size: 0.97rem; display: flex; flex-direction: column; gap: 3px; }
+.dates-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+.rows li.off .when, .rows li.off .what { color: var(--muted); }
+.phase { padding-bottom: 10px; }
+.phase > .rows:first-child li:first-child { border-top: 0; padding-top: 0; }
+
+.asks > li { grid-template-columns: 108px 1fr auto; align-items: start; padding: 12px 18px; }
+.asks .cal { white-space: nowrap; font-size: 0.85rem; }
+.asks details { font-size: 0.93rem; }
+.asks summary { cursor: pointer; color: var(--you); font-weight: 600; width: fit-content; }
+.asks summary:focus-visible { outline: 2px solid var(--you); outline-offset: 3px; border-radius: 4px; }
+.asks details ul { margin-top: 6px; }
+@media (max-width: 560px) { .asks > li { grid-template-columns: 1fr; } }
+.notes a { font-size: 0.95rem; font-weight: 600; overflow-wrap: anywhere; }
+.notes li:last-child:nth-child(odd) { grid-column: 1 / -1; }
 </style>
 </head>
 <body>
-<script>
-  // Sara's settings. This is a String → Kit migration (not a DFY funnel build), so the page script lives below.
-  window.MIGRATION = {
-    client: "sara",                          // must match the folder name and clients.json
-    token: "NNhSqUKaqMfKwfr2LqQJ4GEi",       // must match clients.json
-    firstName: "Sara",
+<div class="wrap">
 
-    // Mark each item true once it's in (your confirmation). When the first five are true, Step 1 hides itself.
-    received: { kit: false, docs: false, pdfs: false, tags: false, domain: false, list: false, zap: false, final: false },
+  <header>
+    <p class="eyebrow">Belly Bliss Nutrition · String to Kit and hosting move</p>
+    <h1>Your project roadmap</h1>
+    <p class="lede">Hi Sara! This page has every key date for your move off String. Start with your to-do list. Below it you'll see when the switch from String to Kit happens and what we're building each week.</p>
+    <div class="facts">
+      <div class="fact"><span>Hosting move</span><strong>Nov 14 to 15</strong></div>
+      <div class="fact"><span>Switch to Kit, in two stages</span><strong>Dec 1 and Dec 10</strong></div>
+      <div class="fact"><span>Target finish</span><strong>Mon, Dec 14</strong></div>
+    </div>
+  </header>
 
-    // Test links for her review stops. Paste them in when each funnel is ready.
-    reviewLinks: { pro: "#", client1: "#", client2: "#" },
+  <section aria-labelledby="asks-h">
+    <h2 id="asks-h">Your to-do list</h2>
+    <p class="section-note">Five dates, and each one keeps the next step on schedule. Email everything to Priscilla at admin@whitneybateson.com.</p>
+    <ul class="asks">
+      <li>
+        <span class="when">Thu, Nov 12</span>
+        <div class="what">
+          <strong>Give us access</strong>
+          <span>Your domain, your Kit account and your sender email address.</span>
+          <details><summary>See the details</summary><ul><li>Ian will email you soon about your bellyblissnutrition.com domain, so keep an eye out and reply with the access he asks for.</li><li>Add Priscilla to your Kit account as a team member, or send her the login.</li><li>Tell Priscilla which email address your subscribers should see as the sender when you email them from Kit, for example sara@bellyblissnutrition.com. An address with your name works better than info@ or admin@, and it needs to be at a domain you own, so not a Gmail address.</li></ul></details>
+        </div>
+        <a class="cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Send+WBDS+domain+access+and+Kit+access&dates=20261112/20261113&details=Reply+to+Ian+with+domain+access+for+bellyblissnutrition.com.+Add+Priscilla+to+your+Kit+account+and+tell+her+which+sender+email+address+to+use.">Add to calendar</a>
+      </li>
+      <li>
+        <span class="when">Mon, Nov 16</span>
+        <div class="what">
+          <strong>Send your final funnel files</strong>
+          <span>Funnel docs, lead magnet PDFs, first evergreen emails and a list of where your sign-up links live.</span>
+          <details><summary>See the details</summary><ul><li>The final, approved Word doc for each funnel, with email copy, tags, exit tags, links and buttons.</li><li>The PDF for each lead magnet.</li><li>The first 1 to 2 emails of the evergreen sequence each funnel leads into.</li><li>A list of everywhere your sign-up forms and links live today: pages on your website, your Instagram and LinkedIn bios, your lead magnet PDFs and anywhere else.</li><li>One note on links in your docs. Links to pages on your website stay the same. If a link goes to a page hosted by String, or to your Thinkific checklist opt-in, highlight it and we'll swap in the new Kit link.</li></ul></details>
+        </div>
+        <a class="cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Send+WBDS+final+funnel+docs+and+lead+magnet+PDFs&dates=20261116/20261117&details=Final%2C+approved+Word+doc+for+each+funnel%2C+each+lead+magnet+PDF%2C+the+first+1+to+2+evergreen+emails+each+funnel+leads+into%2C+and+a+list+of+everywhere+your+current+sign-up+forms+and+links+live.">Add to calendar</a>
+      </li>
+      <li>
+        <span class="when">Tue, Nov 24</span>
+        <div class="what">
+          <strong>Review your nutrition professionals funnel</strong>
+          <span>Ready for you on Fri, Nov 20.</span>
+          <details><summary>See the details</summary><ul><li>Priscilla sends you the link on Nov 20. Sign up the way a subscriber would and go through the opt-in page, the thank-you page and the lead magnet delivery.</li><li>Look for design changes, typos and anything that didn't work, like an email that never arrived.</li><li>Send everything you find in one email by Nov 24. Then this to-do is done.</li><li>The rest of the emails keep arriving over the following days. Open each one as it comes in, and if something looks off, forward that email to Priscilla.</li></ul></details>
+        </div>
+        <a class="cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Changes+due%3A+nutrition+professionals+funnel+review&dates=20261124/20261125&details=Go+through+the+whole+funnel+as+a+subscriber+%28opt-in+page%2C+thank-you+page%2C+lead+magnet+delivery%2C+every+email%29+and+send+all+changes+to+Priscilla+in+one+email.">Add to calendar</a>
+      </li>
+      <li>
+        <span class="when">Mon, Nov 30</span>
+        <div class="what">
+          <strong>Send your String subscriber list</strong>
+          <span>Exported from String after your clean-up, as an Excel or CSV file.</span>
+          <details><summary>See the details</summary><ul><li>Export your list from String once your final promotion and clean-up are done, and email the file to Priscilla.</li><li>Include one row per subscriber with their email address, first name and the tags you're keeping.</li><li>Leave out anyone who has unsubscribed, bounced or marked your emails as spam.</li><li>Only the tags in this file come over to Kit, so remove any you no longer use.</li></ul></details>
+        </div>
+        <a class="cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Send+WBDS+cleaned-up+subscriber+list&dates=20261130/20261201&details=Excel+file+with+the+tags+you+are+keeping%2C+ready+to+import+into+Kit.">Add to calendar</a>
+      </li>
+      <li>
+        <span class="when">Wed, Dec 9</span>
+        <div class="what">
+          <strong>Review your two client funnels</strong>
+          <span>Ready for you on Mon, Dec 7. Same process as the first review, including opening the emails as they keep arriving.</span>
+        </div>
+        <a class="cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Changes+due%3A+client+funnels+review&dates=20261209/20261210&details=Go+through+both+client+funnels+from+the+form+to+the+last+email+and+send+all+changes+to+Priscilla+in+one+email.">Add to calendar</a>
+      </li>
+    </ul>
+  </section>
 
-    // Assumes the deposit is paid by Mon, Nov 9. If it's later, shift everything except Thanksgiving.
-    dates: {
-      kickoff: "2026-11-09",      // deposit paid, project starts
-      assetsDue: "2026-11-12",    // Kit access, funnel docs, lead magnet PDFs, tag list, domain access
-      kitReady: "2026-11-13",     // sending domain, template, tags
-      hosting: "2026-11-14",      // Ian moves the site to WBDS hosting (weekend of Nov 14–15)
-      hostingEnd: "2026-11-15",
-      proReady: "2026-11-20",     // Nutrition Professionals funnel ready to test
-      listDue: "2026-11-20",      // String subscriber export (Excel, with tags) + Zapier access
-      proDue: "2026-11-24",       // her testing feedback on funnel 1
-      proLive: "2026-11-24",      // website opt-in live + list imported
-      awayStart: "2026-11-25",    // Thanksgiving
-      awayEnd: "2026-11-27",
-      adsOn: "2026-11-30",        // ads reconnected to Kit and turned back on
-      clientReady: "2026-12-04",  // client funnels + evergreen ready to test
-      clientDue: "2026-12-08",    // her testing feedback on client funnels
-      clientLive: "2026-12-09",   // String forms swapped for Kit forms
-      finalExport: "2026-12-09",  // final String export: only people who joined after Nov 20
-      complete: "2026-12-11",     // final testing done, fully on Kit
-      stringCancel: "2026-12-31"  // she cancels String
-    }
-  };
-</script>
-<script>
-(function () {
-  const C = window.MIGRATION, CLIENT = C.client, TOKEN = C.token, NAME = C.firstName, API = "/api";
-  const EMAIL = "admin@whitneybateson.com";
-  const parse = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y, m-1, d); };
-  const fmt = d => d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
-  const short = d => d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-  const ymd = d => d.getFullYear() + String(d.getMonth()+1).padStart(2,"0") + String(d.getDate()).padStart(2,"0");
-  const iso = d => d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
-  const addDay = d => { const n = new Date(d); n.setDate(n.getDate()+1); return n; };
-  const esc = t => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
-  const today = new Date(); today.setHours(0,0,0,0);
-  const D = {}; Object.keys(C.dates).forEach(k => { D[k] = parse(C.dates[k]); });
-  const got = C.received || {};
-  const RL = C.reviewLinks || {};
-  const live = u => u && u !== "#";
-  const tick = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  const sign = "\n\nQuestions? Email us at " + EMAIL + " – we're happy to help!\n\nWhitney & Priscilla\nWhitney Bateson Digital Strategy";
+  <section aria-labelledby="switch-h">
+    <h2 id="switch-h">When you switch from String to Kit</h2>
+    <p class="section-note">The switch happens in two stages, one audience at a time. Nothing is turned off in String until its Kit replacement is live and tested.</p>
+    <div class="phase">
+      <ul class="rows">
+        <li><span class="when">Until Dec 1</span><span class="what">Everything keeps running in String, the same as today</span><span></span></li>
+        <li class="milestone"><span class="when">Tue, Dec 1</span><span class="what">Switch 1 (target date). New nutrition professional leads go to Kit, from your Meta ads and your new opt-in page</span><span></span></li>
+        <li class="milestone"><span class="when">Thu, Dec 10</span><span class="what">Switch 2. New client leads go to Kit, from the forms on your website</span><span></span></li>
+        <li><span class="when">After Dec 10</span><span class="what">String only sends the emails you already have scheduled. Once those finish, you can cancel String</span><span></span></li>
+      </ul>
+    </div>
+    <p class="section-note">On each switch day, Priscilla sends you your new Kit links. We update your website and the emails we build. You update anywhere else your links live, like your Instagram and LinkedIn bios.</p>
+  </section>
 
-  // ---- Step 1: what we need to get started ----
-  const access = [
-    { id: "kit", item: "Kit access", short: "Add " + EMAIL + " as a team member in Kit (Settings → Team). If your plan doesn't allow extra users, share your login through LastPass (or another secure password tool) with " + EMAIL + " instead." },
-    { id: "docs", item: "Your funnel docs", short: "One Word doc per funnel (the 7-, 8- and 5-email sequences), with the tags, exit tags, links and buttons for each email." },
-    { id: "pdfs", item: "Your lead magnet PDFs", short: "The final PDF for each of your three lead magnets." },
-    { id: "tags", item: "Your tag list", short: "The tags you're keeping in Kit, so we can set them up before your list comes over." },
-    { id: "domain", item: "Domain access for your hosting move", short: "Access to the registrar for bellyblissnutrition.com (wherever you bought your domain). Ian uses this to move your site to our hosting and to set up Kit's sending domain, so your emails land in inboxes. We'll email you exactly what he needs." }
-  ];
-  const step1Hidden = access.every(a => got[a.id]);
+  <section aria-labelledby="timeline-h">
+    <h2 id="timeline-h">What happens when</h2>
+    <p class="section-note">Four steps. Ian moves your hosting first while Priscilla gets Kit ready, then we build your funnels in your priority order.</p>
 
-  // ---- Saved progress ----
-  const KEY = "migration-" + CLIENT;
-  let state = { checks: {}, sent: {} };
-  try { state = Object.assign(state, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) {}
-  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
-  const itemDone = id => !!got[id] || !!state.checks[id];
-
-  // ---- Stops ----
-  const testHow = "Look over your opt-in page and thank-you page, then sign up yourself and go through the whole flow: the form, your lead magnet delivery and the emails as they arrive.";
-  const stops = [
-    { date: C.dates.assetsDue, yours: true, step1: true, title: "Send us your files and access",
-      note: "Everything in Step 1 above. Once it's in, we start setting up Kit.",
-      action: { href: "#access", text: "Get started", internal: true },
-      calTitle: "Send Whitney's team your Kit files and access (Whitney Bateson, " + EMAIL + ")",
-      calDetails: "Hi, " + NAME + "! Today's the day to send what we need for your Kit migration:\n\n→ Kit access (add " + EMAIL + " as a team member)\n→ Your funnel docs (7-, 8- and 5-email sequences)\n→ Your lead magnet PDFs\n→ Your tag list\n→ Domain access for your hosting move\n\nEverything's listed on your roadmap." + sign },
-    { date: C.dates.kitReady, title: "Kit is set up",
-      note: "Your sending domain, email template (footer, signature and socials) and tags are ready to go." },
-    { date: C.dates.hosting, end: C.dates.hostingEnd, host: true, title: "Your website moves to our hosting",
-      note: "Ian moves bellyblissnutrition.com to our hosting over the weekend, outside business hours, and checks that all of your sarakahnnutrition.com redirects still work. Kit's sending-domain records get added during the same change, so your domain only gets touched once." },
-    { date: C.dates.listDue, yours: true, list: true, title: "Send your subscriber list",
-      note: "Your String subscriber export as an Excel file, with the tags you're keeping. Also due: Zapier access, so we can connect your Facebook lead form to Kit.",
-      calTitle: "Send your String subscriber list + Zapier access (Whitney Bateson, " + EMAIL + ")",
-      calDetails: "Hi, " + NAME + "! Today's the day to send:\n\n→ Your String subscriber export (Excel, with the tags you're keeping)\n→ Your Zapier login, shared through LastPass or another secure password tool with " + EMAIL + sign },
-    { date: C.dates.proReady, title: "Your Nutrition Professionals funnel is ready to test",
-      note: "Your 7-email sequence, the Kit form for your Facebook lead form, and the new website opt-in and thank-you pages that replace Thinkific." },
-    { date: C.dates.proDue, yours: true, form: "npro", link: RL.pro, title: "Test your Nutrition Professionals funnel",
-      note: testHow + " Send anything that looks off through the form below.",
-      calTitle: "Test your Nutrition Professionals funnel (Whitney Bateson, " + EMAIL + ")",
-      calDetails: "Hi, " + NAME + "! Today's the day to send your feedback on your Nutrition Professionals funnel.\n\n→ Look over your opt-in page and thank-you page\n→ Sign up yourself and go through the flow: form, lead magnet delivery and emails\n→ Send anything that looks off through the form on your roadmap" + sign },
-    { date: C.dates.proLive, title: "Your website opt-in goes live",
-      note: "Your new opt-in replaces Thinkific, and your subscriber list is imported into Kit." },
-    { away: true, date: C.dates.awayStart, end: C.dates.awayEnd, title: "Thanksgiving break" },
-    { date: C.dates.adsOn, title: "Your ads are back on 🚀",
-      note: "We connect your Facebook lead form to Kit through Zapier and turn your ads back on. We waited until after Thanksgiving so your ads aren't running unwatched over the holiday." },
-    { date: C.dates.clientReady, title: "Your client funnels are ready to test",
-      note: "Both client sequences (8 and 5 emails), their Kit forms, and your evergreen sequence with its first one or two emails, connected so subscribers move into it when they finish a lead magnet sequence." },
-    { date: C.dates.clientDue, yours: true, form: "nclient", link: RL.client1, link2: RL.client2, title: "Test your client funnels",
-      note: "Same as before, for both client funnels. " + testHow + " Send anything that looks off through the form below.",
-      calTitle: "Test your client funnels (Whitney Bateson, " + EMAIL + ")",
-      calDetails: "Hi, " + NAME + "! Today's the day to send your feedback on both client funnels.\n\n→ Look over each opt-in page and thank-you page\n→ Sign up and go through each flow\n→ Send anything that looks off through the form on your roadmap" + sign },
-    { date: C.dates.finalExport, yours: true, final: true, title: "Send your final String export",
-      note: "Just the people who joined your String list after " + short(D.listDue) + ", so nobody who signed up during the move gets left behind. Your String forms come down today.",
-      calTitle: "Send your final String export (Whitney Bateson, " + EMAIL + ")",
-      calDetails: "Hi, " + NAME + "! Today your String forms get swapped for Kit forms. Please send an export of everyone who joined your String list after " + short(D.listDue) + " (Excel, with tags) so we can bring them over." + sign },
-    { date: C.dates.clientLive, title: "Your client funnels go live",
-      note: "The String forms on your website are swapped for your new Kit forms." },
-    { date: C.dates.complete, finish: true, title: "🏁 You're fully on Kit",
-      note: "We test every form, email and automation one last time. Your team can add more evergreen emails whenever you're ready." }
-  ];
-
-  const stopDone = s => {
-    if (s.step1) return access.every(a => itemDone(a.id));
-    if (s.form) return !!state.sent[s.form];
-    if (s.list) return itemDone("list") && itemDone("zap");
-    if (s.final) return itemDone("final");
-    return parse(s.end || s.date) < today;
-  };
-
-  // ---- Forms (testing feedback) ----
-  const FORMS = {
-    npro: { title: "Nutrition Professionals Funnel Feedback", button: "Open the feedback form" },
-    nclient: { title: "Client Funnels Feedback", button: "Open the feedback form" }
-  };
-  const tips = `<div class="f-tip"><strong>Two tips:</strong> sign up with a different email from the one on your list (or unsubscribe when you're done), so your own address doesn't end up tagged in the funnel. And the emails arrive on their normal schedule, so you may not have them all by the due date. Send what you've seen, and email us if something looks off later.</div>`;
-  function renderForm(key) {
-    const f = FORMS[key], req = '<span class="req" aria-hidden="true">*</span>';
-    const checks = ["I've looked over the opt-in page" + (key === "nclient" ? "s" : "") + " and thank-you page" + (key === "nclient" ? "s" : "") + ".",
-      "I signed up and got my lead magnet.",
-      "I've read the emails that have arrived so far."];
-    return `<details class="fwrap"><summary><span class="f-sum">${f.button}</span><span class="f-sum-t">${f.title}</span></summary>
-      <form class="fbody" novalidate data-key="${key}"><h4 class="f-title">${f.title}</h4>${tips}
-        <div class="f-field f-checks">${checks.map(t => `<label class="f-check"><input type="checkbox" data-q="${esc(t)}" required><span>${esc(t)} ${req}</span></label>`).join("")}</div>
-        <div class="f-field"><label for="${key}-t">Anything that looks off? ${req}</label><span class="f-help" id="${key}-th">Tell us which page or email and what's wrong. Something like "the thank-you page links to my old site" is perfect. All good? Just write none.</span><textarea id="${key}-t" data-q="Anything that looks off?" rows="5" required aria-describedby="${key}-th"></textarea></div>
-        <div class="f-actions"><button type="submit" class="f-submit">Send my feedback</button><span class="f-req-note">${req} Required</span></div>
-        <p class="f-status" role="status"></p>
-      </form></details>`;
-  }
-  const sentCard = key => `<div class="f-sent"><span class="f-sent-ic">${tick}</span><p><strong>Sent on ${fmt(parse(state.sent[key]))}. Thank you!</strong> We're on it. Forgot something? Email us at <a class="inline" href="mailto:${EMAIL}">${EMAIL}</a>.</p></div>`;
-
-  function calLinks(s) {
-    const d = parse(s.date), end = addDay(d);
-    const text = encodeURIComponent(s.calTitle), details = encodeURIComponent(s.calDetails);
-    const g = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${ymd(d)}/${ymd(end)}&details=${details}`;
-    const o = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${text}&body=${details}&startdt=${iso(d)}&enddt=${iso(end)}&allday=true`;
-    const act = s.action ? `<a class="act" href="${s.action.href}">${s.action.text}</a>` : "";
-    return `<div class="cal">${act}<a href="${g}" target="_blank" rel="noopener">Add to Google Calendar</a><a href="${o}" target="_blank" rel="noopener">Add to Outlook</a></div>`;
-  }
-  function checkRow(id, label, how) {
-    const on = itemDone(id);
-    return `<div class="zap-row${on ? " on" : ""}">
-      <button class="box" type="button" data-id="${id}" aria-pressed="${on}" aria-label="Mark ${esc(label)} as done" ${got[id] ? "disabled" : ""}>${tick}</button>
-      <div><strong>${label}</strong><span class="how">${how}</span></div></div>`;
-  }
-  function testLinks(s) {
-    const links = [[s.link, s.link2 ? "Open client funnel 1" : "Open your opt-in page"], [s.link2, "Open client funnel 2"]].filter(l => live(l[0]));
-    if (!links.length) return `<p class="after">Your test link shows up here on ${short(parse(s.form === "npro" ? C.dates.proReady : C.dates.clientReady))}.</p>`;
-    return `<p class="after">${links.map(l => `<a class="acc-link" href="${esc(l[0])}" target="_blank" rel="noopener">${l[1]} →</a>`).join(" ")}</p>`;
-  }
-
-  function stopRow(s) {
-    if (s.away) {
-      const a = parse(s.date), b = parse(s.end);
-      return `<li class="away-row"><span class="away-dot" aria-hidden="true"></span><p><strong>Out for Thanksgiving · ${short(a)} to ${b.getDate()}.</strong> Replies pick back up ${fmt(D.adsOn)}.</p></li>`;
-    }
-    const d = parse(s.date), done = stopDone(s), late = s.yours && !done && d < today;
-    const cls = ["stop", s.yours ? "yours" : "", s.finish ? "finish" : "", s.host ? "ours-host" : "", done ? "done" : "", late ? "late" : ""].join(" ").replace(/\s+/g, " ").trim();
-    const when = s.end ? fmt(d) + " to " + fmt(parse(s.end)) : fmt(d);
-    return `<li class="${cls}">
-      <span class="pin" aria-hidden="true"></span>
-      <div class="card">
-        <span class="pstamp" aria-label="Done"><b>Done</b>${short(d)}</span>
-        <div class="date">${when}${s.yours ? '<span class="tag">Your stop</span>' : ""}${late ? '<span class="tag late-tag">Still open</span>' : ""}</div>
-        <h4>${s.title}</h4>
-        <p>${s.note}</p>
-        ${s.host ? `<p class="after">Ian handles this one and will email you directly if he needs anything.</p>` : ""}
-        ${s.form && !done ? testLinks(s) : ""}
-        ${s.yours && !done ? calLinks(s) : ""}
-        ${s.list ? checkRow("list", "String subscriber export", "Excel, with the tags you're keeping. Send it to " + EMAIL + ".") + checkRow("zap", "Zapier access", "Share your Zapier login through LastPass (or another secure password tool) with " + EMAIL + ".") : ""}
-        ${s.final ? checkRow("final", "Final String export", "Only people who joined after " + short(D.listDue) + ". Send it to " + EMAIL + ".") : ""}
-        ${s.form ? `<div class="form-slot" data-form="${s.form}">${state.sent[s.form] ? sentCard(s.form) : renderForm(s.form)}</div>` : ""}
-      </div></li>`;
-  }
-
-  // ---- Page shell ----
-  document.body.insertAdjacentHTML("afterbegin", `
-  <header class="hero"><div class="hero-inner">
-    <p class="brand">Whitney Bateson Digital Strategy</p>
-    <p class="eyebrow">Hi, ${NAME}!</p>
-    <h1>Here's your Kit migration <span style="white-space:nowrap">roadmap 🗺️</span></h1>
-    <p class="lede">This is every step of your move from String to Kit, plus your website's move back to our hosting, from today until you're fully on Kit.</p>
-    <p class="lede">The coral pins are your stops, the few times we need something from you. Everything else is on us, and each stop gets a stamp once it's done.</p>
-    <dl class="glance">
-      <div><dt>Ads back on</dt><dd>${short(D.adsOn)}</dd></div>
-      <div><dt>Fully on Kit</dt><dd>${short(D.complete)}</dd></div>
-    </dl>
-  </div></header>
-  <div class="wrap">
-    <div class="links"><p>Bookmark this page. Questions? Email us at <a class="mail" href="mailto:${EMAIL}">${EMAIL}</a></p></div>
-
-    <section class="access" id="access" aria-labelledby="access-h"${step1Hidden ? " hidden" : ""}>
-      <div class="s1-head">
-        <h2 id="access-h">Step 1: Send us your files and access 🔑</h2>
-        <div class="s1-progress" aria-live="polite"><span class="s1-count"></span><span class="s1-bar"><i></i></span></div>
+    <article class="phase" data-start="2026-11-09" data-end="2026-11-16">
+      <div class="phase-head">
+        <h3><span class="step-num">Step 1.</span> Hosting move <span class="now-tag">Happening now</span></h3>
+        <span class="phase-dates">Nov 12 to 15</span>
       </div>
-      <div class="s1-body">
-        <p class="access-intro">We need these by <strong>${fmt(D.assetsDue)}</strong> to start setting up Kit. Tick each one off as you send it.</p>
-        <ul id="access-list"></ul>
-        <p class="s1-later"><strong>Coming up later:</strong></p>
-        <ul class="later-list">
-          <li>Your String subscriber export and Zapier access, ${fmt(D.listDue)}</li>
-          <li>A final export of anyone who joined String after ${short(D.listDue)}, ${fmt(D.finalExport)}</li>
-          <li>Please finish any emails you have scheduled in String, so Kit starts fresh.</li>
+      <div class="build">
+        <p>What Ian is doing</p>
+        <ul>
+          <li>Moving bellyblissnutrition.com back to our hosting</li>
+          <li>Checking every sarakahnnutrition.com redirect</li>
+          <li>Connecting your sending address to Kit, so your emails land in inboxes</li>
         </ul>
       </div>
-    </section>
+      <p class="dates-label">Key dates</p>
+      <ul class="rows">
+        <li><span class="when">Thu, Nov 12</span><span class="what">Access sent to Ian and Priscilla</span><span class="who you">You</span></li>
+        <li class="milestone"><span class="when">Nov 14 to 15</span><span class="what">Site moves over the weekend</span><span class="who">Ian</span></li>
+      </ul>
+    </article>
 
-    <div class="phase-head">
-      <span class="phase-num">Your route</span>
-      <h2>Moving you to Kit</h2>
-      <p>${short(D.kickoff)} to ${short(D.complete)}. We'll build each funnel in the order you asked for: your Nutrition Professionals funnel first, then your client funnels.</p>
-    </div>
-    <div class="legend" aria-hidden="true"><span><i class="pin y"></i>Your stop</span><span><i class="pin"></i>Our work</span></div>
-    <ol class="route" id="route"></ol>
+    <article class="phase" data-start="2026-11-17" data-end="2026-12-01">
+      <div class="phase-head">
+        <h3><span class="step-num">Step 2.</span> Nutrition professionals funnel <span class="now-tag">Happening now</span></h3>
+        <span class="phase-dates">Nov 16 to Dec 1</span>
+      </div>
+      <p class="phase-sum">Your top two priorities, built as one funnel with two ways in: your Meta ads and a new opt-in page that replaces Thinkific.</p>
+      <div class="build">
+        <p>What Priscilla is building</p>
+        <ul>
+          <li>Your Kit email template and tags</li>
+          <li>The 7-email sequence</li>
+          <li>A Kit opt-in page, and a thank-you page on your website</li>
+          <li>A Kit form connected to your Meta ads</li>
+          <li>Your nutrition professionals evergreen sequence, connected and loaded with your first 1 to 2 emails</li>
+        </ul>
+      </div>
+      <p class="dates-label">Key dates</p>
+      <ul class="rows">
+        <li><span class="when">Mon, Nov 16</span><span class="what">Final funnel docs sent to Priscilla</span><span class="who you">You</span></li>
+        <li class="milestone"><span class="when">Fri, Nov 20</span><span class="what">Funnel ready for your review</span><span class="who">Priscilla</span></li>
+        <li><span class="when">Tue, Nov 24</span><span class="what">Your changes due</span><span class="who you">You</span></li>
+        <li class="off"><span class="when">Nov 25 to 28</span><span class="what">Our office is closed for Thanksgiving</span><span></span></li>
+        <li class="milestone"><span class="when">Tue, Dec 1</span><span class="what">Target date: funnel live and your Meta ads running on Kit</span><span class="who">Priscilla</span></li>
+        <li><span class="when">Tue, Dec 1</span><span class="what">New Kit links sent to you. Update them in your bios and anywhere else outside your website</span><span class="who you">You</span></li>
+      </ul>
+    </article>
 
-    <div class="reply">
-      <p><strong>After ${short(D.complete)}:</strong> your team can add more evergreen emails whenever you're ready. You'll have about three weeks fully on Kit before you cancel String by ${fmt(D.stringCancel)}.</p>
-      <p><strong>Something come up?</strong> Hit reply to any of our emails and we'll adjust the route with you.</p>
-    </div>
-  </div>
-  <section class="finale"><div class="finale-inner">
-    <h2>Final destination: you're fully on Kit 🎉</h2>
-    <p>All three funnels running in Kit, your ads feeding new subscribers straight into your welcome sequences, and your evergreen ready for your team to keep adding to.</p>
-  </div><footer class="site-foot" aria-hidden="true"></footer></section>`);
+    <article class="phase" data-start="2026-12-02" data-end="2026-12-10">
+      <div class="phase-head">
+        <h3><span class="step-num">Step 3.</span> Client funnels <span class="now-tag">Happening now</span></h3>
+        <span class="phase-dates">Nov 30 to Dec 10</span>
+      </div>
+      <p class="phase-sum">Your two client lead magnet funnels, plus the switch from String forms to Kit forms on your website.</p>
+      <div class="build">
+        <p>What Priscilla is building</p>
+        <ul>
+          <li>Both email sequences (8 emails and 5 emails)</li>
+          <li>2 Kit forms to replace the String forms on your website</li>
+          <li>Your client evergreen sequence, connected and loaded with your first 1 to 2 emails</li>
+          <li>Your subscriber list, imported into Kit</li>
+        </ul>
+      </div>
+      <p class="dates-label">Key dates</p>
+      <ul class="rows">
+        <li><span class="when">Mon, Nov 30</span><span class="what">String subscriber list sent to Priscilla</span><span class="who you">You</span></li>
+        <li class="milestone"><span class="when">Mon, Dec 7</span><span class="what">Client funnels ready for your review</span><span class="who">Priscilla</span></li>
+        <li><span class="when">Wed, Dec 9</span><span class="what">Your changes due</span><span class="who you">You</span></li>
+        <li class="milestone"><span class="when">Thu, Dec 10</span><span class="what">Kit forms go live on your website</span><span class="who">Priscilla</span></li>
+        <li><span class="when">Thu, Dec 10</span><span class="what">New Kit links sent to you. Update them in your bios and anywhere else outside your website</span><span class="who you">You</span></li>
+      </ul>
+    </article>
 
-  function renderAccess() {
-    document.getElementById("access-list").innerHTML = access.map(a => {
-      const done = itemDone(a.id), days = Math.round((D.assetsDue - today) / 86400000);
-      const label = got[a.id] ? "Got it, thanks!" : done ? "Done" : days < 0 ? "Still needed" : "Needed by " + fmt(D.assetsDue);
-      return `<li class="${got[a.id] ? "got" : done ? "mine" : ""}">
-        <button class="box" type="button" data-id="${a.id}" aria-pressed="${done}" aria-label="Mark ${esc(a.item)} as done" ${got[a.id] ? 'data-locked="1"' : ""}>${tick}</button>
-        <div><strong>${a.item}</strong><span class="how">${a.short}</span></div>
-        <span class="due${!done && days <= 3 ? " soon" : ""}">${label}</span></li>`;
-    }).join("");
-    const n = access.filter(a => itemDone(a.id)).length;
-    document.querySelector(".s1-count").textContent = n + " of " + access.length + " done";
-    document.querySelector(".s1-bar i").style.width = (n / access.length * 100) + "%";
+    <article class="phase" data-start="2026-12-11" data-end="2026-12-14">
+      <div class="phase-head">
+        <h3><span class="step-num">Step 4.</span> Final testing and handoff <span class="now-tag">Happening now</span></h3>
+        <span class="phase-dates">Dec 11 to 14</span>
+      </div>
+      <ul class="rows">
+        <li><span class="when">Fri, Dec 11</span><span class="what">Every form, email and automation tested one last time</span><span class="who">Priscilla</span></li>
+        <li class="milestone"><span class="when">Mon, Dec 14</span><span class="what">Handoff. Our work is complete and every new lead goes to Kit</span><span class="who">Priscilla</span></li>
+        <li><span class="when">After Dec 14</span><span class="what">Your team keeps adding evergreen emails. Your scheduled String emails can finish there before you cancel at the end of the year</span><span class="who you">You</span></li>
+      </ul>
+    </article>
+  </section>
+
+  <section aria-labelledby="how-h">
+    <h2 id="how-h">How we'll work together</h2>
+    <ul class="notes">
+      <li><strong>Priscilla is your main contact</strong><span>She leads the project and handles everything in Kit, your funnels and your ads.</span><a href="mailto:admin@whitneybateson.com">admin@whitneybateson.com</a></li>
+      <li><strong>Ian handles the hosting move</strong><span>He'll email you directly about your domain, with Priscilla copied.</span><a href="mailto:help@whitneybateson.com">help@whitneybateson.com</a></li>
+      <li><strong>Replies within 2 business days</strong><span>Email either of us and you'll hear back within 2 business days.</span></li>
+      <li><strong>If a date needs to move</strong><span>Tell us as soon as you know. We'll pick a new date together and update this page.</span></li>
+      <li><strong>Your Meta ads</strong><span>Leave them as they are for now. Priscilla connects them to Kit, tests the setup and handles the switch.</span></li>
+    </ul>
+  </section>
+
+  <footer>Last updated Nov 10, 2026. These dates hold as long as we kick off this week.</footer>
+</div>
+
+<script>
+(function () {
+  var now = new Date();
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var phases = document.querySelectorAll('.phase[data-start]');
+  for (var i = 0; i < phases.length; i++) {
+    var s = phases[i].getAttribute('data-start').split('-');
+    var e = phases[i].getAttribute('data-end').split('-');
+    var start = new Date(+s[0], +s[1] - 1, +s[2]);
+    var end = new Date(+e[0], +e[1] - 1, +e[2]);
+    if (today >= start && today <= end) { phases[i].classList.add('current'); }
   }
-  function renderRoute() { document.getElementById("route").innerHTML = stops.map(stopRow).join(""); }
-  function renderAll() { renderAccess(); renderRoute(); }
-  renderAll();
-
-  // Checkboxes: save locally and log to Notion
-  document.addEventListener("click", e => {
-    const btn = e.target.closest("button.box"); if (!btn || btn.dataset.locked || btn.disabled) return;
-    const id = btn.dataset.id; state.checks[id] = !state.checks[id]; save(); renderAll();
-    if (state.checks[id]) fetch(API + "/submit", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ client: CLIENT, token: TOKEN, form: "access", item: id }) }).catch(() => {});
-  });
-
-  // Feedback forms → Notion
-  document.addEventListener("submit", async e => {
-    const form = e.target.closest("form.fbody"); if (!form) return;
-    e.preventDefault();
-    if (!form.checkValidity()) { form.reportValidity(); return; }
-    const btn = form.querySelector(".f-submit"), st = form.querySelector(".f-status"), label = btn.textContent;
-    const answers = [];
-    form.querySelectorAll("textarea[data-q]").forEach(t => answers.push({ q: t.dataset.q, a: t.value.trim() }));
-    form.querySelectorAll('input[type="checkbox"][data-q]').forEach(c => answers.push({ q: c.dataset.q, a: c.checked ? "Yes" : "No" }));
-    btn.disabled = true; btn.textContent = "Sending..."; st.textContent = "";
-    try {
-      const res = await fetch(API + "/submit", { method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ client: CLIENT, token: TOKEN, form: form.dataset.key, answers }) });
-      if (!res.ok) throw new Error("status " + res.status);
-      state.sent[form.dataset.key] = iso(new Date()); save(); renderAll();
-    } catch (err) {
-      btn.disabled = false; btn.textContent = label;
-      st.textContent = "Something went wrong sending this. Please try again, or email your answers to " + EMAIL + ".";
-    }
-  });
-
-  // Notion is the source of truth, so the page matches on every device
-  fetch(API + "/status?client=" + encodeURIComponent(CLIENT) + "&token=" + encodeURIComponent(TOKEN))
-    .then(r => r.ok ? r.json() : null)
-    .then(data => { if (!data) return; state.sent = data.sent || {}; state.checks = Object.assign({}, data.access || {}); save(); renderAll(); })
-    .catch(() => {});
 })();
 </script>
 </body>
