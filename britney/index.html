@@ -31,7 +31,7 @@
     },
 
     // Mark each item true once it's in. When the first four are all true, Step 1 hides itself.
-    received: { email: true, web: true, fb: true, ack: true, zap: false },
+    received: { email: true, web: true, fb: true, ack: true, zap: true },
 
     dates: {
       access: "2026-09-28",            // access + schedule acknowledgement due
@@ -41,8 +41,22 @@
       revisionsDue: "2026-10-20",      // her revisions + Zapier due
       handoff: "2026-10-29",           // funnel handoff, Command Center opens
       editsDue: "2026-11-09",          // her funnel edits due (moved from Nov 3)
-      complete: "2026-11-13",          // final fixes done (our review + fixes Nov 12 to 13)
-      adsOn: "2026-11-13"              // ads go on, ad support starts (one week later than planned, was Nov 6)
+      complete: "2026-11-12",          // final fixes done (her one edit, the two lead magnet links, is fixed)
+      adsOn: "2026-11-12",             // ads scheduled to go live, ad support starts (was Nov 6, then Nov 13)
+      recap: "2026-11-27"              // ad support ends, recap (kept at the date her page already showed)
+    },
+
+    // Replies pause for the holiday during ad support
+    pause: { date: "2026-11-26", reason: "Thanksgiving" },
+
+    // From ads-on day (Nov 12) the page becomes her "your funnel is live" page. Opt-in, thank you page
+    // and email doc come from reviewLinks above. Add recap: "<link>" once her recap is ready.
+    finale: {
+      links: {
+        pdf: "https://britneylentzrd.com/wp-content/uploads/2026/10/Britney-Lentz-Freebie.pdf",
+        canva: "https://canva.link/s2o99dfubxft37k",
+        adCreative: "https://canva.link/tscl7z5vc40exoi"
+      }
     }
   };
 </script>
