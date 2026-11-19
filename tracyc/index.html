@@ -20,10 +20,11 @@
     bonusWeek: false,                        // standard one week of ad support, no bonus week
     digitalSeroUrl: "https://whitneybateson.digitalsero.app/clients/onboarding/95b57b68-d8ca-4780-a7c4-07d799f7f2d5",
     commandCenterUrl: "#",                   // paste her Funnel Command Center link; the button unlocks on handoff day
-    showReview: false,                       // hides the "Ready for your review" card
+    showReview: true,                        // shows the "Ready for your review" card
     reviewLinks: {
       direction: "#",                        // lead magnet direction doc
-      lmemail: "#"                           // lead magnet + email sequence
+      leadMagnet: "https://canva.link/er9ss3bdjzfbjq8",  // lead magnet (Canva)
+      emails: "https://docs.google.com/document/d/1aGfLW978RR_op7U8zbtHcPB7SB2AjgsSFhSs3wHQ0xk/edit?usp=sharing"  // email sequence (Google Doc)
     },
 
     // Mark each item true once it's in. When the first four are all true, Step 1 hides itself.
@@ -34,11 +35,16 @@
       directionArrives: "2026-11-03",  // we send the lead magnet direction + brand kit (moved from Oct 27)
       directionDue: "2026-11-06",      // she approves the direction, EOD (moved from Nov 2; matches the email)
       lmArrives: "2026-11-19",         // we send the lead magnet + emails (build Nov 9 to 16, Whitney reviews Nov 17 to 18)
-      revisionsDue: "2026-11-24",      // her revisions + Zapier due, EOD (3 business days)
+      revisionsDue: "2026-11-25",      // her revisions + Zapier due, EOD (was Nov 24; moved a day because her lead magnet + emails reached her a day late)
       handoff: "2026-12-08",           // funnel handoff, EOD, Command Center opens (pages/ads/automations Nov 30 to Dec 3, Whitney reviews Dec 4 + 7)
       editsDue: "2026-12-11",          // her funnel edits due (tentative)
       complete: "2026-12-14",          // final fixes done (tentative)
       adsOn: "2026-12-14"              // she turns ads on, ad support starts (tentative; recap Dec 21)
+    },
+
+    copy: {
+      // Shown in the "Ready for your review" card
+      reviewNote: "<strong>A little extra time.</strong> We got your lead magnet and emails to you a day later than planned, so your feedback is now due <strong>Wed, Nov 25</strong>. Your funnel handoff is still <strong>Tue, Dec 8</strong>."
     },
 
     // Why some windows are longer than usual
