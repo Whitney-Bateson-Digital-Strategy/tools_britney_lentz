@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kelsey's Funnel Roadmap | Whitney Bateson Digital Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/roadmap.css">
+</head>
+<body>
+<script>
+  // Kelsey's settings. The design and wording live in /assets (shared by every client).
+  // Kelsey (Restore Family Therapy). Bought through the Black Friday offer. She's also getting an
+  // Instagram refresh from us, and her answers for that are due the same day as her funnel intake (Dec 1).
+  window.ROADMAP = {
+    client: "kelsey",                        // must match the folder name and clients.json
+    token: "61WaJ1BB8IzEN0FIswf7d9jFErgNpiE7",       // must match clients.json
+    firstName: "Kelsey",
+    bonusWeek: false,                        // one week of ad support only (Jan 11 to 18)
+    digitalSeroUrl: "",                      // paste her DigitalSero link once we have it
+    commandCenterUrl: "#",                   // paste her Funnel Command Center link; the button unlocks on handoff day
+    showReview: false,                       // hides the "Ready for your review" card until there's something to review
+    reviewLinks: {
+      direction: "#",                        // lead magnet direction doc
+      lmemail: "#"                           // lead magnet + email sequence
+    },
+
+    // Mark each item true once it's in. When the first four are all true, Step 1 hides itself.
+    // web: she's a WBDS website/SEO client, so we already have access to her site.
+    received: { email: false, web: true, fb: false, ack: false, zap: false },
+
+    // Intake due Dec 1 (same day as her Instagram answers), then a slightly tightened schedule
+    // so her ads are live Jan 11. The holiday break (Dec 24 to Jan 1) falls between revisions and handoff.
+    dates: {
+      access: "2026-12-01",            // onboarding questionnaire, access + schedule acknowledgement due (same day as her Instagram answers)
+      directionArrives: "2026-12-04",  // we send the lead magnet direction
+      directionDue: "2026-12-08",      // she approves the direction
+      lmArrives: "2026-12-18",         // we send the lead magnet + emails
+      revisionsDue: "2026-12-23",      // her revisions + Zapier due (before the holiday break)
+      handoff: "2027-01-06",           // funnel handoff, Command Center opens
+      editsDue: "2027-01-08",          // her funnel edits due
+      complete: "2027-01-11",          // final fixes done (same day ads go live)
+      adsOn: "2027-01-11"              // she turns ads on, ad support Jan 11 to 18, recap Jan 18
+    },
+
+    // The holiday break falls between her revisions and the funnel handoff
+    away: { start: "2026-12-24", end: "2027-01-01", back: "2027-01-04", reason: "the holidays",
+            note: "Your funnel handoff is still on track for Wed, Jan 6." },
+
+    copy: {
+      // Step 1 only lists access items, so this is where her intake deadline shows up
+      accessIntro: "Along with your onboarding questionnaire (also due Tue, Dec 1)"
+    }
+  };
+</script>
+<script src="/assets/roadmap.js"></script>
+</body>
+</html>
