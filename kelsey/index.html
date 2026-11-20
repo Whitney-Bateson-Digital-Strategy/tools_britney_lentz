@@ -18,7 +18,7 @@
     client: "kelsey",                        // must match the folder name and clients.json
     token: "61WaJ1BB8IzEN0FIswf7d9jFErgNpiE7",       // must match clients.json
     firstName: "Kelsey",
-    bonusWeek: false,                        // standard one week of ad support (Jan 22 to 29); flip to true if she gets the bonus week
+    bonusWeek: false,                        // one week of ad support only (Jan 11 to 18)
     digitalSeroUrl: "",                      // paste her DigitalSero link once we have it
     commandCenterUrl: "#",                   // paste her Funnel Command Center link; the button unlocks on handoff day
     showReview: false,                       // hides the "Ready for your review" card until there's something to review
@@ -31,23 +31,23 @@
     // web: she's a WBDS website/SEO client, so we already have access to her site.
     received: { email: false, web: true, fb: false, ack: false, zap: false },
 
-    // Standard 40-business-day schedule, counted from her intake due date (Dec 1 = day 3),
-    // skipping the holiday break (Dec 24 to Jan 1).
+    // Intake due Dec 1 (same day as her Instagram answers), then a slightly tightened schedule
+    // so her ads are live Jan 11. The holiday break (Dec 24 to Jan 1) falls between revisions and handoff.
     dates: {
       access: "2026-12-01",            // onboarding questionnaire, access + schedule acknowledgement due (same day as her Instagram answers)
       directionArrives: "2026-12-04",  // we send the lead magnet direction
       directionDue: "2026-12-08",      // she approves the direction
-      lmArrives: "2026-12-22",         // we send the lead magnet + emails
-      revisionsDue: "2027-01-05",      // her revisions + Zapier due (window covers the holiday break)
-      handoff: "2027-01-19",           // funnel handoff, Command Center opens
-      editsDue: "2027-01-21",          // her funnel edits due
-      complete: "2027-01-22",          // final fixes done
-      adsOn: "2027-01-22"              // she turns ads on, ad support Jan 22 to 29, recap Jan 29
+      lmArrives: "2026-12-18",         // we send the lead magnet + emails
+      revisionsDue: "2026-12-23",      // her revisions + Zapier due (before the holiday break)
+      handoff: "2027-01-06",           // funnel handoff, Command Center opens
+      editsDue: "2027-01-08",          // her funnel edits due
+      complete: "2027-01-11",          // final fixes done (same day ads go live)
+      adsOn: "2027-01-11"              // she turns ads on, ad support Jan 11 to 18, recap Jan 18
     },
 
-    // The holiday break falls during her lead magnet + email review
+    // The holiday break falls between her revisions and the funnel handoff
     away: { start: "2026-12-24", end: "2027-01-01", back: "2027-01-04", reason: "the holidays",
-            note: "That's why you have until Tue, Jan 5 for your feedback." },
+            note: "Your funnel handoff is still on track for Wed, Jan 6." },
 
     copy: {
       // Step 1 only lists access items, so this is where her intake deadline shows up
