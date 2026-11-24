@@ -490,7 +490,8 @@
     // Finished reviews fold into one short "already sent" line, so only what's open gets room
     const open = reviews.filter(r => !state.sent[r.form]);
     const sent = reviews.filter(r => state.sent[r.form]);
-    const doneRow = sent.length ? `<li class="rv-done"><span class="rv-done-ic">${tick}</span><p><strong>Already sent, thank you!</strong> ${sent.map(r => esc(r.item)).join(" · ")}</p></li>` : "";
+    // A client can set hideSentReviews: true to drop this line once it's just history
+    const doneRow = sent.length && !C.hideSentReviews ? `<li class="rv-done"><span class="rv-done-ic">${tick}</span><p><strong>Already sent, thank you!</strong> ${sent.map(r => esc(r.item)).join(" · ")}</p></li>` : "";
     document.getElementById("review-intro").textContent = open.length
       ? "Everything we send you to look over lands here. Open it, then send your feedback through the form on that stop."
       : "All of your reviews are in. Nothing left to look over here.";
