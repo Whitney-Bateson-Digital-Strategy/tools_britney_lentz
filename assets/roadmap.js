@@ -51,6 +51,8 @@
   const RL = C.reviewLinks || {};
   // Email doc: comments only, unless a client is set to edit it directly (emailEdits: true)
   const EDIT_EMAILS = !!RL.emailEdits;
+  // Lead magnet + email doc: she can edit either one directly or leave comments (editOrComment: true)
+  const EITHER = !!RL.editOrComment;
   const emailsHow = EDIT_EMAILS ? "make your edits in your email doc" : "in your email doc";
 
   // From ads-on day, a client with finale settings gets the "your funnel is live" page instead of the roadmap.
@@ -327,10 +329,10 @@
       title: T("lmemailFormTitle", "Lead Magnet & Email Review Form"),
       button: "I'm done with my edits",
       fields: [
-        { type: "info", html: "<p>Leave your changes as comments on your lead magnet" + (RL.editVideo ? " (tap Watch how above to see how)" : "") + " and " + (EDIT_EMAILS ? "make your edits right in your email doc" : "in your email doc") + ". Once you've been through everything, check the boxes below and send it over. This is your one round of revisions, so please only submit once you're finished.</p>" },
+        { type: "info", html: "<p>" + (EITHER ? "Make your edits right in your lead magnet and your email doc, or leave comments and we'll make the changes for you" : "Leave your changes as comments on your lead magnet" + (RL.editVideo ? " (tap Watch how above to see how)" : "") + " and " + (EDIT_EMAILS ? "make your edits right in your email doc" : "in your email doc")) + ". Once you've been through everything, check the boxes below and send it over. This is your one round of revisions, so please only submit once you're finished.</p>" },
         { type: "checks", items: [
-          "I've reviewed my full lead magnet and left my changes as comments on it.",
-          EDIT_EMAILS ? "I've reviewed all of my emails and made my edits right in the email doc." : "I've reviewed all of my emails and left my changes as comments in the email doc.",
+          EITHER ? "I've reviewed my full lead magnet and made my edits or left comments on it." : "I've reviewed my full lead magnet and left my changes as comments on it.",
+          EITHER ? "I've reviewed all of my emails and made my edits or left comments in the email doc." : EDIT_EMAILS ? "I've reviewed all of my emails and made my edits right in the email doc." : "I've reviewed all of my emails and left my changes as comments in the email doc.",
           "I've double-checked the details that need to be exactly right: names, credentials, program names, pricing and links.",
           "These are all of my changes, and I'm ready for you to get to work."
         ] },
@@ -521,8 +523,8 @@
     const watch = r.video ? `<button type="button" class="rv-watch" data-video="${r.video}">▶ Watch how</button>` : "";
     return `<span class="how">${r.short}</span>
       <ol class="rv-steps">
-        <li><span class="rv-n">1</span><div><b>Leave comments on your lead magnet.</b><span class="rv-path">Open it, then: ${r.path || "<b>Comment</b> → <b>select the area</b> → <b>type your comment</b> → <b>Comment</b>"}</span><span class="rv-row">${btn(r.links[0])}${watch}</span></div></li>
-        <li><span class="rv-n">2</span><div>${EDIT_EMAILS ? `<b>Make your edits in your email doc.</b><span>Change anything you like, right in the doc.</span>` : `<b>Leave comments in your email doc.</b><span class="rv-path">Open it, then: <b>highlight the words</b> → <b>Add comment</b> (speech bubble with a +) → <b>type your change</b> → <b>Comment</b></span>`}<span class="rv-row">${btn(r.links[1])}</span></div></li>
+        <li><span class="rv-n">1</span><div><b>${EITHER ? "Edit your lead magnet, or leave comments." : "Leave comments on your lead magnet."}</b>${EITHER ? "<span>Change anything you like right in the design, or leave a comment and we'll make the edit for you.</span>" : ""}<span class="rv-path">${EITHER ? "To comment, open it, then:" : "Open it, then:"} ${r.path || "<b>Comment</b> → <b>select the area</b> → <b>type your comment</b> → <b>Comment</b>"}</span><span class="rv-row">${btn(r.links[0])}${watch}</span></div></li>
+        <li><span class="rv-n">2</span><div>${EITHER ? `<b>Edit your email doc, or leave comments.</b><span>Change anything you like right in the doc, or leave a comment and we'll make the edit for you.</span><span class="rv-path">To comment, open it, then: <b>highlight the words</b> → <b>Add comment</b> (speech bubble with a +) → <b>type your change</b> → <b>Comment</b></span>` : EDIT_EMAILS ? `<b>Make your edits in your email doc.</b><span>Change anything you like, right in the doc.</span>` : `<b>Leave comments in your email doc.</b><span class="rv-path">Open it, then: <b>highlight the words</b> → <b>Add comment</b> (speech bubble with a +) → <b>type your change</b> → <b>Comment</b></span>`}<span class="rv-row">${btn(r.links[1])}</span></div></li>
         <li><span class="rv-n">3</span><div><b>Tell us you're done.</b><span>Check the boxes in the form so we know to get started.</span><span class="rv-row"><a class="rv-btn rv-ghost" href="#${r.form}-form">Go to the form ↓</a></span></div></li>
       </ol>`;
   }
